@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 house_color : hint_color;
+uniform float mix_amount = 0.1;
+
+void fragment(){
+    vec4 tex=texture(TEXTURE,UV); //sprite texture
+	vec3 color = house_color.rgb;
+    vec3 sprite_color= tex.rgb; //sprite color, without alpha;
+	
+    COLOR = vec4( sprite_color * (1.0 - mix_amount) + sprite_color * color * mix_amount, tex.a );
+
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/house_color = Color( 0.960784, 0.858824, 0.87451, 1 )
+shader_param/mix_amount = 1.0
