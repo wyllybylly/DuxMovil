@@ -11,7 +11,14 @@ config_version=4
 [application]
 
 config/name="Juego Educativo"
+run/main_scene="res://scenes/Menu_Init.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=500
+window/size/height=650
+window/handheld/orientation="portrait"
 
 [physics]
 
