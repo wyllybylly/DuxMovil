@@ -1,7 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
+shader_type canvas_item;
 
 uniform vec4 tint_color : hint_color;
 uniform sampler2D mask_img;
@@ -19,8 +16,4 @@ void fragment(){
 		COLOR = tex;
 	}
 
-}"
-
-[resource]
-shader = SubResource( 1 )
-shader_param/tint_color = null
+}
