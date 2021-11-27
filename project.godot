@@ -11,14 +11,26 @@ config_version=4
 [application]
 
 config/name="Juego Educativo"
-run/main_scene="res://scenes/Menu_Init.tscn"
+run/main_scene="res://scenes/world_test.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+ConfigVariables="*res://scenes/scripts/config_variables.gd"
 
 [display]
 
 window/size/width=500
-window/size/height=650
+window/size/height=900
 window/handheld/orientation="portrait"
+
+[input]
+
+ui_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [physics]
 
