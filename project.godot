@@ -34,6 +34,14 @@ ui_click={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="boat"
+2d_physics/layer_3="interactive"
+2d_physics/layer_4="overlay"
+2d_physics/layer_5="interaction"
+
 [physics]
 
 common/enable_pause_aware_picking=true

@@ -1,8 +1,7 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://resources/tile_maps/tile_map_house_1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/scripts/tile_map_house.gd" type="Script" id=2]
-
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -19,16 +18,10 @@ void fragment(){
 
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=30]
 shader = SubResource( 1 )
-shader_param/house_color = Color( 0.96, 0.96, 0.86, 1 )
+shader_param/house_color = Color( 0.960784, 0.960784, 0.858824, 1 )
 shader_param/mix_amount = 2.0
-
-[sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 16, 32, 16, 32, 32, 0, 32, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 32, 32, 0, 32, 16, 0, 32, 0, 32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
@@ -42,20 +35,20 @@ points = PoolVector2Array( 32, 32, 24, 32, 24, 0, 32, 0 )
 [sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 32, 16, 24, 16, 24, 0, 32, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=9]
-points = PoolVector2Array( 32, 0, 24, 16, 0, 16, 0, 0, 0, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=24]
+points = PoolVector2Array( 24, 16, 0, 16, 0, 0, 24, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=10]
-points = PoolVector2Array( 32, 32, 24, 32, 24, 16, 32, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=25]
+points = PoolVector2Array( 32, 32, 24, 32, 24, 16, 32, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=11]
-points = PoolVector2Array( 16, 0, 16, 0, 32, 0, 32, 32, 8, 32, 8, 16, 16, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=26]
+points = PoolVector2Array( 32, 32, 8, 32, 8, 16, 32, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
 points = PoolVector2Array( 32, 32, 8, 32, 8, 0, 32, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=13]
-points = PoolVector2Array( 0, 0, 16, 0, 8, 16, 0, 16, 0, 16 )
+[sub_resource type="ConvexPolygonShape2D" id=27]
+points = PoolVector2Array( 8, 16, 0, 16, 0, 0, 8, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
 points = PoolVector2Array( 32, 16, 8, 16, 8, 0, 32, 0 )
@@ -75,11 +68,11 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [sub_resource type="ConvexPolygonShape2D" id=19]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=20]
-points = PoolVector2Array( 0, 0, 16, 0, 0, 32 )
+[sub_resource type="ConvexPolygonShape2D" id=28]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=21]
-points = PoolVector2Array( 32, 0, 16, 32, 0, 32, 0, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=29]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=22]
 points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
@@ -95,16 +88,9 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 3 )
 0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 3 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
 0/z_index = 0
 1/name = "tilemap_house_1.png 1"
 1/texture = ExtResource( 1 )
@@ -116,16 +102,9 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 4 )
 1/shape_one_way = false
-1/shape_one_way_margin = 1.0
-1/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 4 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
 1/z_index = 0
 2/name = "tilemap_house_1.png 2"
 2/texture = ExtResource( 1 )
@@ -221,16 +200,9 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 6/navigation_offset = Vector2( 0, 0 )
 6/shape_offset = Vector2( 0, 0 )
 6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape = SubResource( 20 )
 6/shape_one_way = false
-6/shape_one_way_margin = 1.0
-6/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 20 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
 6/z_index = 0
 7/name = "tilemap_house_1.png 7"
 7/texture = ExtResource( 1 )
@@ -242,14 +214,14 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 7/navigation_offset = Vector2( 0, 0 )
 7/shape_offset = Vector2( 0, 0 )
 7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape = SubResource( 21 )
+7/shape = SubResource( 28 )
 7/shape_one_way = false
 7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 21 ),
+"shape": SubResource( 28 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 7/z_index = 0
@@ -263,9 +235,16 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 8/navigation_offset = Vector2( 0, 0 )
 8/shape_offset = Vector2( 0, 0 )
 8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape = SubResource( 29 )
 8/shape_one_way = false
-8/shape_one_way_margin = 0.0
-8/shapes = [  ]
+8/shape_one_way_margin = 1.0
+8/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 29 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 8/z_index = 0
 9/name = "tilemap_house_1.png 9"
 9/texture = ExtResource( 1 )
@@ -382,14 +361,14 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 14/navigation_offset = Vector2( 0, 0 )
 14/shape_offset = Vector2( 0, 0 )
 14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-14/shape = SubResource( 9 )
+14/shape = SubResource( 24 )
 14/shape_one_way = false
 14/shape_one_way_margin = 1.0
 14/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 9 ),
+"shape": SubResource( 24 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 14/z_index = 0
@@ -403,14 +382,14 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 15/navigation_offset = Vector2( 0, 0 )
 15/shape_offset = Vector2( 0, 0 )
 15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-15/shape = SubResource( 10 )
+15/shape = SubResource( 25 )
 15/shape_one_way = false
 15/shape_one_way_margin = 1.0
 15/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 10 ),
+"shape": SubResource( 25 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 15/z_index = 0
@@ -424,14 +403,14 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 16/navigation_offset = Vector2( 0, 0 )
 16/shape_offset = Vector2( 0, 0 )
 16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-16/shape = SubResource( 11 )
+16/shape = SubResource( 26 )
 16/shape_one_way = false
 16/shape_one_way_margin = 1.0
 16/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 11 ),
+"shape": SubResource( 26 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 16/z_index = 0
@@ -466,14 +445,14 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 18/navigation_offset = Vector2( 0, 0 )
 18/shape_offset = Vector2( 0, 0 )
 18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-18/shape = SubResource( 13 )
+18/shape = SubResource( 27 )
 18/shape_one_way = false
 18/shape_one_way_margin = 1.0
 18/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 13 ),
+"shape": SubResource( 27 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 18/z_index = 0
@@ -521,9 +500,12 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 20/z_index = 0
 
 [node name="TileMapHouse" type="TileMap"]
-material = SubResource( 2 )
+material = SubResource( 30 )
+z_index = 1
 tile_set = SubResource( 23 )
 cell_size = Vector2( 32, 32 )
+collision_mask = 0
 format = 1
 script = ExtResource( 2 )
+house_color = Color( 0.960784, 0.960784, 0.858824, 1 )
 mix_amount = 2.0
