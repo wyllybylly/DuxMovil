@@ -81,17 +81,17 @@
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
 
-[sub_resource type="SpriteFrames" id=15]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 47 ) ],
-"loop": true,
-"name": "back",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 60 ) ],
 "loop": true,
 "name": "front",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 47 ) ],
+"loop": true,
+"name": "back",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 46 ), ExtResource( 55 ), ExtResource( 53 ), ExtResource( 59 ), ExtResource( 12 ), ExtResource( 19 ), ExtResource( 15 ), ExtResource( 24 ), ExtResource( 18 ), ExtResource( 8 ), ExtResource( 16 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 20 ), ExtResource( 32 ), ExtResource( 21 ) ],
 "loop": true,
@@ -104,11 +104,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=16]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 21.0
 height = 28.0
 
-[sub_resource type="SpriteFrames" id=17]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
@@ -120,30 +120,30 @@ animations = [ {
 "name": "dance_choose",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 34 ), ExtResource( 25 ) ],
-"loop": true,
-"name": "dance_init",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 23 ) ],
 "loop": true,
 "name": "frente",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 34 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "dance_init",
+"speed": 2.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=18]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 39.0
 
-[sub_resource type="SpriteFrames" id=19]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "back",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "back",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 14 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 52 ), ExtResource( 61 ), ExtResource( 57 ) ],
@@ -157,21 +157,21 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=20]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 30.0
 height = 26.0
 
-[sub_resource type="SpriteFrames" id=21]
+[sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ ExtResource( 67 ) ],
-"loop": true,
-"name": "back",
-"speed": 1.0
-}, {
 "frames": [ ExtResource( 70 ) ],
 "loop": true,
 "name": "front",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 67 ) ],
+"loop": true,
+"name": "back",
+"speed": 1.0
 }, {
 "frames": [ ExtResource( 70 ), ExtResource( 68 ), ExtResource( 72 ), ExtResource( 66 ), ExtResource( 63 ), ExtResource( 62 ), ExtResource( 73 ), ExtResource( 67 ), ExtResource( 65 ), ExtResource( 74 ) ],
 "loop": true,
@@ -184,7 +184,7 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=22]
+[sub_resource type="CapsuleShape2D" id=9]
 radius = 29.0
 height = 34.0
 
@@ -202,16 +202,16 @@ __meta__ = {
 margin_left = -5.0
 margin_right = 595.0
 margin_bottom = 400.0
-rect_scale = Vector2( 0.85, 1.65 )
+rect_scale = Vector2( 1.61, 1.37 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="title_first" type="Label" parent="."]
-margin_left = 43.0
+margin_left = 287.276
 margin_top = 103.0
-margin_right = 219.0
+margin_right = 463.276
 margin_bottom = 127.0
 rect_scale = Vector2( 2.5, 2.5 )
 theme = SubResource( 1 )
@@ -241,7 +241,7 @@ __meta__ = {
 }
 
 [node name="Player1" type="Area2D" parent="."]
-position = Vector2( -198, -278 )
+position = Vector2( 262.52, -512.932 )
 scale = Vector2( 2, 2 )
 __meta__ = {
 "_edit_group_": true
@@ -250,20 +250,20 @@ __meta__ = {
 [node name="Sprite_Player1" type="AnimatedSprite" parent="Player1"]
 position = Vector2( 270, 384 )
 scale = Vector2( 0.752604, 0.695312 )
-frames = SubResource( 15 )
+frames = SubResource( 2 )
 animation = "dancing_choose"
-frame = 13
+frame = 8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
 position = Vector2( 271, 398 )
-shape = SubResource( 16 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Player2" type="Area2D" parent="."]
-position = Vector2( -128, 135 )
+position = Vector2( 323.176, -86.5834 )
 scale = Vector2( 1.4, 1.4 )
 __meta__ = {
 "_edit_group_": true
@@ -271,19 +271,20 @@ __meta__ = {
 
 [node name="Sprite_Player2" type="AnimatedSprite" parent="Player2"]
 position = Vector2( 195, 254 )
-frames = SubResource( 17 )
+frames = SubResource( 4 )
 animation = "dance_choose"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
 position = Vector2( 200, 269 )
-shape = SubResource( 18 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Player4" type="Area2D" parent="."]
-position = Vector2( -192, -572 )
+position = Vector2( -159.964, -580.009 )
 scale = Vector2( 1.5, 1.5 )
 __meta__ = {
 "_edit_group_": true
@@ -291,17 +292,17 @@ __meta__ = {
 
 [node name="Sprite_Player4" type="AnimatedSprite" parent="Player4"]
 position = Vector2( 227, 567 )
-frames = SubResource( 19 )
+frames = SubResource( 6 )
 animation = "dancing_choose"
-frame = 10
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player4"]
 position = Vector2( 228, 587 )
-shape = SubResource( 20 )
+shape = SubResource( 7 )
 
 [node name="Player5" type="Area2D" parent="."]
-position = Vector2( 27, 115 )
+position = Vector2( 65.7103, 109.661 )
 scale = Vector2( 1.5, 1.5 )
 __meta__ = {
 "_edit_group_": true
@@ -309,13 +310,14 @@ __meta__ = {
 
 [node name="Sprite_Player3" type="AnimatedSprite" parent="Player5"]
 position = Vector2( 222, 113 )
-frames = SubResource( 21 )
+frames = SubResource( 8 )
 animation = "dancing_choose"
+frame = 9
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player5"]
 position = Vector2( 212, 123 )
-shape = SubResource( 22 )
+shape = SubResource( 9 )
 
 [node name="OptionSelected" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 78 )

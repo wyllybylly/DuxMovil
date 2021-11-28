@@ -14,11 +14,33 @@ config/name="Juego Educativo"
 run/main_scene="res://scenes/Menu_Init.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ConfigVariables="*res://scenes/scripts/config_variables.gd"
+LevelVariables="*res://scenes/scripts/level_variables.gd"
+
 [display]
 
-window/size/width=500
-window/size/height=650
-window/handheld/orientation="portrait"
+window/size/width=960
+window/size/height=540
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
+[input]
+
+ui_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="boat"
+2d_physics/layer_3="interactive"
+2d_physics/layer_4="overlay"
+2d_physics/layer_5="interaction"
 
 [physics]
 
