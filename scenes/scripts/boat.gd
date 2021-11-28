@@ -59,12 +59,13 @@ func _on_Lever_input_event(viewport, event, shape_idx):
 
 
 func _on_AnchorButton_input_event(viewport, event, shape_idx):
-	if Input.is_action_just_pressed("ui_click"):
-		if anchored:
-			anchored = false
-		else:
-			if not $Boat/InteractionArea.get_overlapping_bodies().empty():
-				anchored = true
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		if event.button_index == BUTTON_LEFT and not event.pressed:
+			if anchored:
+				anchored = false
+			else:
+				if not $Boat/InteractionArea.get_overlapping_bodies().empty():
+					anchored = true
 
 
 func _physics_process(delta):
