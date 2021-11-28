@@ -10,7 +10,7 @@
 extents = Vector2( 30, 18 )
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 30.0
+radius = 40.0
 height = 35.0
 
 [sub_resource type="CircleShape2D" id=2]
@@ -56,11 +56,14 @@ collision_layer = 16
 collision_mask = 4
 
 [node name="InteractionCollision" type="CollisionShape2D" parent="Boat/InteractionArea"]
+position = Vector2( 0, -0.280617 )
 shape = SubResource( 3 )
 
 [node name="AnchorButton" type="Area2D" parent="."]
 position = Vector2( 197.808, -25.8284 )
 z_index = 10
+collision_layer = 8
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
