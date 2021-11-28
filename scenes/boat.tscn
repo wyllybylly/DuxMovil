@@ -6,24 +6,24 @@
 [ext_resource path="res://resources/controls_overlay/power_frame.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20, 12 )
+extents = Vector2( 30, 18 )
 
 [node name="Boat" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Frame" type="Sprite" parent="."]
-position = Vector2( 332.694, 2.12132 )
+position = Vector2( 70.0378, -68.5938 )
 texture = ExtResource( 4 )
 
 [node name="Lever" type="Area2D" parent="."]
 
 [node name="LeverSprite" type="Sprite" parent="Lever"]
-position = Vector2( 333.754, 43.1335 )
+position = Vector2( 71.0978, -27.5816 )
 texture = ExtResource( 3 )
 
 [node name="LeverCollision" type="CollisionShape2D" parent="Lever"]
 light_mask = 0
-position = Vector2( 333.754, 43.1335 )
+position = Vector2( 71.0978, -27.5816 )
 shape = SubResource( 1 )
 
 [node name="Boat" type="Sprite" parent="."]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/level_creation/tile_map_house.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/level_creation/water.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/level_creation/car.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/level_creation/tile_map_decorations.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/boat.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/scripts/world_test.gd" type="Script" id=6]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -47,16 +48,7 @@ shader_param/house_color = Color( 0.96, 0.96, 0.86, 1 )
 shader_param/mix_amount = 2.0
 
 [node name="WorldTest" type="Node2D"]
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-margin_right = 1028.0
-margin_bottom = 606.0
-color = Color( 0.266667, 0.482353, 0.788235, 1 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
+script = ExtResource( 6 )
 
 [node name="TileMapHouse2" parent="." instance=ExtResource( 1 )]
 material = SubResource( 4 )
@@ -71,6 +63,7 @@ tile_data = PoolIntArray( 327695, 0, 0, 327696, 8, 0, 393231, 9, 0, 393232, 8, 0
 tile_data = PoolIntArray( 262166, 3, 0, 393238, 1, 0, 393240, 5, 0, 393242, 5, 0, 458774, 3, 0, 458776, 6, 0, 458778, 6, 0, 589846, 3, 0, 655382, 3, 0, 786454, 0, 0, 851990, 3, 0, 917527, 5, 0, 917529, 5, 0, 983063, 6, 0, 983065, 6, 0 )
 
 [node name="Water" parent="." instance=ExtResource( 2 )]
+position = Vector2( 706.046, 366.742 )
 
 [node name="Car" parent="." instance=ExtResource( 3 )]
 position = Vector2( 631.5, 231.027 )
