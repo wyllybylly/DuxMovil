@@ -32,9 +32,13 @@ func _process(delta):
 	if Input.is_action_pressed("ui_down"):
 		power_down(delta)
 	if Input.is_action_pressed("ui_right") and speed != 0.0:
-		$Boat.rotate(PI / 4 * delta)
+		rotate(delta)
 	if Input.is_action_pressed("ui_left") and speed != 0.0:
-		$Boat.rotate(- PI / 4 * delta)
+		rotate(-delta)
+	if Input.get_accelerometer().x > 3.0:
+		rotate(delta)
+	if Input.get_accelerometer().x < -3.0:
+		rotate(-delta)
 	var movement = Vector2()
 	if speed != 0.0:
 		movement += Vector2(1, 0).rotated($Boat.rotation - PI / 2) * speed
@@ -69,6 +73,10 @@ func power_up(delta):
 func power_down(delta):
 	speed = max(speed - 20.0 * delta, 0)
 	update_lever_y()
+
+
+func rotate(delta):
+	$Boat.rotate(PI / 4 * delta)
 
 
 func update_lever_y():
