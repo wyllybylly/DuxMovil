@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sign_no_stairs.png-79eb5197138f4ce9ba81a0a7e4acddd8.stex"
+path="res://.import/sign_no_stairs.png-d798a0a1db3635b7ef28c58e9e2b24d8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/rescue_sign/sign_no_stairs.png"
-dest_files=[ "res://.import/sign_no_stairs.png-79eb5197138f4ce9ba81a0a7e4acddd8.stex" ]
+source_file="res://resources/rescue/sign_no_stairs.png"
+dest_files=[ "res://.import/sign_no_stairs.png-d798a0a1db3635b7ef28c58e9e2b24d8.stex" ]
 
 [params]
 

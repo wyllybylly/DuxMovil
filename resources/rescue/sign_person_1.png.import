@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sign_person_2.png-193038134656b0f226ef01f0aec077f6.stex"
+path="res://.import/sign_person_1.png-c9e6ce9a1a3731b07ffd57445b63a070.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/rescue_sign/sign_person_2.png"
-dest_files=[ "res://.import/sign_person_2.png-193038134656b0f226ef01f0aec077f6.stex" ]
+source_file="res://resources/rescue/sign_person_1.png"
+dest_files=[ "res://.import/sign_person_1.png-c9e6ce9a1a3731b07ffd57445b63a070.stex" ]
 
 [params]
 

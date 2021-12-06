@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sign_flooded.png-f0804ca1ffd5edba9aa432d44696260c.stex"
+path="res://.import/person.png-9465678d746c4945817ea38563a7d08d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/rescue_sign/sign_flooded.png"
-dest_files=[ "res://.import/sign_flooded.png-f0804ca1ffd5edba9aa432d44696260c.stex" ]
+source_file="res://resources/rescue/person.png"
+dest_files=[ "res://.import/person.png-9465678d746c4945817ea38563a7d08d.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

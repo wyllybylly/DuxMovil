@@ -3,11 +3,29 @@ extends Node2D
 
 export (float) var max_speed = 20
 
+const SEATS = [
+	[Vector2(15, 30), 0],
+	[Vector2(15, 17.5), 0],
+	[Vector2(15, 5), 0],
+	[Vector2(15, -7.5), 0],
+	[Vector2(15, -20), 0],
+	[Vector2(12.5, -32.5), 135],
+	[Vector2(0, -40), 90],
+	[Vector2(-12.5, -32.5), 45],
+	[Vector2(-15, -20), 0],
+	[Vector2(-15, -7.5), 0],
+	[Vector2(-15, 5), 0],
+	[Vector2(-15, 17.5), 0],
+	[Vector2(-15, 30), 0],
+]
+
 var speed = 0.0
 var water_speed = 10.0
 var lever_height = Vector2(0,0) # [0] min pos, [1] max movement
 var power_selected = false
 var anchored = false
+var max_seats = 15
+var used_seats = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,14 +35,18 @@ func _ready():
 	$Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.overlay_size, mid_height)
 	$Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.overlay_size, mid_height + 48 * ConfigVariables.overlay_size)
 	$AnchorButton.position = Vector2(50.0 * ConfigVariables.overlay_size, get_viewport().size.y - 50 * ConfigVariables.overlay_size)
+	$RescueButton.position = Vector2(50.0 * ConfigVariables.overlay_size, get_viewport().size.y - 100 * ConfigVariables.overlay_size)
 	$Lever/LeverSprite.position = Vector2.ZERO
 	$Lever/LeverCollision.position = Vector2.ZERO
 	$AnchorButton/AnchorSprite.position = Vector2.ZERO
 	$AnchorButton/AnchorCollision.position = Vector2.ZERO
+	$RescueButton/RescueSprite.position = Vector2.ZERO
+	$RescueButton/RescueCollision.position = Vector2.ZERO
 	lever_height = Vector2($Lever.position.y, 96 * ConfigVariables.overlay_size)
 	$Lever.scale = Vector2(ConfigVariables.overlay_size,ConfigVariables.overlay_size)
 	$Frame.scale = Vector2(ConfigVariables.overlay_size,ConfigVariables.overlay_size)
 	$AnchorButton.scale = Vector2(ConfigVariables.overlay_size * 1.5,ConfigVariables.overlay_size * 1.5)
+	$RescueButton.scale = Vector2(ConfigVariables.overlay_size * 1.5,ConfigVariables.overlay_size * 1.5)
 	
 	# Initialize water speed
 	water_speed = LevelVariables.water_speed
@@ -64,8 +86,18 @@ func _on_AnchorButton_input_event(viewport, event, shape_idx):
 			if anchored:
 				anchored = false
 			else:
-				if not $Boat/InteractionArea.get_overlapping_bodies().empty():
+				if not $Boat/AnchorageArea.get_overlapping_bodies().empty():
 					anchored = true
+
+
+func _on_RescueButton_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		if event.button_index == BUTTON_LEFT and not event.pressed:
+			# If there is a person to rescue, rescue them
+			if anchored and not $Boat/RescueArea.get_overlapping_areas().empty():
+				var person = $Boat/RescueArea.get_overlapping_areas().pop_front()
+				person.rescued($Boat, get_seat())
+			# Else do nothing
 
 
 func _physics_process(delta):
@@ -103,3 +135,9 @@ func update_lever_y():
 func update_water_speed():
 	water_speed = LevelVariables.water_speed
 
+
+func get_seat():
+	if max_seats > used_seats:
+		used_seats += 1
+		# Get position and rotation to seat
+		return SEATS[used_seats - 1]

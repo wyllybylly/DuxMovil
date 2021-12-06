@@ -8,20 +8,20 @@ export (bool) var sign_elder = false setget set_sign_elder
 export (bool) var sign_disability = false setget set_sign_disability
 export (bool) var sign_flooded = false setget set_sign_flooded
 export (bool) var sign_stairs = false setget set_sign_stairs
-export (int) var num_of_people = 1.0 setget set_num_of_people
+export (int) var num_of_people = 0.0 setget set_num_of_people
 
 var box_radius = 16
 var box_position = Vector2.ZERO
 var box_size = Vector2(16, 80)
-var sign_baby_texture = preload("res://resources/rescue_sign/sign_baby.png")
-var sign_elder_texture = preload("res://resources/rescue_sign/sign_elder.png")
-var sign_disability_texture = preload("res://resources/rescue_sign/sign_disability.png")
-var sign_flooded_texture = preload("res://resources/rescue_sign/sign_flooded.png")
-var sign_stairs_texture = preload("res://resources/rescue_sign/sign_stairs.png")
-var sign_no_stairs_texture = preload("res://resources/rescue_sign/sign_no_stairs.png")
-var sign_person_1_texture = preload("res://resources/rescue_sign/sign_person_1.png")
-var sign_person_2_texture = preload("res://resources/rescue_sign/sign_person_2.png")
-var sign_person_3_texture = preload("res://resources/rescue_sign/sign_person_3.png")
+var sign_baby_texture = preload("res://resources/rescue/sign_baby.png")
+var sign_elder_texture = preload("res://resources/rescue/sign_elder.png")
+var sign_disability_texture = preload("res://resources/rescue/sign_disability.png")
+var sign_flooded_texture = preload("res://resources/rescue/sign_flooded.png")
+var sign_stairs_texture = preload("res://resources/rescue/sign_stairs.png")
+var sign_no_stairs_texture = preload("res://resources/rescue/sign_no_stairs.png")
+var sign_person_1_texture = preload("res://resources/rescue/sign_person_1.png")
+var sign_person_2_texture = preload("res://resources/rescue/sign_person_2.png")
+var sign_person_3_texture = preload("res://resources/rescue/sign_person_3.png")
 
 
 func _draw():
@@ -82,7 +82,9 @@ func set_sign_stairs(new_value):
 
 func set_num_of_people(new_value):
 	num_of_people = new_value
-	if new_value == 1:
+	if new_value == 0:
+		remove_sign("SignPeople")
+	elif new_value == 1:
 		change_sign_texture("SignPeople",sign_person_1_texture)
 	elif new_value == 2:
 		change_sign_texture("SignPeople",sign_person_2_texture)
@@ -96,6 +98,7 @@ func add_sign(name, texture):
 	sign_sprite.name = name
 	sign_sprite.position = Vector2(64 * self.get_child_count() + 40, 40)
 	self.add_child(sign_sprite)
+	sign_sprite.set_owner(self)
 	box_size.x += 64
 	update()
 
