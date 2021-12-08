@@ -27,7 +27,7 @@ var sign_person_3_texture = preload("res://resources/rescue/sign_person_3.png")
 func _draw():
 	var style_box = StyleBoxFlat.new()
 	style_box.set_corner_radius_all(box_radius)
-#	style_box.bg_color = Color.white
+	style_box.bg_color = Color(0.5, 0.5, 0.5, 0.75)
 	draw_style_box(style_box, Rect2(box_position, box_size))
 
 

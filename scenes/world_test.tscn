@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/level_creation/tile_map_house.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/level_creation/water.tscn" type="PackedScene" id=2]
@@ -7,10 +7,9 @@
 [ext_resource path="res://scenes/boat.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/scripts/world_test.gd" type="Script" id=6]
 [ext_resource path="res://scenes/level_creation/light_pole.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/scripts/person_to_rescue.gd" type="Script" id=8]
 [ext_resource path="res://scenes/scripts/group_to_rescue.gd" type="Script" id=9]
-[ext_resource path="res://resources/rescue/person.png" type="Texture" id=10]
-[ext_resource path="res://scenes/level_creation/signs.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/scripts/signs.gd" type="Script" id=11]
+[ext_resource path="res://scenes/person_to_rescue.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -27,7 +26,7 @@ void fragment(){
 
 }"
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 shader_param/house_color = Color( 0.831373, 0.92549, 0.737255, 1 )
 shader_param/mix_amount = 2.0
@@ -47,31 +46,28 @@ void fragment(){
 
 }"
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
 shader_param/house_color = Color( 0.960784, 0.960784, 0.858824, 1 )
 shader_param/mix_amount = 2.0
-
-[sub_resource type="CircleShape2D" id=6]
-radius = 16.0
 
 [node name="WorldTest" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="TileMapHouse2" parent="." instance=ExtResource( 1 )]
-material = SubResource( 7 )
+material = SubResource( 2 )
 tile_data = PoolIntArray( 65559, 0, 0, 65560, 8, 0, 65561, 8, 0, 65562, 8, 0, 65563, 8, 0, 65564, 8, 0, 131095, 1, 0, 131096, 8, 0, 131097, 8, 0, 131098, 8, 0, 131099, 8, 0, 131100, 8, 0, 196630, 0, 0, 196631, 2, 0, 196632, 8, 0, 196633, 8, 0, 196634, 8, 0, 196635, 8, 0, 196636, 8, 0, 262166, 16, 0, 262167, 2, 0, 262168, 8, 0, 262169, 8, 0, 262170, 8, 0, 262171, 8, 0, 262172, 8, 0, 327702, 17, 0, 327703, 2, 0, 327704, 8, 0, 327705, 8, 0, 327706, 8, 0, 327707, 8, 0, 327708, 8, 0, 393238, 17, 0, 393239, 3, 0, 393240, 5, 0, 393241, 5, 0, 393242, 5, 0, 393243, 5, 0, 393244, 7, 0, 458774, 17, 0, 458775, 4, 0, 458776, 5, 0, 458777, 5, 0, 458778, 5, 0, 458779, 5, 0, 458780, 6, 0, 524310, 17, 0, 589846, 17, 0 )
 house_color = Color( 0.831373, 0.92549, 0.737255, 1 )
 
 [node name="TileMapHouse" parent="." instance=ExtResource( 1 )]
-material = SubResource( 8 )
+material = SubResource( 4 )
 tile_data = PoolIntArray( 327695, 0, 0, 327696, 8, 0, 393231, 9, 0, 393232, 8, 0, 458767, 10, 0, 458768, 7, 0, 524310, 0, 0, 524311, 8, 0, 524312, 8, 0, 524313, 8, 0, 524314, 8, 0, 524315, 8, 0, 589846, 1, 0, 589847, 8, 0, 589848, 8, 0, 589849, 8, 0, 589850, 8, 0, 589851, 8, 0, 655382, 2, 0, 655383, 8, 0, 655384, 8, 0, 655385, 8, 0, 655386, 8, 0, 655387, 8, 0, 720918, 2, 0, 720919, 8, 0, 720920, 8, 0, 720921, 8, 0, 720922, 8, 0, 720923, 8, 0, 786454, 2, 0, 786455, 8, 0, 786456, 8, 0, 786457, 8, 0, 786458, 8, 0, 786459, 8, 0, 851990, 2, 0, 851991, 8, 0, 851992, 8, 0, 851993, 8, 0, 851994, 8, 0, 851995, 8, 0, 917526, 3, 0, 917527, 5, 0, 917528, 5, 0, 917529, 5, 0, 917530, 5, 0, 917531, 7, 0, 983062, 4, 0, 983063, 5, 0, 983064, 5, 0, 983065, 5, 0, 983066, 5, 0, 983067, 6, 0 )
 
 [node name="TileMapDecorations" parent="." instance=ExtResource( 4 )]
 tile_data = PoolIntArray( 262166, 3, 0, 393238, 1, 0, 393240, 5, 0, 393242, 5, 0, 458774, 3, 0, 458776, 6, 0, 458778, 6, 0, 589846, 3, 0, 655382, 3, 0, 786454, 0, 0, 851990, 3, 0, 917527, 5, 0, 917529, 5, 0, 983063, 6, 0, 983065, 6, 0 )
 
 [node name="Water" parent="." instance=ExtResource( 2 )]
-position = Vector2( 477.518, 317.69 )
+position = Vector2( 481.518, 312.69 )
 
 [node name="Car" parent="." instance=ExtResource( 3 )]
 position = Vector2( 601.77, 227.459 )
@@ -88,120 +84,69 @@ position = Vector2( 775.142, 319.006 )
 z_index = 5
 script = ExtResource( 9 )
 
-[node name="Signs" parent="Group 1" instance=ExtResource( 11 )]
-position = Vector2( -222.31, -88.7669 )
+[node name="Signs" type="Node2D" parent="Group 1"]
+position = Vector2( -267.26, -102.252 )
+script = ExtResource( 11 )
 sign_elder = true
 sign_stairs = true
 num_of_people = 3
 
-[node name="Person" type="Area2D" parent="Group 1"]
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 32
-collision_mask = 16
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Person" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 34.2734, -17.1656 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonSprite" type="Sprite" parent="Group 1/Person"]
-texture = ExtResource( 10 )
+[node name="Person2" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 36.5006, 36.2883 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonCollision" type="CollisionShape2D" parent="Group 1/Person"]
-visible = false
-shape = SubResource( 6 )
+[node name="Person3" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -27.1986, -15.8293 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="Person2" type="Area2D" parent="Group 1"]
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 32
-collision_mask = 16
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Person4" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -13.3897, 50.0973 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonSprite" type="Sprite" parent="Group 1/Person2"]
-texture = ExtResource( 10 )
+[node name="Person5" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 61.0003, 8.67044 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonCollision" type="CollisionShape2D" parent="Group 1/Person2"]
-visible = false
-shape = SubResource( 6 )
+[node name="Person6" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 11.5555, 27.3793 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="Person3" type="Area2D" parent="Group 1"]
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 32
-collision_mask = 16
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Person7" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -20.0714, 8.22501 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonSprite" type="Sprite" parent="Group 1/Person3"]
-texture = ExtResource( 10 )
+[node name="Person8" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -16.0624, -43.8926 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonCollision" type="CollisionShape2D" parent="Group 1/Person3"]
-visible = false
-shape = SubResource( 6 )
+[node name="Person9" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -0.471619, -8.70209 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="Person4" type="Area2D" parent="Group 1"]
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 32
-collision_mask = 16
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Person10" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 34.7189, -42.5562 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonSprite" type="Sprite" parent="Group 1/Person4"]
-texture = ExtResource( 10 )
+[node name="Person11" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonCollision" type="CollisionShape2D" parent="Group 1/Person4"]
-visible = false
-shape = SubResource( 6 )
+[node name="Person12" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="Person5" type="Area2D" parent="Group 1"]
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 32
-collision_mask = 16
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Person13" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonSprite" type="Sprite" parent="Group 1/Person5"]
-texture = ExtResource( 10 )
+[node name="Person14" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
 
-[node name="PersonCollision" type="CollisionShape2D" parent="Group 1/Person5"]
-visible = false
-shape = SubResource( 6 )
-
-[node name="Person6" type="Area2D" parent="Group 1"]
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 32
-collision_mask = 16
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="PersonSprite" type="Sprite" parent="Group 1/Person6"]
-texture = ExtResource( 10 )
-
-[node name="PersonCollision" type="CollisionShape2D" parent="Group 1/Person6"]
-visible = false
-shape = SubResource( 6 )
-
-[node name="Person7" type="Area2D" parent="Group 1"]
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 32
-collision_mask = 16
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="PersonSprite" type="Sprite" parent="Group 1/Person7"]
-texture = ExtResource( 10 )
-
-[node name="PersonCollision" type="CollisionShape2D" parent="Group 1/Person7"]
-visible = false
-shape = SubResource( 6 )
+[node name="Person15" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )

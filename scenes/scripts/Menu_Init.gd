@@ -26,7 +26,7 @@ func scene_voice():
 func _on_OptionSelected_finished():
 	if b_quit: get_tree().quit()
 	elif b_play: get_tree().change_scene("res://scenes/Choose_Player.tscn")
-	elif b_config: get_tree().change_scene("res://scenes/Juego.tscn")
+	elif b_config: get_tree().change_scene("res://scenes/config_menu.tscn")
 	elif b_about: get_tree().change_scene("res://scenes/DificultadScene.tscn")
 
 #Functions to setup boolean to determine scene to load and doing a sound on selection

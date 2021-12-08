@@ -4,19 +4,21 @@ extends Node2D
 export (float) var max_speed = 20
 
 const SEATS = [
-	[Vector2(15, 30), 0],
-	[Vector2(15, 17.5), 0],
-	[Vector2(15, 5), 0],
-	[Vector2(15, -7.5), 0],
-	[Vector2(15, -20), 0],
-	[Vector2(12.5, -32.5), 135],
-	[Vector2(0, -40), 90],
-	[Vector2(-12.5, -32.5), 45],
-	[Vector2(-15, -20), 0],
-	[Vector2(-15, -7.5), 0],
-	[Vector2(-15, 5), 0],
-	[Vector2(-15, 17.5), 0],
-	[Vector2(-15, 30), 0],
+	[Vector2(0, -50), 90],
+	[Vector2(15, -45), 135],
+	[Vector2(-15, -45), 45],
+	[Vector2(20, -30), 0],
+	[Vector2(-20, -30), 0],
+	[Vector2(0, -35), 90],
+	[Vector2(0, -20), 90],
+	[Vector2(20, -12.5), 0],
+	[Vector2(-20, -12.5), 0],
+	[Vector2(20, 5), 0],
+	[Vector2(-20, 5), 0],
+	[Vector2(20, 22.5), 0],
+	[Vector2(-20, 22.5), 0],
+	[Vector2(20, 40), 0],
+	[Vector2(-20, 40), 0],
 ]
 
 var speed = 0.0
@@ -32,21 +34,25 @@ var used_seats = 0
 func _ready():
 	# Initialize overlay positions
 	var mid_height = get_viewport().size.y / 2.0
-	$Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.overlay_size, mid_height)
-	$Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.overlay_size, mid_height + 48 * ConfigVariables.overlay_size)
-	$AnchorButton.position = Vector2(50.0 * ConfigVariables.overlay_size, get_viewport().size.y - 50 * ConfigVariables.overlay_size)
-	$RescueButton.position = Vector2(50.0 * ConfigVariables.overlay_size, get_viewport().size.y - 100 * ConfigVariables.overlay_size)
+	$Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
+	$Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
+	$AnchorButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 30 * ConfigVariables.get_overlay_size())
+	$RescueButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 80 * ConfigVariables.get_overlay_size())
 	$Lever/LeverSprite.position = Vector2.ZERO
 	$Lever/LeverCollision.position = Vector2.ZERO
 	$AnchorButton/AnchorSprite.position = Vector2.ZERO
 	$AnchorButton/AnchorCollision.position = Vector2.ZERO
 	$RescueButton/RescueSprite.position = Vector2.ZERO
 	$RescueButton/RescueCollision.position = Vector2.ZERO
-	lever_height = Vector2($Lever.position.y, 96 * ConfigVariables.overlay_size)
-	$Lever.scale = Vector2(ConfigVariables.overlay_size,ConfigVariables.overlay_size)
-	$Frame.scale = Vector2(ConfigVariables.overlay_size,ConfigVariables.overlay_size)
-	$AnchorButton.scale = Vector2(ConfigVariables.overlay_size * 1.5,ConfigVariables.overlay_size * 1.5)
-	$RescueButton.scale = Vector2(ConfigVariables.overlay_size * 1.5,ConfigVariables.overlay_size * 1.5)
+	lever_height = Vector2($Lever.position.y, 96 * ConfigVariables.get_overlay_size())
+	$Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+	$Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+	$AnchorButton.scale = Vector2(ConfigVariables.get_overlay_size() * 1.2,ConfigVariables.get_overlay_size() * 1.2)
+	$RescueButton.scale = Vector2(ConfigVariables.get_overlay_size() * 1.2,ConfigVariables.get_overlay_size() * 1.2)
+	$Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
+	$Frame.modulate.a = ConfigVariables.overlay_alpha
+	$AnchorButton/AnchorSprite.modulate.a = ConfigVariables.overlay_alpha
+	$RescueButton/RescueSprite.modulate.a = ConfigVariables.overlay_alpha
 	
 	# Initialize water speed
 	water_speed = LevelVariables.water_speed

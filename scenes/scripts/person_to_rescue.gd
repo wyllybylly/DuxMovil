@@ -14,6 +14,7 @@ func rescued(boat, seat):
 	position = seat[0]
 	rotation_degrees = seat[1]
 	z_index = 0
+	scale = Vector2(0.6, 0.6)
 	# Remove collision
 	self.get_child(1).queue_free()
 	

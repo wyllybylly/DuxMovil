@@ -433,7 +433,7 @@ position = Vector2( 270, 384 )
 scale = Vector2( 0.752604, 0.695312 )
 frames = SubResource( 15 )
 animation = "dancing_init"
-frame = 2
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
@@ -454,7 +454,7 @@ __meta__ = {
 position = Vector2( 195, 254 )
 frames = SubResource( 17 )
 animation = "dance_init"
-frame = 5
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
@@ -475,7 +475,6 @@ __meta__ = {
 position = Vector2( 227, 567 )
 frames = SubResource( 19 )
 animation = "dancing_init"
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player4"]
@@ -493,7 +492,7 @@ __meta__ = {
 position = Vector2( 222, 113 )
 frames = SubResource( 21 )
 animation = "dancing_init"
-frame = 3
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player5"]
