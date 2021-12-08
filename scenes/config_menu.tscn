@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/scripts/config_menu.gd" type="Script" id=1]
+[ext_resource path="res://resources/sounds/menu_options.ogg" type="AudioStream" id=2]
+[ext_resource path="res://resources/sounds/pluck_002.ogg" type="AudioStream" id=3]
 
 [sub_resource type="DynamicFontData" id=3]
 font_path = "res://fonts/Kenney Pixel Square.ttf"
@@ -172,6 +174,12 @@ margin_right = 392.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 6 )
 text = "Reestablecer"
+
+[node name="ChangeOptionPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="SelectOptionPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
 
 [connection signal="button_up" from="CenterContainer/VBoxContainer/CommitButtons/HBoxContainer/Save" to="CenterContainer/VBoxContainer/Options" method="_on_Save_button_up"]
 [connection signal="button_up" from="CenterContainer/VBoxContainer/CommitButtons/HBoxContainer/Cancel" to="CenterContainer/VBoxContainer/Options" method="_on_Cancel_button_up"]
