@@ -13,14 +13,14 @@ extents = Vector2( 30, 18 )
 radius = 40.0
 height = 35.0
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 100.0
 height = 35.0
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 24.0
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 radius = 24.0
 
 [node name="Boat" type="Node2D"]
@@ -47,12 +47,11 @@ position = Vector2( 71.0978, -27.5816 )
 shape = SubResource( 1 )
 
 [node name="Boat" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -37.5 )
-rotation = 6.28319
 collision_layer = 2
 
 [node name="BoatSprite" type="Sprite" parent="Boat"]
 scale = Vector2( 2, 2 )
+z_index = -1
 texture = ExtResource( 1 )
 
 [node name="BoatCollision" type="CollisionPolygon2D" parent="Boat"]
@@ -73,7 +72,7 @@ collision_layer = 16
 collision_mask = 32
 
 [node name="RescueCollision" type="CollisionShape2D" parent="Boat/RescueArea"]
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="AnchorButton" type="Area2D" parent="."]
 position = Vector2( 197.808, -25.8284 )
@@ -89,7 +88,7 @@ texture = ExtResource( 5 )
 
 [node name="AnchorCollision" type="CollisionShape2D" parent="AnchorButton"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="RescueButton" type="Area2D" parent="."]
 position = Vector2( 269.859, -23.9748 )
@@ -103,7 +102,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 
 [node name="RescueCollision" type="CollisionShape2D" parent="RescueButton"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [connection signal="input_event" from="Lever" to="." method="_on_Lever_input_event"]
 [connection signal="input_event" from="AnchorButton" to="." method="_on_AnchorButton_input_event"]

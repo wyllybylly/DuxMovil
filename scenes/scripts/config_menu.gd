@@ -60,25 +60,28 @@ func _process(delta):
 			pressed_time = 0
 			manage_option("up")
 	if Input.is_action_just_pressed("ui_right"):
-		if selection < get_child_count() / 2 and option_selected:
-			pressed_time = 0
-			manage_option("right")
+		if selection < get_child_count() / 2:
+			if option_selected:
+				pressed_time = 0
+				manage_option("right")
 		elif commit_selection < 2:
 			commit_selection += 1
 			set_selection(selection)
 	if Input.is_action_just_pressed("ui_left"):
-		if selection < get_child_count() / 2 and option_selected:
-			pressed_time = 0
-			manage_option("left")
+		if selection < get_child_count() / 2:
+			if option_selected:
+				pressed_time = 0
+				manage_option("left")
 		elif commit_selection > 0:
 			commit_selection -= 1
 			set_selection(selection)
 	if Input.is_action_just_pressed("ui_accept"):
-		select_option_player.stop()
-		select_option_player.play()
 		if selection < get_child_count() / 2:
 			select()
 		else:
+			select_option_player.pitch_scale = 1.0
+			select_option_player.stop()
+			select_option_player.play()
 			if commit_selection == 0:
 				_on_Save_button_up()
 			elif commit_selection == 1:
@@ -129,11 +132,15 @@ func set_selection(new_value):
 
 func select():
 	if option_selected:
+		select_option_player.pitch_scale = 2.0
 		selection_box_pos = Vector2(-7.5, min(get_child(2 * selection).get_rect().position.y, get_child(2 * selection + 1).get_rect().position.y) - 5.0)
 		selection_box_size = Vector2(get_rect().size.x + 15, max(get_child(2 * selection).get_rect().size.y, get_child(2 * selection + 1).get_rect().size.y) + 10)
 	else:
+		select_option_player.pitch_scale = 1.0
 		selection_box_pos = Vector2(get_child(2 * selection + 1).get_rect().position.x - 7.5, get_child(2 * selection + 1).get_rect().position.y - 5.0)
 		selection_box_size = Vector2(get_child(2 * selection + 1).get_rect().size.x + 15, get_child(2 * selection + 1).get_rect().size.y + 10)
+	select_option_player.stop()
+	select_option_player.play()
 	option_selected = !option_selected
 	update()
 

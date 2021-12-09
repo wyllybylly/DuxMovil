@@ -28,6 +28,15 @@ var power_selected = false
 var anchored = false
 var max_seats = 15
 var used_seats = 0
+var from_point
+var to_point
+var rope_color
+var rope_lenght
+var stabilizing
+
+
+func _draw():
+	draw_line(from_point, to_point, rope_color)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -56,6 +65,11 @@ func _ready():
 	
 	# Initialize water speed
 	water_speed = LevelVariables.water_speed
+	
+	# Initialize rope variables
+	from_point = Vector2.ZERO
+	to_point = Vector2.ZERO
+	rope_color = Color.darkgray
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -79,6 +93,19 @@ func _process(delta):
 			movement += Vector2(1, 0).rotated($Boat.rotation - PI / 2) * speed
 		movement.y += water_speed
 		$Boat.move_and_collide(movement * delta * 10)
+	else:
+		if stabilizing:
+			power_down(delta)
+			var movement = $Boat.position.direction_to(Vector2(to_point.x, to_point.y + 75.0 + rope_lenght))
+			if $Boat.rotation != 0.0:
+				stabilize_rotation(delta * movement.y)
+			var distance = $Boat.position.distance_to(Vector2(to_point.x, to_point.y + 75.0 + rope_lenght))
+			if distance >= 1.0:
+				$Boat.move_and_collide(movement * delta * 10 * water_speed)
+			from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
+			update()
+			if distance < 1.0 and $Boat.rotation == 0.0:
+				stabilizing = false
 
 
 func _on_Lever_input_event(viewport, event, shape_idx):
@@ -91,9 +118,16 @@ func _on_AnchorButton_input_event(viewport, event, shape_idx):
 		if event.button_index == BUTTON_LEFT and not event.pressed:
 			if anchored:
 				anchored = false
+				from_point = to_point
+				update()
 			else:
 				if not $Boat/AnchorageArea.get_overlapping_bodies().empty():
 					anchored = true
+					from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
+					to_point = $Boat/AnchorageArea.get_overlapping_bodies().pop_front().global_position - global_position
+					rope_lenght = from_point.distance_to(to_point)
+					update()
+					stabilizing = true
 
 
 func _on_RescueButton_input_event(viewport, event, shape_idx):
@@ -132,6 +166,13 @@ func power_down(delta):
 
 func rotate(delta):
 	$Boat.rotate(PI / 4 * delta)
+
+
+func stabilize_rotation(delta):
+	if $Boat.rotation > 0.0:
+		$Boat.rotation = max($Boat.rotation - PI / 4 * delta, 0.0)
+	else:
+		$Boat.rotation = min($Boat.rotation + PI / 4 * delta, 0.0)
 
 
 func update_lever_y():
