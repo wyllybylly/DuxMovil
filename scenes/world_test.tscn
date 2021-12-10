@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/level_creation/tile_map_house.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/level_creation/water.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://scenes/boat.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/scripts/world_test.gd" type="Script" id=6]
 [ext_resource path="res://scenes/level_creation/light_pole.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/scripts/group_to_rescue.gd" type="Script" id=9]
+[ext_resource path="res://scenes/scripts/signs.gd" type="Script" id=11]
+[ext_resource path="res://scenes/person_to_rescue.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -64,7 +67,7 @@ tile_data = PoolIntArray( 327695, 0, 0, 327696, 8, 0, 393231, 9, 0, 393232, 8, 0
 tile_data = PoolIntArray( 262166, 3, 0, 393238, 1, 0, 393240, 5, 0, 393242, 5, 0, 458774, 3, 0, 458776, 6, 0, 458778, 6, 0, 589846, 3, 0, 655382, 3, 0, 786454, 0, 0, 851990, 3, 0, 917527, 5, 0, 917529, 5, 0, 983063, 6, 0, 983065, 6, 0 )
 
 [node name="Water" parent="." instance=ExtResource( 2 )]
-position = Vector2( 479.359, 316.69 )
+position = Vector2( 481.518, 312.69 )
 
 [node name="Car" parent="." instance=ExtResource( 3 )]
 position = Vector2( 601.77, 227.459 )
@@ -73,4 +76,77 @@ scale = Vector2( 1.57357, 1.57357 )
 [node name="Boat" parent="." instance=ExtResource( 5 )]
 
 [node name="LightPole" parent="." instance=ExtResource( 7 )]
-position = Vector2( 317.48, 90.4818 )
+position = Vector2( 653.499, 328.338 )
+collision_mask = 0
+
+[node name="Group 1" type="Node2D" parent="."]
+position = Vector2( 775.142, 319.006 )
+z_index = 5
+script = ExtResource( 9 )
+
+[node name="Signs" type="Node2D" parent="Group 1"]
+position = Vector2( -267.26, -102.252 )
+script = ExtResource( 11 )
+sign_elder = true
+sign_stairs = true
+num_of_people = 3
+
+[node name="Person" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 34.2734, -17.1656 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person2" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 36.5006, 36.2883 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person3" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -27.1986, -15.8293 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person4" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -13.3897, 50.0973 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person5" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 61.0003, 8.67044 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person6" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 11.5555, 27.3793 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person7" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -20.0714, 8.22501 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person8" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -16.0624, -43.8926 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person9" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( -0.471619, -8.70209 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person10" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 34.7189, -42.5562 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person11" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person12" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person13" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person14" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="Person15" parent="Group 1" instance=ExtResource( 12 )]
+position = Vector2( 12.8918, -31.8654 )
+scale = Vector2( 0.75, 0.75 )
