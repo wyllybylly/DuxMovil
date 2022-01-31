@@ -43,25 +43,25 @@ func _draw():
 func _ready():
 	# Initialize overlay positions
 	var mid_height = get_viewport().size.y / 2.0
-	$Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
-	$Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
-	$AnchorButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 30 * ConfigVariables.get_overlay_size())
-	$RescueButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 80 * ConfigVariables.get_overlay_size())
-	$Lever/LeverSprite.position = Vector2.ZERO
-	$Lever/LeverCollision.position = Vector2.ZERO
-	$AnchorButton/AnchorSprite.position = Vector2.ZERO
-	$AnchorButton/AnchorCollision.position = Vector2.ZERO
-	$RescueButton/RescueSprite.position = Vector2.ZERO
-	$RescueButton/RescueCollision.position = Vector2.ZERO
-	lever_height = Vector2($Lever.position.y, 96 * ConfigVariables.get_overlay_size())
-	$Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-	$Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-	$AnchorButton.scale = Vector2(ConfigVariables.get_overlay_size() * 1.2,ConfigVariables.get_overlay_size() * 1.2)
-	$RescueButton.scale = Vector2(ConfigVariables.get_overlay_size() * 1.2,ConfigVariables.get_overlay_size() * 1.2)
-	$Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
-	$Frame.modulate.a = ConfigVariables.overlay_alpha
-	$AnchorButton/AnchorSprite.modulate.a = ConfigVariables.overlay_alpha
-	$RescueButton/RescueSprite.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
+	$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
+	$GUI/AnchorButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 30 * ConfigVariables.get_overlay_size())
+	$GUI/RescueButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 80 * ConfigVariables.get_overlay_size())
+	$GUI/Lever/LeverSprite.position = Vector2.ZERO
+	$GUI/Lever/LeverCollision.position = Vector2.ZERO
+	$GUI/AnchorButton/AnchorSprite.position = Vector2.ZERO
+	$GUI/AnchorButton/AnchorCollision.position = Vector2.ZERO
+	$GUI/RescueButton/RescueSprite.position = Vector2.ZERO
+	$GUI/RescueButton/RescueCollision.position = Vector2.ZERO
+	lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
+	$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+	$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+	$GUI/AnchorButton.scale = Vector2(ConfigVariables.get_overlay_size() * 1.2,ConfigVariables.get_overlay_size() * 1.2)
+	$GUI/RescueButton.scale = Vector2(ConfigVariables.get_overlay_size() * 1.2,ConfigVariables.get_overlay_size() * 1.2)
+	$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/AnchorButton/AnchorSprite.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/RescueButton/RescueSprite.modulate.a = ConfigVariables.overlay_alpha
 	
 	# Initialize water speed
 	water_speed = LevelVariables.water_speed
@@ -142,7 +142,7 @@ func _on_RescueButton_input_event(viewport, event, shape_idx):
 
 func _physics_process(delta):
 	if power_selected:
-		if get_global_mouse_position().y < $Lever.position.y:
+		if get_viewport().get_mouse_position().y < $GUI/Lever.global_position.y:
 			power_up(delta)
 		else:
 			power_down(delta)
@@ -176,7 +176,7 @@ func stabilize_rotation(delta):
 
 
 func update_lever_y():
-	$Lever.position.y = lever_height.x - (speed / max_speed) * lever_height.y
+	$GUI/Lever.position.y = lever_height.x - (speed / max_speed) * lever_height.y
 
 
 func update_water_speed():

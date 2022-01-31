@@ -6,16 +6,16 @@
 [ext_resource path="res://resources/controls_overlay/power_frame.png" type="Texture" id=4]
 [ext_resource path="res://resources/controls_overlay/circular_button.png" type="Texture" id=5]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30, 18 )
-
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
 height = 35.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 100.0
 height = 35.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30, 18 )
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 24.0
@@ -25,26 +25,6 @@ radius = 24.0
 
 [node name="Boat" type="Node2D"]
 script = ExtResource( 2 )
-
-[node name="Frame" type="Sprite" parent="."]
-position = Vector2( 70.0378, -68.5938 )
-z_index = 10
-texture = ExtResource( 4 )
-
-[node name="Lever" type="Area2D" parent="."]
-z_index = 10
-collision_layer = 8
-collision_mask = 0
-
-[node name="LeverSprite" type="Sprite" parent="Lever"]
-position = Vector2( 71.0978, -27.5816 )
-texture = ExtResource( 3 )
-
-[node name="LeverCollision" type="CollisionShape2D" parent="Lever"]
-visible = false
-light_mask = 0
-position = Vector2( 71.0978, -27.5816 )
-shape = SubResource( 1 )
 
 [node name="Boat" type="KinematicBody2D" parent="."]
 collision_layer = 2
@@ -64,7 +44,7 @@ collision_layer = 16
 collision_mask = 4
 
 [node name="AnchorageCollision" type="CollisionShape2D" parent="Boat/AnchorageArea"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="RescueArea" type="Area2D" parent="Boat"]
 scale = Vector2( 2, 2 )
@@ -72,9 +52,43 @@ collision_layer = 16
 collision_mask = 32
 
 [node name="RescueCollision" type="CollisionShape2D" parent="Boat/RescueArea"]
+shape = SubResource( 2 )
+
+[node name="FollowBoatCamera" type="Camera2D" parent="Boat"]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Frame" type="Sprite" parent="GUI"]
+position = Vector2( 70.0378, -68.5938 )
+z_index = 10
+texture = ExtResource( 4 )
+
+[node name="Lever" type="Area2D" parent="GUI"]
+z_index = 10
+collision_layer = 8
+collision_mask = 0
+
+[node name="LeverSprite" type="Sprite" parent="GUI/Lever"]
+position = Vector2( 71.0978, -27.5816 )
+texture = ExtResource( 3 )
+
+[node name="LeverCollision" type="CollisionShape2D" parent="GUI/Lever"]
+visible = false
+light_mask = 0
+position = Vector2( 71.0978, -27.5816 )
 shape = SubResource( 3 )
 
-[node name="AnchorButton" type="Area2D" parent="."]
+[node name="AnchorButton" type="Area2D" parent="GUI"]
 position = Vector2( 197.808, -25.8284 )
 z_index = 10
 collision_layer = 8
@@ -83,14 +97,14 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="AnchorSprite" type="Sprite" parent="AnchorButton"]
+[node name="AnchorSprite" type="Sprite" parent="GUI/AnchorButton"]
 texture = ExtResource( 5 )
 
-[node name="AnchorCollision" type="CollisionShape2D" parent="AnchorButton"]
+[node name="AnchorCollision" type="CollisionShape2D" parent="GUI/AnchorButton"]
 visible = false
 shape = SubResource( 4 )
 
-[node name="RescueButton" type="Area2D" parent="."]
+[node name="RescueButton" type="Area2D" parent="GUI"]
 position = Vector2( 269.859, -23.9748 )
 collision_layer = 8
 collision_mask = 0
@@ -98,12 +112,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="RescueSprite" type="Sprite" parent="RescueButton"]
+[node name="RescueSprite" type="Sprite" parent="GUI/RescueButton"]
 texture = ExtResource( 5 )
 
-[node name="RescueCollision" type="CollisionShape2D" parent="RescueButton"]
+[node name="RescueCollision" type="CollisionShape2D" parent="GUI/RescueButton"]
 shape = SubResource( 5 )
 
-[connection signal="input_event" from="Lever" to="." method="_on_Lever_input_event"]
-[connection signal="input_event" from="AnchorButton" to="." method="_on_AnchorButton_input_event"]
-[connection signal="input_event" from="RescueButton" to="." method="_on_RescueButton_input_event"]
+[connection signal="input_event" from="GUI/Lever" to="." method="_on_Lever_input_event"]
+[connection signal="input_event" from="GUI/AnchorButton" to="." method="_on_AnchorButton_input_event"]
+[connection signal="input_event" from="GUI/RescueButton" to="." method="_on_RescueButton_input_event"]
