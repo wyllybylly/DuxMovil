@@ -2,7 +2,7 @@ extends Node2D
 
 
 export (String) var node_path;
-export (String, "Circle", "Rectangle") var poly_type;
+export (String, "Circle", "Rectangle", "None") var poly_type;
 
 
 func _draw():
@@ -11,6 +11,10 @@ func _draw():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	update_shape()
+
+
+func update_shape():
 	if poly_type == "Circle":
 		var vs = get_viewport_rect().size
 		var ar = vs.y / vs.x
@@ -28,7 +32,6 @@ func _ready():
 		mat.set_shader_param("radius", radius)
 	elif poly_type == "Rectangle":
 		var vs = get_viewport_rect().size
-		var ar = vs.y / vs.x
 		var mat = self.get_material()
 		mat.set_shader_param("type", 2)
 		var button = get_node(node_path)
@@ -40,3 +43,6 @@ func _ready():
 		pos.x = pos.x / vs.x
 		pos.y = pos.y / vs.y
 		mat.set_shader_param("position", pos)
+	elif poly_type == "None":
+		var mat = self.get_material()
+		mat.set_shader_param("type", 1)

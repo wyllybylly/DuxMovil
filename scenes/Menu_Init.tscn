@@ -191,15 +191,15 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ ExtResource( 47 ) ],
-"loop": true,
-"name": "back",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 60 ) ],
 "loop": true,
 "name": "front",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 47 ) ],
+"loop": true,
+"name": "back",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 46 ), ExtResource( 55 ), ExtResource( 53 ), ExtResource( 59 ), ExtResource( 12 ), ExtResource( 19 ), ExtResource( 15 ), ExtResource( 24 ), ExtResource( 18 ), ExtResource( 8 ), ExtResource( 16 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 20 ), ExtResource( 32 ), ExtResource( 21 ) ],
 "loop": true,
@@ -223,6 +223,11 @@ animations = [ {
 "name": "back",
 "speed": 25.0
 }, {
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 27 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 30 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 17 ), ExtResource( 37 ), ExtResource( 35 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "dance_choose",
+"speed": 2.0
+}, {
 "frames": [ ExtResource( 23 ) ],
 "loop": true,
 "name": "frente",
@@ -232,11 +237,6 @@ animations = [ {
 "loop": true,
 "name": "dance_init",
 "speed": 2.0
-}, {
-"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 27 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 30 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 17 ), ExtResource( 37 ), ExtResource( 35 ), ExtResource( 33 ) ],
-"loop": true,
-"name": "dance_choose",
-"speed": 2.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=18]
@@ -244,14 +244,14 @@ radius = 39.0
 
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "back",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "back",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 14 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 52 ), ExtResource( 61 ), ExtResource( 57 ) ],
@@ -271,15 +271,15 @@ height = 26.0
 
 [sub_resource type="SpriteFrames" id=21]
 animations = [ {
-"frames": [ ExtResource( 67 ) ],
-"loop": true,
-"name": "back",
-"speed": 1.0
-}, {
 "frames": [ ExtResource( 70 ) ],
 "loop": true,
 "name": "front",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 67 ) ],
+"loop": true,
+"name": "back",
+"speed": 1.0
 }, {
 "frames": [ ExtResource( 70 ), ExtResource( 68 ), ExtResource( 72 ), ExtResource( 66 ), ExtResource( 63 ), ExtResource( 62 ), ExtResource( 73 ), ExtResource( 67 ), ExtResource( 65 ), ExtResource( 74 ) ],
 "loop": true,
@@ -433,7 +433,7 @@ position = Vector2( 270, 384 )
 scale = Vector2( 0.752604, 0.695312 )
 frames = SubResource( 15 )
 animation = "dancing_init"
-frame = 6
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
@@ -454,7 +454,7 @@ __meta__ = {
 position = Vector2( 195, 254 )
 frames = SubResource( 17 )
 animation = "dance_init"
-frame = 5
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
@@ -475,7 +475,6 @@ __meta__ = {
 position = Vector2( 227, 567 )
 frames = SubResource( 19 )
 animation = "dancing_init"
-frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player4"]

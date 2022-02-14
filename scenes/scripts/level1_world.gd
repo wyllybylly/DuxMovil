@@ -1,8 +1,9 @@
 extends Node2D
 
 
-var onMenu
+var onHelpView
 var helpScreenLevel
+var helpArray
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,21 +19,30 @@ func _ready():
 	camera.limit_right = $Water.global_position.x + water_size.x / 2
 	
 	# Set first help screen
-	get_tree().paused = true
-	$Help/Background.node_path = "../../Boat/GUI/Frame"
-	$Help/Background.poly_type = "Rectangle"
 	$Help/Background.show()
-	$Help/TextPower.show()
 	$Help/Button.show()
 	$Help/TextAnchor.hide()
 	$Help/TextSave.hide()
 	$Help/TextSteering.hide()
-	onMenu = true
-	helpScreenLevel = 1
+	set_text_config($Help/TextPower, 0.8)
+	set_text_config($Help/TextSteering)
+	set_text_config($Help/TextAnchor, 1.0, 0.2)
+	set_text_config($Help/TextSave, 1.0, 0.2)
+	$Boat/GUI/AnchorButton.hide()
+	$Boat/GUI/RescueButton.hide()
+	onHelpView = false
+	helpScreenLevel = 0
+	helpArray = [
+		[$Help/TextPower, "Rectangle", $Boat/GUI/Frame],
+		[$Help/TextSteering, "None"],
+		[$Help/TextAnchor, "Circle", $Boat/GUI/AnchorButton],
+		[$Help/TextSave, "Circle", $Boat/GUI/RescueButton]
+	]
+	next_screen()
 
 
-func _process(delta):
-	if onMenu:
+func _process(_delta):
+	if onHelpView:
 		if Input.is_action_just_released("ui_accept"):
 			next_screen()
 
@@ -41,31 +51,58 @@ func _on_Button_button_up():
 	next_screen()
 
 
+func _on_NextHelp_body_entered(body):
+	if body.name == "Boat":
+		next_screen()
+#		queue_free()
+
+
+func _on_turn_on_water_body_entered(body):
+	if body.name == "Boat":
+		LevelVariables.water_speed = 10.0
+		$Boat.update_water_speed()
+		$Water.update_water_speed()
+		$Triggers/TurnOnWater.queue_free()
+
+
 func next_screen():
-	if helpScreenLevel == 1:
-		if onMenu:
-			$Help/Background.hide()
-			$Help/TextPower.hide()
-			$Help/Button.hide()
-			onMenu = false
-		else:
-			$Help/Background.show()
-			$Help/TextSteering.show()
-			$Help/Button.show()
-			onMenu = true
-			helpScreenLevel = 2
-	elif helpScreenLevel == 2:
-		if onMenu:
-			pass
-		else:
-			pass
-	elif helpScreenLevel == 3:
-		if onMenu:
-			pass
-		else:
-			pass
-	elif helpScreenLevel == 4:
-		if onMenu:
-			pass
-		else:
-			pass
+	if onHelpView:
+		hide_help_view(helpArray[helpScreenLevel][0])
+	else:
+		$Help/Background.poly_type = helpArray[helpScreenLevel][1]
+		if helpArray[helpScreenLevel].size() == 3:
+			var button = helpArray[helpScreenLevel][2]
+			$Help/Background.node_path = button.get_path()
+			button.show()
+		$Help/Background.update_shape()
+		show_help_view(helpArray[helpScreenLevel][0])
+		if helpScreenLevel > 0:
+			$Triggers.get_child(0).queue_free()
+	onHelpView = !onHelpView
+	get_tree().paused = !get_tree().paused
+
+
+func hide_help_view(text):
+	$Help/Background.hide()
+	text.hide()
+	$Help/Button.hide()
+	helpScreenLevel += 1
+
+
+func show_help_view(text):
+	$Help/Background.show()
+	text.show()
+	$Help/Button.show()
+
+
+func set_text_config(text, right = 1.0, left = 0.0, bottom = 0.9, top = 0.0):
+	text.anchor_bottom = 0.0
+	text.anchor_left = 0.0
+	text.anchor_right = 0.0
+	text.anchor_top = 0.0
+	var view_y = get_viewport_rect().size.y - 50
+	var view_x = get_viewport_rect().size.x - 50
+	text.margin_bottom = 25 + view_y * bottom
+	text.margin_left = 25 + view_x * left
+	text.margin_right = 25 + view_x * right
+	text.margin_top = 25 + view_y * top

@@ -108,12 +108,12 @@ func _process(delta):
 				stabilizing = false
 
 
-func _on_Lever_input_event(viewport, event, shape_idx):
+func _on_Lever_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("ui_click"):
 		power_selected = true
 
 
-func _on_AnchorButton_input_event(viewport, event, shape_idx):
+func _on_AnchorButton_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
 			if anchored:
@@ -130,7 +130,7 @@ func _on_AnchorButton_input_event(viewport, event, shape_idx):
 					stabilizing = true
 
 
-func _on_RescueButton_input_event(viewport, event, shape_idx):
+func _on_RescueButton_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
 			# If there is a person to rescue, rescue them
