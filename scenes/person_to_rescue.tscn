@@ -3,11 +3,10 @@
 [ext_resource path="res://scenes/scripts/person_to_rescue.gd" type="Script" id=1]
 [ext_resource path="res://resources/rescue/person.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=1]
 radius = 16.0
 
 [node name="Person" type="Area2D"]
-scale = Vector2( 0.5, 0.5 )
 collision_layer = 32
 collision_mask = 16
 script = ExtResource( 1 )
@@ -20,4 +19,4 @@ texture = ExtResource( 2 )
 
 [node name="PersonCollision" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 6 )
+shape = SubResource( 1 )

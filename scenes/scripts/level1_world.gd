@@ -4,6 +4,7 @@ extends Node2D
 var onHelpView
 var helpScreenLevel
 var helpArray
+var people = 3
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,6 +40,12 @@ func _ready():
 		[$Help/TextSave, "Circle", $Boat/GUI/RescueButton]
 	]
 	next_screen()
+	
+	# Set finish panel
+	$FinishLevel/Panel.hide()
+	var title = "Has completado el tutorial"
+	var description = "Ya tienes los conocimientos básicos para comenzar a jugar"
+	$FinishLevel.set_texts(title, description)
 
 
 func _process(_delta):
@@ -106,3 +113,23 @@ func set_text_config(text, right = 1.0, left = 0.0, bottom = 0.9, top = 0.0):
 	text.margin_left = 25 + view_x * left
 	text.margin_right = 25 + view_x * right
 	text.margin_top = 25 + view_y * top
+
+
+func _on_Boat_person_safe():
+	people -= 1
+	if people == 0:
+		finish_menu()
+
+
+func finish_menu():
+	get_tree().paused = true
+	$FinishLevel/Panel.show()
+
+
+func _on_FinishLevel_back_button_pressed():
+	get_tree().change_scene("res://scenes/Menu_Init.tscn")
+
+
+func _on_FinishLevel_next_button_pressed():
+	pass
+#	get_tree().change_scene("res://scenes/level2.tscn")

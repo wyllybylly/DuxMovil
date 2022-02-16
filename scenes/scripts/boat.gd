@@ -3,6 +3,9 @@ extends Node2D
 
 export (float) var max_speed = 20
 
+signal person_safe
+
+
 const SEATS = [
 	[Vector2(0, -50), 90],
 	[Vector2(15, -45), 135],
@@ -133,11 +136,21 @@ func _on_AnchorButton_input_event(_viewport, event, _shape_idx):
 func _on_RescueButton_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
-			# If there is a person to rescue, rescue them
-			if anchored and not $Boat/RescueArea.get_overlapping_areas().empty():
-				var person = $Boat/RescueArea.get_overlapping_areas().pop_front()
-				person.rescued($Boat, get_seat())
-			# Else do nothing
+			if anchored:
+				# If there is a person to rescue, rescue them
+				if not $Boat/RescueArea.get_overlapping_areas().empty():
+					var person = $Boat/RescueArea.get_overlapping_areas().pop_front()
+					var seat = get_seat()
+					if seat != null:
+						person.rescued($Boat, seat)
+				# If there is a safe zone, leave a person on  it
+				elif not $Boat/SafeZoneArea.get_overlapping_areas().empty():
+					var safe_zone = $Boat/SafeZoneArea.get_overlapping_areas().pop_front()
+					var person = get_person()
+					if person != null:
+						person.get_to_safe_zone(safe_zone)
+						emit_signal("person_safe")
+				# Else do nothing
 
 
 func _physics_process(delta):
@@ -188,3 +201,10 @@ func get_seat():
 		used_seats += 1
 		# Get position and rotation to seat
 		return SEATS[used_seats - 1]
+
+
+func get_person():
+	if used_seats > 0:
+		used_seats -= 1
+		var person = $Boat.get_child($Boat.get_child_count() - 1)
+		return person

@@ -17,6 +17,13 @@ func rescued(boat, seat):
 	scale = Vector2(0.6, 0.6)
 	# Remove collision
 	self.get_child(1).queue_free()
-	
-	
+
+
+func get_to_safe_zone(safe_zone):
+	get_parent().remove_child(self)
+	safe_zone.add_child(self)
+	position = Vector2(rand_range(-50.0, 50.0), rand_range(-50.0, 50.0))
+	rotation_degrees = 0.0
+	z_index = 1
+	scale = Vector2(0.75, 0.75)
 

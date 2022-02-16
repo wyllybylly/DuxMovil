@@ -42,6 +42,7 @@ ui_click={
 2d_physics/layer_4="overlay"
 2d_physics/layer_5="interaction"
 2d_physics/layer_6="people_to_rescue"
+2d_physics/layer_7="safe_zone"
 
 [physics]
 
