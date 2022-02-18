@@ -223,9 +223,9 @@ animations = [ {
 "name": "back",
 "speed": 25.0
 }, {
-"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 27 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 30 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 17 ), ExtResource( 37 ), ExtResource( 35 ), ExtResource( 33 ) ],
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 34 ), ExtResource( 25 ) ],
 "loop": true,
-"name": "dance_choose",
+"name": "dance_init",
 "speed": 2.0
 }, {
 "frames": [ ExtResource( 23 ) ],
@@ -233,9 +233,9 @@ animations = [ {
 "name": "frente",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 34 ), ExtResource( 25 ) ],
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 27 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 30 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 17 ), ExtResource( 37 ), ExtResource( 35 ), ExtResource( 33 ) ],
 "loop": true,
-"name": "dance_init",
+"name": "dance_choose",
 "speed": 2.0
 } ]
 
@@ -433,7 +433,6 @@ position = Vector2( 270, 384 )
 scale = Vector2( 0.752604, 0.695312 )
 frames = SubResource( 15 )
 animation = "dancing_init"
-frame = 8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
@@ -454,7 +453,7 @@ __meta__ = {
 position = Vector2( 195, 254 )
 frames = SubResource( 17 )
 animation = "dance_init"
-frame = 4
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
@@ -475,7 +474,7 @@ __meta__ = {
 position = Vector2( 227, 567 )
 frames = SubResource( 19 )
 animation = "dancing_init"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player4"]
@@ -483,7 +482,7 @@ position = Vector2( 228, 587 )
 shape = SubResource( 20 )
 
 [node name="Player5" type="Area2D" parent="."]
-position = Vector2( 1.47229, 271.286 )
+position = Vector2( 8.47229, 268.286 )
 scale = Vector2( 1.5, 1.5 )
 __meta__ = {
 "_edit_group_": true
@@ -493,7 +492,7 @@ __meta__ = {
 position = Vector2( 222, 113 )
 frames = SubResource( 21 )
 animation = "dancing_init"
-frame = 3
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player5"]

@@ -28,7 +28,7 @@ var speed = 0.0
 var water_speed = 10.0
 var lever_height = Vector2(0,0) # [0] min pos, [1] max movement
 var power_selected = false
-var anchored = false
+var docked = false
 var max_seats = 15
 var used_seats = 0
 var from_point
@@ -39,7 +39,7 @@ var stabilizing
 
 
 func _draw():
-	draw_line(from_point, to_point, rope_color)
+	draw_line(from_point, to_point, rope_color, 2.0)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -48,22 +48,22 @@ func _ready():
 	var mid_height = get_viewport().size.y / 2.0
 	$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
 	$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
-	$GUI/AnchorButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 30 * ConfigVariables.get_overlay_size())
+	$GUI/DockButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 30 * ConfigVariables.get_overlay_size())
 	$GUI/RescueButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 80 * ConfigVariables.get_overlay_size())
 	$GUI/Lever/LeverSprite.position = Vector2.ZERO
 	$GUI/Lever/LeverCollision.position = Vector2.ZERO
-	$GUI/AnchorButton/AnchorSprite.position = Vector2.ZERO
-	$GUI/AnchorButton/AnchorCollision.position = Vector2.ZERO
+	$GUI/DockButton/DockSprite.position = Vector2.ZERO
+	$GUI/DockButton/DockCollision.position = Vector2.ZERO
 	$GUI/RescueButton/RescueSprite.position = Vector2.ZERO
 	$GUI/RescueButton/RescueCollision.position = Vector2.ZERO
 	lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
 	$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
 	$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-	$GUI/AnchorButton.scale = Vector2(ConfigVariables.get_overlay_size() * 1.2,ConfigVariables.get_overlay_size() * 1.2)
-	$GUI/RescueButton.scale = Vector2(ConfigVariables.get_overlay_size() * 1.2,ConfigVariables.get_overlay_size() * 1.2)
+	$GUI/DockButton.scale = Vector2(ConfigVariables.get_overlay_size() * 0.6,ConfigVariables.get_overlay_size() * 0.6)
+	$GUI/RescueButton.scale = Vector2(ConfigVariables.get_overlay_size() * 0.6,ConfigVariables.get_overlay_size() * 0.6)
 	$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
 	$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/AnchorButton/AnchorSprite.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/DockButton/DockSprite.modulate.a = ConfigVariables.overlay_alpha
 	$GUI/RescueButton/RescueSprite.modulate.a = ConfigVariables.overlay_alpha
 	
 	# Initialize water speed
@@ -72,12 +72,12 @@ func _ready():
 	# Initialize rope variables
 	from_point = Vector2.ZERO
 	to_point = Vector2.ZERO
-	rope_color = Color.darkgray
+	rope_color = Color("87633B")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not anchored:
+	if not docked:
 		# Movement
 		if Input.is_action_pressed("ui_up"):
 			power_up(delta)
@@ -116,18 +116,18 @@ func _on_Lever_input_event(_viewport, _event, _shape_idx):
 		power_selected = true
 
 
-func _on_AnchorButton_input_event(_viewport, event, _shape_idx):
+func _on_DockButton_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
-			if anchored:
-				anchored = false
+			if docked:
+				docked = false
 				from_point = to_point
 				update()
 			else:
-				if not $Boat/AnchorageArea.get_overlapping_bodies().empty():
-					anchored = true
+				if not $Boat/DockArea.get_overlapping_bodies().empty():
+					docked = true
 					from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
-					to_point = $Boat/AnchorageArea.get_overlapping_bodies().pop_front().global_position - global_position
+					to_point = $Boat/DockArea.get_overlapping_bodies().pop_front().global_position - global_position
 					rope_lenght = from_point.distance_to(to_point)
 					update()
 					stabilizing = true
@@ -136,7 +136,7 @@ func _on_AnchorButton_input_event(_viewport, event, _shape_idx):
 func _on_RescueButton_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		if event.button_index == BUTTON_LEFT and not event.pressed:
-			if anchored:
+			if docked:
 				# If there is a person to rescue, rescue them
 				if not $Boat/RescueArea.get_overlapping_areas().empty():
 					var person = $Boat/RescueArea.get_overlapping_areas().pop_front()

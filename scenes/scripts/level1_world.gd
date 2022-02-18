@@ -22,23 +22,37 @@ func _ready():
 	# Set first help screen
 	$Help/Background.show()
 	$Help/Button.show()
-	$Help/TextAnchor.hide()
+	$Help/TextDocking.hide()
 	$Help/TextSave.hide()
 	$Help/TextSteering.hide()
-	set_text_config($Help/TextPower, 0.8)
+	$Help/TextSigns.hide()
+	set_text_config($Help/TextPower, 0.85)
 	set_text_config($Help/TextSteering)
-	set_text_config($Help/TextAnchor, 1.0, 0.2)
+	set_text_config($Help/TextDocking, 1.0, 0.2)
 	set_text_config($Help/TextSave, 1.0, 0.2)
-	$Boat/GUI/AnchorButton.hide()
+	set_text_config($Help/TextSigns)
+	$Help/TextSteering/PhoneIcon.position.x = $Help/TextSteering.rect_size.x / 2
+	$Help/TextPower.get("custom_fonts/normal_font").set_size(ConfigVariables.get_text_size_value())
+	$Boat/GUI/DockButton.hide()
 	$Boat/GUI/RescueButton.hide()
 	onHelpView = false
 	helpScreenLevel = 0
 	helpArray = [
 		[$Help/TextPower, "Rectangle", $Boat/GUI/Frame],
 		[$Help/TextSteering, "None"],
-		[$Help/TextAnchor, "Circle", $Boat/GUI/AnchorButton],
-		[$Help/TextSave, "Circle", $Boat/GUI/RescueButton]
+		[$Help/TextDocking, "Circle", $Boat/GUI/DockButton],
+		[$Help/TextSave, "Circle", $Boat/GUI/RescueButton],
+		[$Help/TextSigns, "None"]
 	]
+	
+	var icon_size = Vector2(ConfigVariables.get_text_size_value(), ConfigVariables.get_text_size_value()) * 1.25
+	for sign_line in $Help/TextSigns/SignList.get_children():
+		var child_count = sign_line.get_child_count()
+		var description = sign_line.get_child(child_count - 1)
+		description.rect_min_size.x = $Help/TextSigns.rect_size.x - ConfigVariables.get_text_size_value() * (child_count - 1)
+		for i in (child_count - 1):
+			sign_line.get_child(i).rect_min_size = icon_size
+	
 	next_screen()
 	
 	# Set finish panel
@@ -127,6 +141,7 @@ func finish_menu():
 
 
 func _on_FinishLevel_back_button_pressed():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://scenes/Menu_Init.tscn")
 
 
