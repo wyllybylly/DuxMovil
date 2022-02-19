@@ -1,5 +1,4 @@
-tool
-extends GridContainer
+extends VBoxContainer
 
 
 var selection = 0
@@ -10,9 +9,14 @@ var style_box
 var selection_box_size
 var selection_box_pos
 var pressed_time
+var current_rect
 
 var change_option_player
 var select_option_player
+
+var from_level = false
+signal changes_canceled
+signal changes_saved
 
 
 func _draw():
@@ -21,6 +25,13 @@ func _draw():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Initialize option values
+	set_default_values()
+	
+	# Load sounds
+	change_option_player = get_node("../../../ChangeOptionPlayer")
+	select_option_player = get_node("../../../SelectOptionPlayer")
+	
 	# Initialize selection boxes
 	style_box = StyleBoxFlat.new()
 	style_box.set_corner_radius_all(5)
@@ -30,24 +41,14 @@ func _ready():
 	style_box.border_width_top = 5
 	style_box.border_width_left = 5
 	style_box.border_width_right = 5
-	selection_box_size = Vector2(get_rect().size.x + 15, get_child(2 * selection).get_rect().size.y + 10)
-	selection_box_pos = Vector2(-7.5, -5.0)
-#	option_box_size = Vector2.ZERO
-#	option_box_pos = Vector2(get_child(2 * selection + 1).get_rect().position.x - 7.5, get_child(2 * selection + 1).get_rect().position.y - 5.0)
-	
-	# Initialize option values
-	set_default_values()
-	
-	# Load sounds
-	change_option_player = get_node("/root/Menu/ChangeOptionPlayer")
-	select_option_player = get_node("/root/Menu/SelectOptionPlayer")
+	selection_box_pos = Vector2(-7.5, get_child(selection).get_rect().position.y - 5.0)
+	selection_box_size = Vector2(get_child(selection).get_rect().size.x + 15, get_child(selection).get_rect().size.y + 10)
 
-
-func _process(delta):
+func _process(_delta):
 	# Controls
 	if Input.is_action_just_pressed("ui_down"):
 		if not option_selected:
-			if selection < (get_child_count() / 2):
+			if selection < get_child_count():
 				set_selection(selection + 1)
 		else:
 			pressed_time = 0
@@ -60,7 +61,7 @@ func _process(delta):
 			pressed_time = 0
 			manage_option("up")
 	if Input.is_action_just_pressed("ui_right"):
-		if selection < get_child_count() / 2:
+		if selection < get_child_count():
 			if option_selected:
 				pressed_time = 0
 				manage_option("right")
@@ -68,7 +69,7 @@ func _process(delta):
 			commit_selection += 1
 			set_selection(selection)
 	if Input.is_action_just_pressed("ui_left"):
-		if selection < get_child_count() / 2:
+		if selection < get_child_count():
 			if option_selected:
 				pressed_time = 0
 				manage_option("left")
@@ -76,7 +77,7 @@ func _process(delta):
 			commit_selection -= 1
 			set_selection(selection)
 	if Input.is_action_just_pressed("ui_accept"):
-		if selection < get_child_count() / 2:
+		if selection < get_child_count():
 			select()
 		else:
 			select_option_player.pitch_scale = 1.0
@@ -111,20 +112,21 @@ func _process(delta):
 
 
 func set_default_values():
-	$OverlaySizeOption.value = ConfigVariables.get_overlay_size_value()
-	$OverlayAlphaOption.value = ConfigVariables.get_overlay_alpha()
+	$OverlaySizeRow/OverlaySizeOption.value = ConfigVariables.get_overlay_size()
+	$OverlayAlphaRow/OverlayAlphaOption.value = ConfigVariables.get_overlay_alpha()
+	$TextSizeRow/TextSizeOption.value = ConfigVariables.get_text_size()
 
 
 func set_selection(new_value):
 	selection = new_value
-	if new_value == get_child_count() / 2:
-		var option = get_node("/root/Menu/CenterContainer/VBoxContainer/CommitButtons/HBoxContainer").get_child(2 * commit_selection)
+	if new_value == get_child_count():
+		var option = get_node("../CommitButtons/HBoxContainer").get_child(2 * commit_selection)
 		var option_pos = option.rect_global_position - rect_global_position
 		selection_box_pos = Vector2(option_pos.x - 7.5, option_pos.y - 5.0)
 		selection_box_size = Vector2(option.get_rect().size.x + 15.0, option.get_rect().size.y + 10.0)
 	else:
-		selection_box_pos = Vector2(-7.5, min(get_child(2 * selection).get_rect().position.y, get_child(2 * selection + 1).get_rect().position.y) - 5.0)
-		selection_box_size = Vector2(get_rect().size.x + 15, max(get_child(2 * selection).get_rect().size.y, get_child(2 * selection + 1).get_rect().size.y) + 10)
+		selection_box_pos = Vector2(-7.5, get_child(selection).get_rect().position.y - 5.0)
+		selection_box_size = Vector2(get_child(selection).get_rect().size.x + 15, get_child(selection).get_rect().size.y + 10)
 	change_option_player.stop()
 	change_option_player.play()
 	update()
@@ -133,21 +135,37 @@ func set_selection(new_value):
 func select():
 	if option_selected:
 		select_option_player.pitch_scale = 2.0
-		selection_box_pos = Vector2(-7.5, min(get_child(2 * selection).get_rect().position.y, get_child(2 * selection + 1).get_rect().position.y) - 5.0)
-		selection_box_size = Vector2(get_rect().size.x + 15, max(get_child(2 * selection).get_rect().size.y, get_child(2 * selection + 1).get_rect().size.y) + 10)
+		selection_box_pos = Vector2(-7.5, get_child(selection).get_rect().position.y - 5.0)
+		selection_box_size = Vector2(get_child(selection).get_rect().size.x + 15, get_child(selection).get_rect().size.y + 10)
 	else:
 		select_option_player.pitch_scale = 1.0
-		selection_box_pos = Vector2(get_child(2 * selection + 1).get_rect().position.x - 7.5, get_child(2 * selection + 1).get_rect().position.y - 5.0)
-		selection_box_size = Vector2(get_child(2 * selection + 1).get_rect().size.x + 15, get_child(2 * selection + 1).get_rect().size.y + 10)
+		selection_box_pos = Vector2(get_child(selection).get_child(1).get_rect().position.x + get_child(selection).get_rect().position.x - 7.5, get_child(selection).get_child(1).get_rect().position.y  + get_child(selection).get_rect().position.y - 5.0)
+		selection_box_size = Vector2(get_child(selection).get_child(1).get_rect().size.x + 15, get_child(selection).get_child(1).get_rect().size.y + 10)
 	select_option_player.stop()
 	select_option_player.play()
 	option_selected = !option_selected
 	update()
 
 
+func update_box():
+	if option_selected:
+		selection_box_pos = Vector2(get_child(selection).get_child(1).get_rect().position.x + get_child(selection).get_rect().position.x - 7.5, get_child(selection).get_child(1).get_rect().position.y  + get_child(selection).get_rect().position.y - 5.0)
+		selection_box_size = Vector2(get_child(selection).get_child(1).get_rect().size.x + 15, get_child(selection).get_child(1).get_rect().size.y + 10)
+	else:
+		if selection == get_child_count():
+			var option = get_node("/root/Menu/CenterContainer/VBoxContainer/CommitButtons/HBoxContainer").get_child(2 * commit_selection)
+			var option_pos = option.rect_global_position - rect_global_position
+			selection_box_pos = Vector2(option_pos.x - 7.5, option_pos.y - 5.0)
+			selection_box_size = Vector2(option.get_rect().size.x + 15.0, option.get_rect().size.y + 10.0)
+		else:
+			selection_box_pos = Vector2(-7.5, get_child(selection).get_rect().position.y - 5.0)
+			selection_box_size = Vector2(get_child(selection).get_rect().size.x + 15, get_child(selection).get_rect().size.y + 10)
+	update()
+
+
 func manage_option(input):
 	# Get option
-	var option = get_child(2 * selection + 1)
+	var option = get_child(selection).get_child(1)
 	
 	# SpinBox
 	if option is SpinBox:
@@ -165,14 +183,36 @@ func manage_option(input):
 
 
 func _on_Save_button_up():
-	ConfigVariables.update_overlay_size($OverlaySizeOption.value)
-	ConfigVariables.set_overlay_alpha($OverlayAlphaOption.value)
-	get_tree().change_scene("res://scenes/Menu_Init.tscn")
+	ConfigVariables.update_overlay_size($OverlaySizeRow/OverlaySizeOption.value)
+	ConfigVariables.set_overlay_alpha($OverlayAlphaRow/OverlayAlphaOption.value)
+	ConfigVariables.set_text_size($TextSizeRow/TextSizeOption.value)
+	if !from_level:
+# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://scenes/Menu_Init.tscn")
+	else:
+		emit_signal("changes_saved")
 
 
 func _on_Cancel_button_up():
-	get_tree().change_scene("res://scenes/Menu_Init.tscn")
+	if !from_level:
+# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://scenes/Menu_Init.tscn")
+	else:
+		emit_signal("changes_canceled")
 
 
 func _on_Reset_button_up():
 	set_default_values()
+
+
+func _on_TextSizeOption_value_changed(value):
+	$TextSizeRow/TextSizeLabel.get("custom_fonts/font").set_size(ConfigVariables.get_text_size_m_value(value))
+	get_node("../Title").get("custom_fonts/font").set_size(ConfigVariables.get_text_size_l_value(value))
+	set_min_size(value)
+	yield(get_tree(), "idle_frame")
+	update_box()
+
+
+func set_min_size(value):
+	for row in get_children():
+		row.get_child(0).rect_min_size.x = 200.0 + 90.0 * value

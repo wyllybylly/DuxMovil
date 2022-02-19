@@ -81,7 +81,7 @@ void fragment(){
 
 }"
 
-[sub_resource type="ShaderMaterial" id=36]
+[sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
 shader_param/house_color = Color( 0.960784, 0.960784, 0.858824, 1 )
 shader_param/mix_amount = 2.0
@@ -673,7 +673,7 @@ position = Vector2( 513.511, 806.166 )
 
 [node name="TileMapHouse" type="TileMap" parent="."]
 pause_mode = 1
-material = SubResource( 36 )
+material = SubResource( 4 )
 z_index = 1
 tile_set = SubResource( 23 )
 cell_size = Vector2( 32, 32 )

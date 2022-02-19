@@ -45,26 +45,7 @@ func _draw():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Initialize overlay positions
-	var mid_height = get_viewport().size.y / 2.0
-	$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
-	$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
-	$GUI/DockButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 30 * ConfigVariables.get_overlay_size())
-	$GUI/RescueButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 80 * ConfigVariables.get_overlay_size())
-	$GUI/Lever/LeverSprite.position = Vector2.ZERO
-	$GUI/Lever/LeverCollision.position = Vector2.ZERO
-	$GUI/DockButton/DockSprite.position = Vector2.ZERO
-	$GUI/DockButton/DockCollision.position = Vector2.ZERO
-	$GUI/RescueButton/RescueSprite.position = Vector2.ZERO
-	$GUI/RescueButton/RescueCollision.position = Vector2.ZERO
-	lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
-	$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-	$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-	$GUI/DockButton.scale = Vector2(ConfigVariables.get_overlay_size() * 0.6,ConfigVariables.get_overlay_size() * 0.6)
-	$GUI/RescueButton.scale = Vector2(ConfigVariables.get_overlay_size() * 0.6,ConfigVariables.get_overlay_size() * 0.6)
-	$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/DockButton/DockSprite.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/RescueButton/RescueSprite.modulate.a = ConfigVariables.overlay_alpha
+	set_overlay()
 	
 	# Initialize water speed
 	water_speed = LevelVariables.water_speed
@@ -73,6 +54,13 @@ func _ready():
 	from_point = Vector2.ZERO
 	to_point = Vector2.ZERO
 	rope_color = Color("87633B")
+	
+	# Options
+	$GUI/OptionsPanel.hide()
+	var options_node = get_node("GUI/OptionsPanel/Menu/CenterContainer/VBoxContainer/Options")
+	options_node.from_level = true
+	options_node.connect("changes_canceled", self, "_on_menu_changes_canceled")
+	options_node.connect("changes_saved", self, "_on_menu_changes_saved")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -208,3 +196,44 @@ func get_person():
 		used_seats -= 1
 		var person = $Boat.get_child($Boat.get_child_count() - 1)
 		return person
+
+
+func _on_OptionsButton_pressed():
+	get_tree().paused = true
+	$GUI/OptionsPanel.show()
+
+
+func _on_menu_changes_canceled():
+	$GUI/OptionsPanel.hide()
+	get_tree().paused = false
+
+
+func _on_menu_changes_saved():
+	set_overlay()
+	$GUI/OptionsPanel.hide()
+	get_tree().paused = false
+
+
+func set_overlay():
+	var mid_height = get_viewport().size.y / 2.0
+	$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
+	$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
+	$GUI/DockButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 30 * ConfigVariables.get_overlay_size())
+	$GUI/RescueButton.position = Vector2(30.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 80 * ConfigVariables.get_overlay_size())
+	$GUI/Lever/LeverSprite.position = Vector2.ZERO
+	$GUI/Lever/LeverCollision.position = Vector2.ZERO
+	$GUI/DockButton/DockSprite.position = Vector2.ZERO
+	$GUI/DockButton/DockCollision.position = Vector2.ZERO
+	$GUI/RescueButton/RescueSprite.position = Vector2.ZERO
+	$GUI/RescueButton/RescueCollision.position = Vector2.ZERO
+	lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
+	$GUI/OptionsButton.rect_position = Vector2(get_viewport().size.x - 50.0 * ConfigVariables.get_overlay_size() - (150.0 if ConfigVariables.get_overlay_size() == 4 else 0.0), 10.0)
+	$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+	$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+	$GUI/DockButton.scale = Vector2(ConfigVariables.get_overlay_size() * 0.6,ConfigVariables.get_overlay_size() * 0.6)
+	$GUI/RescueButton.scale = Vector2(ConfigVariables.get_overlay_size() * 0.6,ConfigVariables.get_overlay_size() * 0.6)
+	$GUI/OptionsButton.rect_scale = Vector2(ConfigVariables.get_overlay_size() * 0.6,ConfigVariables.get_overlay_size() * 0.6)
+	$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/DockButton/DockSprite.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/RescueButton/RescueSprite.modulate.a = ConfigVariables.overlay_alpha

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/scripts/boat.gd" type="Script" id=1]
 [ext_resource path="res://resources/controls_overlay/power_frame.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://resources/playable_vehicles/boat.png" type="Texture" id=4]
 [ext_resource path="res://resources/controls_overlay/power_lever.png" type="Texture" id=5]
 [ext_resource path="res://resources/controls_overlay/dock_button.png" type="Texture" id=6]
+[ext_resource path="res://resources/controls_overlay/options_button.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menus/config_menu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
@@ -21,8 +23,8 @@ extents = Vector2( 30, 18 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="CircleShape2D" id=5]
-radius = 24.0
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 32 )
 
 [node name="Boat" type="Node2D"]
 script = ExtResource( 1 )
@@ -79,11 +81,9 @@ editor_draw_drag_margin = true
 
 [node name="Frame" type="Sprite" parent="GUI"]
 position = Vector2( 70.0378, -68.5938 )
-z_index = 10
 texture = ExtResource( 2 )
 
 [node name="Lever" type="Area2D" parent="GUI"]
-z_index = 10
 collision_layer = 8
 collision_mask = 0
 
@@ -99,7 +99,6 @@ shape = SubResource( 3 )
 
 [node name="DockButton" type="Area2D" parent="GUI"]
 position = Vector2( 197.808, -25.8284 )
-z_index = 10
 collision_layer = 8
 collision_mask = 0
 __meta__ = {
@@ -126,6 +125,28 @@ texture = ExtResource( 3 )
 [node name="RescueCollision" type="CollisionShape2D" parent="GUI/RescueButton"]
 shape = SubResource( 5 )
 
+[node name="OptionsButton" type="TextureButton" parent="GUI"]
+margin_left = 319.469
+margin_top = -57.6551
+margin_right = 383.469
+margin_bottom = 6.34489
+texture_normal = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsPanel" type="Panel" parent="GUI"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" parent="GUI/OptionsPanel" instance=ExtResource( 8 )]
+
 [connection signal="input_event" from="GUI/Lever" to="." method="_on_Lever_input_event"]
 [connection signal="input_event" from="GUI/DockButton" to="." method="_on_DockButton_input_event"]
 [connection signal="input_event" from="GUI/RescueButton" to="." method="_on_RescueButton_input_event"]
+[connection signal="pressed" from="GUI/OptionsButton" to="." method="_on_OptionsButton_pressed"]

@@ -32,7 +32,7 @@ func _ready():
 	set_text_config($Help/TextSave, 1.0, 0.2)
 	set_text_config($Help/TextSigns)
 	$Help/TextSteering/PhoneIcon.position.x = $Help/TextSteering.rect_size.x / 2
-	$Help/TextPower.get("custom_fonts/normal_font").set_size(ConfigVariables.get_text_size_value())
+	$Help/TextPower.get("custom_fonts/normal_font").set_size(ConfigVariables.get_text_size_l_value())
 	$Boat/GUI/DockButton.hide()
 	$Boat/GUI/RescueButton.hide()
 	onHelpView = false
@@ -45,11 +45,11 @@ func _ready():
 		[$Help/TextSigns, "None"]
 	]
 	
-	var icon_size = Vector2(ConfigVariables.get_text_size_value(), ConfigVariables.get_text_size_value()) * 1.25
+	var icon_size = Vector2(ConfigVariables.get_text_size_l_value(), ConfigVariables.get_text_size_l_value()) * 1.25
 	for sign_line in $Help/TextSigns/SignList.get_children():
 		var child_count = sign_line.get_child_count()
 		var description = sign_line.get_child(child_count - 1)
-		description.rect_min_size.x = $Help/TextSigns.rect_size.x - ConfigVariables.get_text_size_value() * (child_count - 1)
+		description.rect_min_size.x = $Help/TextSigns.rect_size.x - ConfigVariables.get_text_size_l_value() * (child_count - 1)
 		for i in (child_count - 1):
 			sign_line.get_child(i).rect_min_size = icon_size
 	
