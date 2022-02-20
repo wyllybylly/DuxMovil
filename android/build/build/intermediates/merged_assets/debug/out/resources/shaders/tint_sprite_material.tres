@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://resources/cars/car_mask_2.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 tint_color : hint_color;
+uniform sampler2D mask_img;
+
+void fragment(){
+    vec4 tex=texture(TEXTURE,UV); //sprite texture
+	vec3 color = tint_color.rgb;
+    vec3 sprite_color= tex.rgb; //sprite color, without alpha;
+	float mask_value = texture(mask_img, UV).a;
+	
+	if (mask_value == 1.0) {
+    	COLOR = vec4( color * sprite_color.r, tex.a );
+	}
+	else {
+		COLOR = tex;
+	}
+
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/tint_color = Color( 0.137255, 0.121569, 0.631373, 1 )
+shader_param/mask_img = ExtResource( 1 )
