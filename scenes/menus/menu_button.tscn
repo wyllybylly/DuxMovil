@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/scripts/menu_button.gd" type="Script" id=1]
+[ext_resource path="res://fonts/tres/menu_button.tres" type="DynamicFont" id=2]
+[ext_resource path="res://resources/controls_overlay/menu_button_l.png" type="Texture" id=3]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+
+[node name="MenuButton" type="TextureButton"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -210.0
+margin_right = 210.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+focus_mode = 1
+action_mode = 0
+texture_normal = ExtResource( 3 )
+expand = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonText" type="RichTextLabel" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_vertical = 2
+rect_min_size = Vector2( 0, 42 )
+mouse_filter = 2
+theme = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center] Text button [/center]"
+text = " Text button "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="focus_entered" from="." to="." method="_on_MenuButton_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_MenuButton_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_MenuButton_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_MenuButton_pressed"]

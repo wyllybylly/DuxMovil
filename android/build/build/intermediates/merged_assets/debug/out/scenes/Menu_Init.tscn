@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://scenes/scripts/Menu_Init.gd" type="Script" id=1]
 [ext_resource path="res://fonts/button_font.tres" type="DynamicFont" id=2]
@@ -78,6 +78,8 @@
 [ext_resource path="res://resources/sprites/Player3/zombie_action1.png" type="Texture" id=76]
 [ext_resource path="res://resources/sounds/main_menu.mp3" type="AudioStream" id=77]
 [ext_resource path="res://resources/sounds/pluck_002.ogg" type="AudioStream" id=78]
+[ext_resource path="res://resources/controls_overlay/tts_off.png" type="Texture" id=79]
+[ext_resource path="res://resources/controls_overlay/tts_on.png" type="Texture" id=80]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -223,9 +225,9 @@ animations = [ {
 "name": "back",
 "speed": 25.0
 }, {
-"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 27 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 30 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 17 ), ExtResource( 37 ), ExtResource( 35 ), ExtResource( 33 ) ],
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 34 ), ExtResource( 25 ) ],
 "loop": true,
-"name": "dance_choose",
+"name": "dance_init",
 "speed": 2.0
 }, {
 "frames": [ ExtResource( 23 ) ],
@@ -233,9 +235,9 @@ animations = [ {
 "name": "frente",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 34 ), ExtResource( 25 ) ],
+"frames": [ ExtResource( 23 ), ExtResource( 22 ), ExtResource( 39 ), ExtResource( 27 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 30 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 17 ), ExtResource( 37 ), ExtResource( 35 ), ExtResource( 33 ) ],
 "loop": true,
-"name": "dance_init",
+"name": "dance_choose",
 "speed": 2.0
 } ]
 
@@ -365,56 +367,56 @@ __meta__ = {
 
 [node name="PlayButton" type="Button" parent="Button_Container"]
 margin_right = 469.0
-margin_bottom = 27.0
+margin_bottom = 36.0
 focus_neighbour_top = NodePath("../QuitButton")
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 0, 1 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 0, 1 )
 text = "1. Jugar"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ConfigButton" type="Button" parent="Button_Container"]
-margin_top = 31.0
+margin_top = 40.0
 margin_right = 469.0
-margin_bottom = 58.0
+margin_bottom = 76.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.847059, 1, 0, 1 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/focus = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0.847059, 1, 0, 1 )
 text = "2. Configuración"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AboutUsButton" type="Button" parent="Button_Container"]
-margin_top = 62.0
+margin_top = 80.0
 margin_right = 469.0
-margin_bottom = 89.0
+margin_bottom = 116.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.87451, 1, 0, 1 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/focus = SubResource( 10 )
 custom_styles/normal = SubResource( 11 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0.87451, 1, 0, 1 )
 text = "3. Sobre Nosotros"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="QuitButton" type="Button" parent="Button_Container"]
-margin_top = 93.0
+margin_top = 120.0
 margin_right = 469.0
-margin_bottom = 120.0
+margin_bottom = 156.0
 focus_neighbour_bottom = NodePath("../PlayButton")
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.886275, 0.996078, 0, 1 )
 custom_styles/pressed = SubResource( 12 )
 custom_styles/focus = SubResource( 13 )
 custom_styles/normal = SubResource( 14 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0.886275, 0.996078, 0, 1 )
 text = "4. Salir"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -432,6 +434,7 @@ position = Vector2( 270, 384 )
 scale = Vector2( 0.752604, 0.695312 )
 frames = SubResource( 15 )
 animation = "dancing_init"
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
@@ -452,7 +455,7 @@ __meta__ = {
 position = Vector2( 195, 254 )
 frames = SubResource( 17 )
 animation = "dance_init"
-frame = 2
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
@@ -490,7 +493,7 @@ __meta__ = {
 position = Vector2( 222, 113 )
 frames = SubResource( 21 )
 animation = "dancing_init"
-frame = 3
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player5"]
@@ -503,8 +506,18 @@ stream = ExtResource( 77 )
 [node name="OptionSelected" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 78 )
 
+[node name="TTSButton" type="TextureButton" parent="."]
+margin_left = 843.704
+margin_top = 231.761
+margin_right = 907.704
+margin_bottom = 295.761
+toggle_mode = true
+texture_normal = ExtResource( 80 )
+texture_pressed = ExtResource( 79 )
+
 [connection signal="pressed" from="Button_Container/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Button_Container/ConfigButton" to="." method="_on_ConfigButton_pressed"]
 [connection signal="pressed" from="Button_Container/AboutUsButton" to="." method="_on_AboutUsButton_pressed"]
 [connection signal="pressed" from="Button_Container/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="finished" from="OptionSelected" to="." method="_on_OptionSelected_finished"]
+[connection signal="toggled" from="TTSButton" to="." method="_on_TTSButton_toggled"]

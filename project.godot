@@ -8,10 +8,20 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "TextureButton",
+"class": "MenuButtonBase",
+"language": "GDScript",
+"path": "res://scenes/scripts/menu_button.gd"
+} ]
+_global_script_class_icons={
+"MenuButtonBase": ""
+}
+
 [application]
 
 config/name="Juego Educativo"
-run/main_scene="res://scenes/Menu_Init.tscn"
+run/main_scene="res://scenes/menus/main_menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

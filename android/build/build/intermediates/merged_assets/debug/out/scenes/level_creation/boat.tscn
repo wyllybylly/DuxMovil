@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/scripts/boat.gd" type="Script" id=1]
 [ext_resource path="res://resources/controls_overlay/power_frame.png" type="Texture" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://resources/controls_overlay/power_lever.png" type="Texture" id=5]
 [ext_resource path="res://resources/controls_overlay/dock_button.png" type="Texture" id=6]
 [ext_resource path="res://resources/controls_overlay/options_button.png" type="Texture" id=7]
-[ext_resource path="res://scenes/menus/config_menu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/menus/config_menu_old.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/menus/config_menu.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
@@ -146,7 +147,11 @@ __meta__ = {
 
 [node name="Menu" parent="GUI/OptionsPanel" instance=ExtResource( 8 )]
 
+[node name="ConfigMenu" parent="GUI" instance=ExtResource( 9 )]
+visible = false
+
 [connection signal="input_event" from="GUI/Lever" to="." method="_on_Lever_input_event"]
 [connection signal="input_event" from="GUI/DockButton" to="." method="_on_DockButton_input_event"]
 [connection signal="input_event" from="GUI/RescueButton" to="." method="_on_RescueButton_input_event"]
 [connection signal="pressed" from="GUI/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="menu_closed" from="GUI/ConfigMenu" to="." method="_on_ConfigMenu_menu_closed"]

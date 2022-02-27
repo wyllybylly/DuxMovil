@@ -4,7 +4,7 @@
 font_path = "res://fonts/Kenney Future.ttf"
 
 [resource]
-size = 42
+size = 56
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_space = 5
 font_data = SubResource( 1 )

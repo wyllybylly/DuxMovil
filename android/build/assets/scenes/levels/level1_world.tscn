@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://scenes/scripts/level1_world.gd" type="Script" id=1]
 [ext_resource path="res://scenes/scripts/water.gd" type="Script" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://resources/rescue/sign_flooded.png" type="Texture" id=29]
 [ext_resource path="res://resources/rescue/sign_stairs.png" type="Texture" id=30]
 [ext_resource path="res://resources/rescue/sign_elder.png" type="Texture" id=31]
+[ext_resource path="res://resources/cars/car_mask_1.png" type="Texture" id=32]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -81,7 +82,7 @@ void fragment(){
 
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=36]
 shader = SubResource( 3 )
 shader_param/house_color = Color( 0.960784, 0.960784, 0.858824, 1 )
 shader_param/mix_amount = 2.0
@@ -594,12 +595,12 @@ void fragment(){
 [sub_resource type="ShaderMaterial" id=27]
 shader = SubResource( 26 )
 shader_param/tint_color = Color( 0.145098, 0.239216, 0.733333, 1 )
-shader_param/mask_img = ExtResource( 12 )
+shader_param/mask_img = ExtResource( 32 )
 
 [sub_resource type="ShaderMaterial" id=28]
 shader = SubResource( 26 )
 shader_param/tint_color = Color( 0.423529, 0.439216, 0.415686, 1 )
-shader_param/mask_img = ExtResource( 12 )
+shader_param/mask_img = ExtResource( 32 )
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = SubResource( 26 )
@@ -640,12 +641,12 @@ shader_param/mask_img = ExtResource( 12 )
 [sub_resource type="ShaderMaterial" id=33]
 shader = SubResource( 31 )
 shader_param/tint_color = Color( 0.835294, 0.721569, 0.0784314, 1 )
-shader_param/mask_img = ExtResource( 12 )
+shader_param/mask_img = ExtResource( 32 )
 
 [sub_resource type="ShaderMaterial" id=34]
 shader = SubResource( 26 )
 shader_param/tint_color = Color( 0.227451, 0.262745, 0.211765, 1 )
-shader_param/mask_img = ExtResource( 12 )
+shader_param/mask_img = ExtResource( 32 )
 
 [sub_resource type="RectangleShape2D" id=35]
 extents = Vector2( 220.668, 76.1206 )
@@ -673,7 +674,7 @@ position = Vector2( 513.511, 806.166 )
 
 [node name="TileMapHouse" type="TileMap" parent="."]
 pause_mode = 1
-material = SubResource( 4 )
+material = SubResource( 36 )
 z_index = 1
 tile_set = SubResource( 23 )
 cell_size = Vector2( 32, 32 )
@@ -688,7 +689,7 @@ house_color = Color( 0.960784, 0.960784, 0.858824, 1 )
 mix_amount = 2.0
 
 [node name="TileMapDecorations" parent="." instance=ExtResource( 16 )]
-tile_data = PoolIntArray( -5636073, 3, 0, -5570537, 3, 0, -5439465, 0, 0, -5373929, 3, 0, -5308393, 3, 0 )
+tile_data = PoolIntArray( -5570537, 3, 0, -5439465, 0, 0, -5308393, 3, 0, -5177320, 5, 0, -5177318, 5, 0, -5111784, 6, 0, -5111782, 6, 0 )
 
 [node name="Help" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -761,7 +762,7 @@ __meta__ = {
 
 [node name="SignList" type="VBoxContainer" parent="Help/TextSigns"]
 margin_right = 12.0
-margin_bottom = 6488.0
+margin_bottom = 8468.0
 
 [node name="Sign1" type="HBoxContainer" parent="Help/TextSigns/SignList"]
 margin_right = 12.0
@@ -1046,8 +1047,8 @@ position = Vector2( 506.146, -1550.04 )
 position = Vector2( 691.489, -2670.13 )
 
 [node name="LightPole6" parent="Poles" instance=ExtResource( 15 )]
-position = Vector2( 416.375, -3650 )
-rotation = 0.505436
+position = Vector2( 415.534, -3629.19 )
+rotation = 0.274793
 scale = Vector2( -1, 1 )
 
 [node name="Group1" type="Node2D" parent="."]
@@ -1056,7 +1057,7 @@ z_index = 2
 script = ExtResource( 17 )
 
 [node name="Signs" type="Node2D" parent="Group1"]
-position = Vector2( 64.0363, -231.556 )
+position = Vector2( 60.0678, -278.781 )
 z_index = 2
 script = ExtResource( 18 )
 sign_elder = true

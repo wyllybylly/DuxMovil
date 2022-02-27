@@ -45,3 +45,7 @@ func _on_AboutUsButton_pressed():
 func _on_QuitButton_pressed():
 	$OptionSelected.play()
 	b_quit = true
+
+
+func _on_TTSButton_toggled(button_pressed):
+	TTSManager.toggle(button_pressed)
