@@ -8,7 +8,7 @@ func _ready():
 
 func _on_Start_pressed():
 	TTSManager.say("Start Presionado")
-	get_tree().change_scene("res://scenes/levels/level1_world.tscn")
+	get_tree().change_scene("res://scenes/levels/level1_new.tscn")
 
 
 func _on_Config_pressed():

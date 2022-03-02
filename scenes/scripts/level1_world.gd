@@ -11,13 +11,13 @@ var people = 3
 func _ready():
 	LevelVariables.water_speed = 0.0
 	$Boat.update_water_speed()
-	$Water.update_water_speed()
+	$World/Water.update_water_speed()
 	var camera = $Boat/Boat/FollowBoatCamera
-	var water_size = $Water.region_rect.size
-	camera.limit_bottom = $Water.global_position.y + water_size.y / 2
-	camera.limit_top = $Water.global_position.y - water_size.y / 2
-	camera.limit_left = $Water.global_position.x - water_size.x / 2
-	camera.limit_right = $Water.global_position.x + water_size.x / 2
+	var water_size = $World/Water.region_rect.size
+	camera.limit_bottom = $World/Water.global_position.y + water_size.y / 2
+	camera.limit_top = $World/Water.global_position.y - water_size.y / 2
+	camera.limit_left = $World/Water.global_position.x - water_size.x / 2
+	camera.limit_right = $World/Water.global_position.x + water_size.x / 2
 	
 	# Set first help screen
 	$Help/Background.show()
@@ -32,7 +32,6 @@ func _ready():
 	set_text_config($Help/TextSave, 1.0, 0.2)
 	set_text_config($Help/TextSigns)
 	$Help/TextSteering/PhoneIcon.position.x = $Help/TextSteering.rect_size.x / 2
-	$Help/TextPower.get("custom_fonts/normal_font").set_size(ConfigVariables.get_text_size_l_value())
 	$Boat/GUI/DockButton.hide()
 	$Boat/GUI/RescueButton.hide()
 	onHelpView = false
@@ -68,21 +67,17 @@ func _process(_delta):
 			next_screen()
 
 
-func _on_Button_button_up():
-	next_screen()
-
-
 func _on_NextHelp_body_entered(body):
 	if body.name == "Boat":
 		next_screen()
 #		queue_free()
 
 
-func _on_turn_on_water_body_entered(body):
+func _on_TurnOnWater_body_entered(body):
 	if body.name == "Boat":
 		LevelVariables.water_speed = 10.0
 		$Boat.update_water_speed()
-		$Water.update_water_speed()
+		$World/Water.update_water_speed()
 		$Triggers/TurnOnWater.queue_free()
 
 
@@ -114,6 +109,7 @@ func show_help_view(text):
 	$Help/Background.show()
 	text.show()
 	$Help/Button.show()
+	$Help/Button.update_size()
 
 
 func set_text_config(text, right = 1.0, left = 0.0, bottom = 0.9, top = 0.0):
@@ -142,9 +138,13 @@ func finish_menu():
 
 func _on_FinishLevel_back_button_pressed():
 # warning-ignore:return_value_discarded
-	get_tree().change_scene("res://scenes/Menu_Init.tscn")
+	get_tree().change_scene("res://scenes/menus/main_menu.tscn")
 
 
 func _on_FinishLevel_next_button_pressed():
 	pass
 #	get_tree().change_scene("res://scenes/level2.tscn")
+
+
+func _on_Button_b_pressed():
+	next_screen()

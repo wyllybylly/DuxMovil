@@ -63,5 +63,7 @@ func update_font_sizes():
 	font.set_size(get_text_size_m_value())
 	font = load("res://fonts/tres/config_label.tres")
 	font.set_size(get_text_size_m_value())
+	font = load("res://fonts/tres/help_text.tres")
+	font.set_size(get_text_size_m_value())
 	font = load("res://fonts/tres/menu_title.tres")
 	font.set_size(get_text_size_l_value())

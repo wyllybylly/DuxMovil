@@ -22,13 +22,13 @@ func update_shape():
 		mat.set_shader_param("type", 1)
 		mat.set_shader_param("aspect_ratio", ar)
 		var button = get_node(node_path)
-		var pos = button.global_position
+		var pos = button.rect_global_position + button.rect_size / 2.0 * button.rect_scale
 		print(pos)
 		pos.x = pos.x / vs.x / ar
 		pos.y = pos.y / vs.y
 		print(pos)
 		mat.set_shader_param("position", pos)
-		var radius = button.get_child(0).get_rect().size.x / vs.x * button.scale.x * 1.1
+		var radius = button.rect_size.x / vs.x * button.rect_scale.x * 1.1
 		mat.set_shader_param("radius", radius)
 	elif poly_type == "Rectangle":
 		var vs = get_viewport_rect().size
@@ -45,4 +45,4 @@ func update_shape():
 		mat.set_shader_param("position", pos)
 	elif poly_type == "None":
 		var mat = self.get_material()
-		mat.set_shader_param("type", 1)
+		mat.set_shader_param("type", 3)

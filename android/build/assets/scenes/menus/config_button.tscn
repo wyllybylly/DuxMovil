@@ -42,4 +42,3 @@ __meta__ = {
 [connection signal="focus_exited" from="." to="." method="_on_MenuButton_focus_exited"]
 [connection signal="mouse_entered" from="." to="." method="_on_MenuButton_mouse_entered"]
 [connection signal="pressed" from="." to="." method="_on_MenuButton_pressed"]
-[connection signal="resized" from="ButtonText" to="." method="_on_ButtonText_resized"]

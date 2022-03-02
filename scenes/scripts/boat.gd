@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export (float) var max_speed = 20
+export (float) var max_speed = 40
 
 signal person_safe
 
@@ -96,48 +96,6 @@ func _process(delta):
 				stabilizing = false
 
 
-func _on_Lever_input_event(_viewport, _event, _shape_idx):
-	if Input.is_action_just_pressed("ui_click"):
-		power_selected = true
-
-
-func _on_DockButton_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton or event is InputEventScreenTouch:
-		if event.button_index == BUTTON_LEFT and not event.pressed:
-			if docked:
-				docked = false
-				from_point = to_point
-				update()
-			else:
-				if not $Boat/DockArea.get_overlapping_bodies().empty():
-					docked = true
-					from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
-					to_point = $Boat/DockArea.get_overlapping_bodies().pop_front().global_position - global_position
-					rope_lenght = from_point.distance_to(to_point)
-					update()
-					stabilizing = true
-
-
-func _on_RescueButton_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton or event is InputEventScreenTouch:
-		if event.button_index == BUTTON_LEFT and not event.pressed:
-			if docked:
-				# If there is a person to rescue, rescue them
-				if not $Boat/RescueArea.get_overlapping_areas().empty():
-					var person = $Boat/RescueArea.get_overlapping_areas().pop_front()
-					var seat = get_seat()
-					if seat != null:
-						person.rescued($Boat, seat)
-				# If there is a safe zone, leave a person on  it
-				elif not $Boat/SafeZoneArea.get_overlapping_areas().empty():
-					var safe_zone = $Boat/SafeZoneArea.get_overlapping_areas().pop_front()
-					var person = get_person()
-					if person != null:
-						person.get_to_safe_zone(safe_zone)
-						emit_signal("person_safe")
-				# Else do nothing
-
-
 func _physics_process(delta):
 	if power_selected:
 		if get_viewport().get_mouse_position().y < $GUI/Lever.global_position.y:
@@ -160,6 +118,7 @@ func power_up(delta):
 func power_down(delta):
 	speed = max(speed - 20.0 * delta, 0)
 	update_lever_y()
+	TTSManager.say("Motor al " + str(round(speed / max_speed * 100)) + "%")
 
 
 func rotate(delta):
@@ -167,10 +126,11 @@ func rotate(delta):
 
 
 func stabilize_rotation(delta):
-	if $Boat.rotation > 0.0:
-		$Boat.rotation = max($Boat.rotation - PI / 4 * delta, 0.0)
-	else:
-		$Boat.rotation = min($Boat.rotation + PI / 4 * delta, 0.0)
+	if delta > 0.0:
+		if $Boat.rotation > 0.0:
+			$Boat.rotation = max($Boat.rotation - PI / 4 * delta, 0.0)
+		else:
+			$Boat.rotation = min($Boat.rotation + PI / 4 * delta, 0.0)
 
 
 func update_lever_y():
@@ -195,39 +155,87 @@ func get_person():
 		return person
 
 
-func _on_OptionsButton_pressed():
+func set_overlay():
+	var mid_height = get_viewport().size.y / 2.0
+	$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
+	$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
+	$GUI/DockButton.rect_position = Vector2(20.0, get_viewport().size.y - 15.0 * ConfigVariables.get_overlay_size() - 110.0)
+	$GUI/RescueButton.rect_position = Vector2(20.0, get_viewport().size.y - 35.0 * ConfigVariables.get_overlay_size() - 200.0)
+	$GUI/OptionsButton.rect_position = Vector2(get_viewport().size.x - (40.0 * ConfigVariables.get_overlay_size() + 200.0 if ConfigVariables.get_overlay_size() >= 3 else 20.0 * ConfigVariables.get_overlay_size() + 100.0), 10.0)
+	$GUI/Lever/LeverSprite.position = Vector2.ZERO
+	$GUI/Lever/LeverCollision.position = Vector2.ZERO
+	lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
+	$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+	$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+	var scale_value = 1.4 + ConfigVariables.get_overlay_size() * 0.2
+	$GUI/DockButton.rect_scale = Vector2(scale_value, scale_value)
+	$GUI/RescueButton.rect_scale = Vector2(scale_value, scale_value)
+	$GUI/OptionsButton.rect_scale = Vector2(scale_value, scale_value)
+	$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/DockButton.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/RescueButton.modulate.a = ConfigVariables.overlay_alpha
+	$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
+
+
+func _on_DockButton_b_pressed():
+	# If boat is docked, undock it
+	if docked:
+		docked = false
+		from_point = to_point
+		update()
+		TTSManager.say("Lancha suelta")
+	# Else, check if there is dockable areas
+	else:
+		# If there is, dock
+		if not $Boat/DockArea.get_overlapping_bodies().empty():
+			docked = true
+			from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
+			to_point = $Boat/DockArea.get_overlapping_bodies().pop_front().global_position - global_position
+			rope_lenght = from_point.distance_to(to_point)
+			update()
+			stabilizing = true
+			TTSManager.say("Lancha anclada")
+		# Else notify
+		else:
+			TTSManager.say("No se encontró lugar para anclar")
+
+
+func _on_RescueButton_b_pressed():
+	if docked:
+		# If there is a person to rescue, rescue them
+		if not $Boat/RescueArea.get_overlapping_areas().empty():
+			var person = $Boat/RescueArea.get_overlapping_areas().pop_front()
+			var seat = get_seat()
+			if seat != null:
+				person.rescued($Boat, seat)
+				TTSManager.say("Se subió una persona a la lancha")
+			else:
+				TTSManager.say("No hay más lugar en la lancha")
+		# If there is a safe zone, leave a person on  it
+		elif not $Boat/SafeZoneArea.get_overlapping_areas().empty():
+			var safe_zone = $Boat/SafeZoneArea.get_overlapping_areas().pop_front()
+			var person = get_person()
+			if person != null:
+				person.get_to_safe_zone(safe_zone)
+				emit_signal("person_safe")
+				TTSManager.say("Se dejó una persona en zona segura")
+		# Else do nothing
+
+
+func _on_OptionsButton_b_pressed():
 	get_tree().paused = true
 	$GUI/ConfigMenu.show()
+	TTSManager.say("Menu de configuración abierto")
 
 
 func _on_ConfigMenu_menu_closed():
 	set_overlay()
 	$GUI/ConfigMenu.hide()
+	TTSManager.say("Menu de configuración cerrado")
 	get_tree().paused = false
 
 
-func set_overlay():
-	var mid_height = get_viewport().size.y / 2.0
-	$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
-	$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
-	$GUI/DockButton.position = Vector2(60.0 + 10.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 30 * ConfigVariables.get_overlay_size())
-	$GUI/RescueButton.position = Vector2(60.0 + 10.0 * ConfigVariables.get_overlay_size(), get_viewport().size.y - 80 * ConfigVariables.get_overlay_size())
-	$GUI/OptionsButton.rect_position = Vector2(get_viewport().size.x - (40.0 * ConfigVariables.get_overlay_size() + 200.0 if ConfigVariables.get_overlay_size() >= 3 else 20.0 * ConfigVariables.get_overlay_size() + 100.0), 10.0)
-	$GUI/Lever/LeverSprite.position = Vector2.ZERO
-	$GUI/Lever/LeverCollision.position = Vector2.ZERO
-	$GUI/DockButton/DockSprite.position = Vector2.ZERO
-	$GUI/DockButton/DockCollision.position = Vector2.ZERO
-	$GUI/RescueButton/RescueSprite.position = Vector2.ZERO
-	$GUI/RescueButton/RescueCollision.position = Vector2.ZERO
-	lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
-	$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-	$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-	var scale_value = 1.4 + ConfigVariables.get_overlay_size() * 0.2
-	$GUI/DockButton.scale = Vector2(scale_value, scale_value)
-	$GUI/RescueButton.scale = Vector2(scale_value, scale_value)
-	$GUI/OptionsButton.rect_scale = Vector2(scale_value, scale_value)
-	$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/DockButton/DockSprite.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/RescueButton/RescueSprite.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
+func _on_Lever_input_event(_viewport, _event, _shape_idx):
+	if Input.is_action_just_pressed("ui_click"):
+		power_selected = true

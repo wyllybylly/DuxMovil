@@ -1,0 +1,40 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://resources/rescue/person_mask.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 hair_color : hint_color;
+uniform vec4 clothes_color : hint_color;
+uniform vec4 baby_color : hint_color;
+uniform sampler2D mask_img;
+
+void fragment(){
+    vec4 tex=texture(TEXTURE,UV); //sprite texture
+    vec3 sprite_color= tex.rgb; //sprite color, without alpha;
+	vec4 mask_value = texture(mask_img, UV).rgba;
+	
+	if (mask_value.a > 0.0) {
+		if (mask_value.r == 1.0) {
+	    	COLOR = vec4( hair_color.rgb * sprite_color.r, tex.a );
+		}
+		else if (mask_value.g == 1.0) {
+	    	COLOR = vec4( clothes_color.rgb * sprite_color.r, tex.a );
+		}
+		else {
+	    	COLOR = vec4( baby_color.rgb * sprite_color.r, tex.a );
+		}
+	}
+	else {
+		COLOR = tex;
+	}
+
+}"
+
+[resource]
+shader = SubResource( 2 )
+shader_param/hair_color = Color( 0.647059, 0.647059, 0.647059, 1 )
+shader_param/clothes_color = Color( 0.157546, 0.665756, 0.82824, 1 )
+shader_param/baby_color = Color( 0.157536, 0.511334, 0.628349, 1 )
+shader_param/mask_img = ExtResource( 1 )

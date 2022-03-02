@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://scenes/scripts/level1_world.gd" type="Script" id=1]
 [ext_resource path="res://scenes/scripts/water.gd" type="Script" id=2]
@@ -9,8 +9,7 @@
 [ext_resource path="res://resources/tile_maps/tile_map_house_1.png" type="Texture" id=7]
 [ext_resource path="res://scenes/scripts/help_background.gd" type="Script" id=8]
 [ext_resource path="res://resources/shaders/help_background.tres" type="Material" id=9]
-[ext_resource path="res://fonts/title_two.tres" type="DynamicFont" id=10]
-[ext_resource path="res://fonts/Kenney Future.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://scenes/menus/config_button.tscn" type="PackedScene" id=10]
 [ext_resource path="res://resources/cars/car_mask_2.png" type="Texture" id=12]
 [ext_resource path="res://resources/cars/car_base_1.png" type="Texture" id=13]
 [ext_resource path="res://scenes/level_creation/car.tscn" type="PackedScene" id=14]
@@ -32,6 +31,7 @@
 [ext_resource path="res://resources/rescue/sign_stairs.png" type="Texture" id=30]
 [ext_resource path="res://resources/rescue/sign_elder.png" type="Texture" id=31]
 [ext_resource path="res://resources/cars/car_mask_1.png" type="Texture" id=32]
+[ext_resource path="res://fonts/tres/help_text.tres" type="DynamicFont" id=33]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -563,10 +563,6 @@ points = PoolVector2Array( 32, 32, 16, 32, 16, 0, 32, 0 )
 } ]
 20/z_index = 0
 
-[sub_resource type="DynamicFont" id=24]
-size = 32
-font_data = ExtResource( 11 )
-
 [sub_resource type="SegmentShape2D" id=25]
 a = Vector2( 530, 0 )
 b = Vector2( 0, 0 )
@@ -706,9 +702,11 @@ poly_type = "Rectangle"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "La potencia de la lancha es controlada por la palanca a la derecha.
-Arrastrando la palanca hacia arriba se aumenta la potencia y hacia abajo se reduce."
+Arrastrando la palanca hacia arriba se aumenta la potencia y hacia abajo se reduce.
+También puede controlarse con teclado u otro controlador (arriba y abajo)."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -717,8 +715,10 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/normal_font = ExtResource( 10 )
-text = "La lancha puede moverse rotando el dispositivo hacia la derecha y hacia la izquierda."
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
+text = "La lancha puede moverse rotando el dispositivo hacia la izquierda y hacia la derecha.
+También puede controlarse con teclado u otro controlador (izquierda y derecha)."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -734,7 +734,8 @@ script = ExtResource( 22 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "Explicación de anclaje"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -744,7 +745,8 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "Una vez anclada la lancha, podemos empezar a subir personas.
 En el mapa nos encontraremos distintos grupos de personas indicados con un cartel en la parte superior indicando su situación."
 __meta__ = {
@@ -762,7 +764,7 @@ __meta__ = {
 
 [node name="SignList" type="VBoxContainer" parent="Help/TextSigns"]
 margin_right = 12.0
-margin_bottom = 8468.0
+margin_bottom = 3716.0
 
 [node name="Sign1" type="HBoxContainer" parent="Help/TextSigns/SignList"]
 margin_right = 12.0
@@ -778,7 +780,8 @@ stretch_mode = 5
 margin_left = 4.0
 margin_right = 4.0
 margin_bottom = 245.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "Bebé"
 fit_content_height = true
 
@@ -797,7 +800,8 @@ stretch_mode = 5
 margin_left = 4.0
 margin_right = 4.0
 margin_bottom = 1225.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "Persona con discapacidad"
 fit_content_height = true
 
@@ -816,7 +820,8 @@ stretch_mode = 5
 margin_left = 4.0
 margin_right = 4.0
 margin_bottom = 686.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "Persona mayor"
 fit_content_height = true
 
@@ -835,7 +840,8 @@ stretch_mode = 5
 margin_left = 4.0
 margin_right = 4.0
 margin_bottom = 980.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "Agua demasiado alta"
 fit_content_height = true
 
@@ -862,7 +868,8 @@ stretch_mode = 5
 margin_left = 8.0
 margin_right = 8.0
 margin_bottom = 2205.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "Tienen o no lugar alto (techo o planta alta)"
 fit_content_height = true
 scroll_active = false
@@ -898,20 +905,20 @@ stretch_mode = 5
 margin_left = 12.0
 margin_right = 12.0
 margin_bottom = 1127.0
-custom_fonts/normal_font = ExtResource( 10 )
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 33 )
 text = "Quedan 1/2/+3 personas"
 fit_content_height = true
 
-[node name="Button" type="Button" parent="Help"]
-margin_left = 393.0
-margin_top = 460.0
-margin_right = 567.0
-margin_bottom = 502.0
-custom_fonts/font = SubResource( 24 )
+[node name="Button" parent="Help" instance=ExtResource( 10 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -98.4126
+margin_top = -77.622
+margin_right = -18.4126
+margin_bottom = -47.622
+rect_min_size = Vector2( 90, 30 )
 text = "Seguir"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Triggers" type="Node2D" parent="."]
 
@@ -985,13 +992,13 @@ texture = ExtResource( 13 )
 
 [node name="Car2" parent="Cars" instance=ExtResource( 14 )]
 material = SubResource( 28 )
-position = Vector2( 269.238, -178.885 )
-rotation = -0.523598
+position = Vector2( 291.101, -174.68 )
+rotation = -1.01396
 texture = ExtResource( 13 )
 
 [node name="Car3" parent="Cars" instance=ExtResource( 14 )]
 material = SubResource( 29 )
-position = Vector2( 177.132, -158.883 )
+position = Vector2( 131.724, -158.042 )
 rotation = 0.805901
 
 [node name="Car4" parent="Cars" instance=ExtResource( 14 )]
@@ -1012,8 +1019,8 @@ texture = ExtResource( 13 )
 
 [node name="Car7" parent="Cars" instance=ExtResource( 14 )]
 material = SubResource( 34 )
-position = Vector2( 206.551, -326.106 )
-rotation = -0.451792
+position = Vector2( 258.464, -267.586 )
+rotation = -0.402683
 texture = ExtResource( 13 )
 
 [node name="Car8" parent="Cars" instance=ExtResource( 14 )]
@@ -1056,10 +1063,17 @@ position = Vector2( 598.37, -2534.21 )
 z_index = 2
 script = ExtResource( 17 )
 
-[node name="Signs" type="Node2D" parent="Group1"]
-position = Vector2( 60.0678, -278.781 )
-z_index = 2
+[node name="Signs" type="Button" parent="Group1"]
+margin_left = 53.8174
+margin_top = -262.359
+margin_right = 261.817
+margin_bottom = -182.359
+action_mode = 0
+flat = true
 script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 sign_elder = true
 sign_stairs = true
 num_of_people = 3
@@ -1091,11 +1105,12 @@ shape = SubResource( 35 )
 [node name="FinishLevel" parent="." instance=ExtResource( 20 )]
 
 [connection signal="person_safe" from="Boat" to="." method="_on_Boat_person_safe"]
-[connection signal="button_up" from="Help/Button" to="." method="_on_Button_button_up"]
+[connection signal="b_pressed" from="Help/Button" to="." method="_on_Button_b_pressed"]
 [connection signal="body_entered" from="Triggers/TurnOnWater" to="." method="_on_turn_on_water_body_entered"]
 [connection signal="body_entered" from="Triggers/NextHelp" to="." method="_on_NextHelp_body_entered"]
 [connection signal="body_entered" from="Triggers/NextHelp2" to="." method="_on_NextHelp_body_entered"]
 [connection signal="body_entered" from="Triggers/NextHelp3" to="." method="_on_NextHelp_body_entered"]
 [connection signal="body_entered" from="Triggers/NextHelp4" to="." method="_on_NextHelp_body_entered"]
+[connection signal="pressed" from="Group1/Signs" to="Group1/Signs" method="_on_Signs_pressed"]
 [connection signal="back_button_pressed" from="FinishLevel" to="." method="_on_FinishLevel_back_button_pressed"]
 [connection signal="next_button_pressed" from="FinishLevel" to="." method="_on_FinishLevel_next_button_pressed"]

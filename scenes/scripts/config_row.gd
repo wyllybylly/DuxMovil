@@ -26,7 +26,7 @@ func _draw():
 	draw_style_box(style_box, Rect2(config_box_pos, config_box_size))
 
 
-func _process(delta):
+func _process(_delta):
 	if focused:
 		if Input.is_action_just_pressed("ui_accept"):
 			if !selected:
@@ -154,6 +154,6 @@ func _on_ConfigRow_mouse_entered():
 	grab_focus()
 
 
-func _on_ConfigOption_value_changed(value):
+func _on_ConfigOption_value_changed(_value):
 	if focused:
 		TTSManager.say("Nuevo valor de " + text + ": " + str($ConfigOption.value))

@@ -10,12 +10,30 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "TextureButton",
+"class": "CustomButtonBase",
+"language": "GDScript",
+"path": "res://scenes/scripts/game_button.gd"
+}, {
+"base": "TextureButton",
+"class": "GroupSign",
+"language": "GDScript",
+"path": "res://scenes/scripts/signs.gd"
+}, {
+"base": "TextureButton",
 "class": "MenuButtonBase",
 "language": "GDScript",
 "path": "res://scenes/scripts/menu_button.gd"
+}, {
+"base": "Area2D",
+"class": "Person",
+"language": "GDScript",
+"path": "res://scenes/scripts/person_to_rescue.gd"
 } ]
 _global_script_class_icons={
-"MenuButtonBase": ""
+"CustomButtonBase": "",
+"GroupSign": "",
+"MenuButtonBase": "",
+"Person": ""
 }
 
 [application]

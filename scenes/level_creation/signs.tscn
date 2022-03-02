@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scenes/scripts/signs.gd" type="Script" id=1]
-[ext_resource path="res://resources/rescue/sign_no_stairs.png" type="Texture" id=2]
 
-[node name="Signs" type="Node2D"]
+[node name="Signs" type="TextureButton"]
+margin_left = 53.8174
+margin_top = -262.359
+margin_right = 69.8174
+margin_bottom = -182.359
+action_mode = 0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="SignStair" type="Sprite" parent="."]
-position = Vector2( 40, 40 )
-texture = ExtResource( 2 )
+[connection signal="pressed" from="." to="." method="_on_Signs_pressed"]

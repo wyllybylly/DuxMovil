@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/scripts/boat.gd" type="Script" id=1]
 [ext_resource path="res://resources/controls_overlay/power_frame.png" type="Texture" id=2]
@@ -7,8 +7,8 @@
 [ext_resource path="res://resources/controls_overlay/power_lever.png" type="Texture" id=5]
 [ext_resource path="res://resources/controls_overlay/dock_button.png" type="Texture" id=6]
 [ext_resource path="res://resources/controls_overlay/options_button.png" type="Texture" id=7]
-[ext_resource path="res://scenes/menus/config_menu_old.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/menus/config_menu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/scripts/game_button.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
@@ -20,12 +20,6 @@ height = 35.0
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 30, 18 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 32, 32 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 32, 32 )
 
 [node name="Boat" type="Node2D"]
 script = ExtResource( 1 )
@@ -98,60 +92,59 @@ light_mask = 0
 position = Vector2( 71.0978, -27.5816 )
 shape = SubResource( 3 )
 
-[node name="DockButton" type="Area2D" parent="GUI"]
-position = Vector2( 197.808, -25.8284 )
-collision_layer = 8
-collision_mask = 0
+[node name="DockButton" type="TextureButton" parent="GUI"]
+margin_left = 173.982
+margin_top = -56.1231
+margin_right = 237.982
+margin_bottom = 7.87689
+texture_normal = ExtResource( 6 )
+script = ExtResource( 10 )
 __meta__ = {
-"_edit_group_": true
+"_edit_use_anchors_": false
 }
+text = "Botón de anclaje"
 
-[node name="DockSprite" type="Sprite" parent="GUI/DockButton"]
-texture = ExtResource( 6 )
-
-[node name="DockCollision" type="CollisionShape2D" parent="GUI/DockButton"]
-shape = SubResource( 4 )
-
-[node name="RescueButton" type="Area2D" parent="GUI"]
-position = Vector2( 269.859, -23.9748 )
-collision_layer = 8
-collision_mask = 0
+[node name="RescueButton" type="TextureButton" parent="GUI"]
+margin_left = 251.432
+margin_top = -55.0006
+margin_right = 315.432
+margin_bottom = 8.99937
+texture_normal = ExtResource( 3 )
+script = ExtResource( 10 )
 __meta__ = {
-"_edit_group_": true
+"_edit_use_anchors_": false
 }
-
-[node name="RescueSprite" type="Sprite" parent="GUI/RescueButton"]
-texture = ExtResource( 3 )
-
-[node name="RescueCollision" type="CollisionShape2D" parent="GUI/RescueButton"]
-shape = SubResource( 5 )
+text = "Botón de rescate"
 
 [node name="OptionsButton" type="TextureButton" parent="GUI"]
-margin_left = 319.469
-margin_top = -57.6551
-margin_right = 383.469
-margin_bottom = 6.34489
+margin_left = 334.494
+margin_top = -57.2456
+margin_right = 398.494
+margin_bottom = 6.75443
 texture_normal = ExtResource( 7 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="OptionsPanel" type="Panel" parent="GUI"]
-pause_mode = 2
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Menu" parent="GUI/OptionsPanel" instance=ExtResource( 8 )]
+text = "Botón de configuraciones"
 
 [node name="ConfigMenu" parent="GUI" instance=ExtResource( 9 )]
 visible = false
 
 [connection signal="input_event" from="GUI/Lever" to="." method="_on_Lever_input_event"]
-[connection signal="input_event" from="GUI/DockButton" to="." method="_on_DockButton_input_event"]
-[connection signal="input_event" from="GUI/RescueButton" to="." method="_on_RescueButton_input_event"]
-[connection signal="pressed" from="GUI/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="b_pressed" from="GUI/DockButton" to="." method="_on_DockButton_b_pressed"]
+[connection signal="focus_entered" from="GUI/DockButton" to="GUI/DockButton" method="_on_GameButton_focus_entered"]
+[connection signal="focus_exited" from="GUI/DockButton" to="GUI/DockButton" method="_on_GameButton_focus_exited"]
+[connection signal="mouse_entered" from="GUI/DockButton" to="GUI/DockButton" method="_on_GameButton_mouse_entered"]
+[connection signal="pressed" from="GUI/DockButton" to="GUI/DockButton" method="_on_GameButton_pressed"]
+[connection signal="b_pressed" from="GUI/RescueButton" to="." method="_on_RescueButton_b_pressed"]
+[connection signal="focus_entered" from="GUI/RescueButton" to="GUI/RescueButton" method="_on_GameButton_focus_entered"]
+[connection signal="focus_exited" from="GUI/RescueButton" to="GUI/RescueButton" method="_on_GameButton_focus_exited"]
+[connection signal="mouse_entered" from="GUI/RescueButton" to="GUI/RescueButton" method="_on_GameButton_mouse_entered"]
+[connection signal="pressed" from="GUI/RescueButton" to="GUI/RescueButton" method="_on_GameButton_pressed"]
+[connection signal="b_pressed" from="GUI/OptionsButton" to="." method="_on_OptionsButton_b_pressed"]
+[connection signal="focus_entered" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_focus_entered"]
+[connection signal="focus_exited" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_focus_exited"]
+[connection signal="mouse_entered" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_mouse_entered"]
+[connection signal="pressed" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_pressed"]
 [connection signal="menu_closed" from="GUI/ConfigMenu" to="." method="_on_ConfigMenu_menu_closed"]

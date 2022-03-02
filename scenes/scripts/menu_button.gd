@@ -18,8 +18,6 @@ func _draw():
 
 func _ready():
 	setup_text()
-#	show_arrows()
-	set_focus_mode(true)
 	setup_border()
 
 

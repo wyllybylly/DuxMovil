@@ -31,8 +31,11 @@ void fragment() {
 	else if (type == 2) {
 		result = distance_rectangle(UV);
 	}
+	else {
+		result = 0.1
+	}
 	if (result != 0.0) {
-		COLOR = vec4(0.3, 0.3, 0.3, 0.8)
+		COLOR = vec4(0.7, 0.7, 0.7, 0.8)
 	}
 	else {
 		COLOR.a = 0.0
