@@ -1,4 +1,4 @@
-#Mon Feb 28 16:51:16 ART 2022
+#Wed Mar 02 00:29:31 ART 2022
 base.0=D\:\\GithubProjects\\DuxMovil\\android\\build\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

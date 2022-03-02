@@ -1095,19 +1095,28 @@ sign_stairs = true
 num_of_people = 3
 
 [node name="Person" type="Area2D" parent="Group1"]
-position = Vector2( 205.768, -31.1125 )
+position = Vector2( 190.768, -33.6125 )
 scale = Vector2( 0.6, 0.6 )
 script = ExtResource( 5 )
+hair_color = Color( 0.54902, 0.458824, 0.164706, 1 )
+clothes_color = Color( 0.887775, 0.569349, 0.387809, 1 )
 
 [node name="Person2" type="Area2D" parent="Group1"]
 position = Vector2( 243.952, -70.0032 )
 scale = Vector2( 0.6, 0.6 )
 script = ExtResource( 5 )
+baby = true
+hair_color = Color( 0.45098, 0.298039, 0.160784, 1 )
+clothes_color = Color( 0.0638352, 0.987356, 0.234082, 1 )
+baby_color = Color( 0.977265, 0.312508, 0.323844, 1 )
 
 [node name="Person3" type="Area2D" parent="Group1"]
-position = Vector2( 205.061, -115.259 )
+position = Vector2( 200.299, -113.274 )
 scale = Vector2( 0.6, 0.6 )
 script = ExtResource( 5 )
+elder = true
+hair_color = Color( 0.454902, 0.454902, 0.454902, 1 )
+clothes_color = Color( 0.244754, 0.736457, 0.181611, 1 )
 
 [node name="SafeZone" type="Area2D" parent="."]
 visible = false
