@@ -32,7 +32,7 @@ script = ExtResource( 7 )
 
 [node name="Boat" parent="." instance=ExtResource( 27 )]
 pause_mode = 1
-position = Vector2( 513.511, 806.166 )
+position = Vector2( 462.013, 760.52 )
 
 [node name="Help" type="CanvasLayer" parent="."]
 pause_mode = 2

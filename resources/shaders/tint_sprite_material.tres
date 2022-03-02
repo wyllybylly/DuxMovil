@@ -25,5 +25,5 @@ void fragment(){
 
 [resource]
 shader = SubResource( 1 )
-shader_param/tint_color = Color( 0.137255, 0.121569, 0.631373, 1 )
+shader_param/tint_color = Color( 0.235294, 0.470588, 0.917647, 1 )
 shader_param/mask_img = ExtResource( 1 )

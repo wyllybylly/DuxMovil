@@ -1,0 +1,261 @@
+ffmpeg version 5.0-essentials_build-www.gyan.dev Copyright (c) 2000-2022 the FFmpeg developers
+  built with gcc 11.2.0 (Rev5, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-libass --enable-libfreetype --enable-libfribidi --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-ffnvcodec --enable-nvdec --enable-nvenc --enable-d3d11va --enable-dxva2 --enable-libmfx --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband
+  libavutil      57. 17.100 / 57. 17.100
+  libavcodec     59. 18.100 / 59. 18.100
+  libavformat    59. 16.100 / 59. 16.100
+  libavdevice    59.  4.100 / 59.  4.100
+  libavfilter     8. 24.100 /  8. 24.100
+  libswscale      6.  4.100 /  6.  4.100
+  libswresample   4.  3.100 /  4.  3.100
+  libpostproc    56.  3.100 / 56.  3.100
+Splitting the commandline.
+Reading option '-v' ... matched as option 'v' (set logging level) with argument 'debug'.
+Reading option '-nostdin' ... matched as option 'stdin' (enable or disable interaction on standard input) with argument 0.
+Reading option '-progress' ... matched as option 'progress' (write program-readable progress information) with argument 'C:/Users/MicroHard/AppData/Local/Temp/KritaFFmpegProgress.NtEanr'.
+Reading option '-r' ... matched as option 'r' (set frame rate (Hz value, fraction or abbreviation)) with argument '10'.
+Reading option '-start_number' ... matched as AVOption 'start_number' with argument '0'.
+Reading option '-i' ... matched as input url with argument 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric%04d.png'.
+Reading option '-vcodec' ... matched as option 'vcodec' (force video codec ('copy' to copy stream)) with argument 'libvpx-vp9'.
+Reading option '-b:v' ... matched as option 'b' (video bitrate (please use -b:v)) with argument '2M'.
+Reading option '-y' ... matched as option 'y' (overwrite output files) with argument '1'.
+Reading option 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric.webm' ... matched as output url.
+Finished splitting the commandline.
+Parsing a group of options: global .
+Applying option v (set logging level) with argument debug.
+Applying option nostdin (enable or disable interaction on standard input) with argument 0.
+Applying option progress (write program-readable progress information) with argument C:/Users/MicroHard/AppData/Local/Temp/KritaFFmpegProgress.NtEanr.
+[file @ 0000019e1076bbc0] Setting default whitelist 'file,crypto,data'
+Applying option y (overwrite output files) with argument 1.
+Successfully parsed a group of options.
+Parsing a group of options: input url D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric%04d.png.
+Applying option r (set frame rate (Hz value, fraction or abbreviation)) with argument 10.
+Successfully parsed a group of options.
+Opening an input file: D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric%04d.png.
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0000.png' for reading
+[file @ 0000019e107af2c0] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107b74c0] Statistics: 2381 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0001.png' for reading
+[file @ 0000019e107b8140] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c0d80] Statistics: 2411 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0002.png' for reading
+[file @ 0000019e107c1900] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c9a40] Statistics: 2391 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0003.png' for reading
+[file @ 0000019e107ca680] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c9940] Statistics: 2434 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0004.png' for reading
+[file @ 0000019e107ca740] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c9940] Statistics: 2455 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0005.png' for reading
+[file @ 0000019e107ca9c0] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c9940] Statistics: 2463 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0006.png' for reading
+[file @ 0000019e107ca9c0] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c9940] Statistics: 2546 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0007.png' for reading
+[file @ 0000019e107cac80] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c9940] Statistics: 3012 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0008.png' for reading
+[file @ 0000019e107cac80] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c9940] Statistics: 2815 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0009.png' for reading
+[file @ 0000019e107cac80] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107c9940] Statistics: 2705 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0010.png' for reading
+[file @ 0000019e107cac80] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107b0700] Statistics: 2535 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0011.png' for reading
+[file @ 0000019e107cac80] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107b0700] Statistics: 2381 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0012.png' for reading
+[file @ 0000019e107cac80] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107b0700] Statistics: 2381 bytes read, 0 seeks
+[image2 @ 0000019e107ac080] Opening 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric0013.png' for reading
+[file @ 0000019e107cac80] Setting default whitelist 'file,crypto,data'
+[AVIOContext @ 0000019e107d4e40] Statistics: 2381 bytes read, 0 seeks
+Input #0, image2, from 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric%04d.png':
+  Duration: 00:00:00.56, start: 0.000000, bitrate: N/A
+  Stream #0:0, 14, 1/25: Video: png, 1 reference frame, rgba(pc), 80x80 [SAR 11811:11811 DAR 1:1], 0/1, 25 fps, 25 tbr, 25 tbn
+Successfully opened the file.
+Parsing a group of options: output url D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric.webm.
+Applying option vcodec (force video codec ('copy' to copy stream)) with argument libvpx-vp9.
+Applying option b:v (video bitrate (please use -b:v)) with argument 2M.
+Successfully parsed a group of options.
+Opening an output file: D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric.webm.
+[file @ 0000019e107bad40] Setting default whitelist 'file,crypto,data'
+Successfully opened the file.
+detected 12 logical cores
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> vp9 (libvpx-vp9))
+cur_dts is invalid st:0 (0) [init:0 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+    Last message repeated 12 times
+[graph 0 input from stream 0:0 @ 0000019e1084e440] Setting 'video_size' to value '80x80'
+[graph 0 input from stream 0:0 @ 0000019e1084e440] Setting 'pix_fmt' to value '26'
+[graph 0 input from stream 0:0 @ 0000019e1084e440] Setting 'time_base' to value '1/10'
+[graph 0 input from stream 0:0 @ 0000019e1084e440] Setting 'pixel_aspect' to value '11811/11811'
+[graph 0 input from stream 0:0 @ 0000019e1084e440] Setting 'frame_rate' to value '10/1'
+[graph 0 input from stream 0:0 @ 0000019e1084e440] w:80 h:80 pixfmt:rgba tb:1/10 fr:10/1 sar:11811/11811
+[format @ 0000019e108b2780] Setting 'pix_fmts' to value 'yuv420p|yuva420p|yuv422p|yuv440p|yuv444p|yuv420p10le|yuv422p10le|yuv440p10le|yuv444p10le|yuv420p12le|yuv422p12le|yuv440p12le|yuv444p12le|gbrp|gbrp10le|gbrp12le'
+[auto_scale_0 @ 0000019e108b2680] w:iw h:ih flags:'' interl:0
+[format @ 0000019e108b2780] auto-inserting filter 'auto_scale_0' between the filter 'Parsed_null_0' and the filter 'format'
+[AVFilterGraph @ 0000019e1083ef40] query_formats: 4 queried, 3 merged, 1 already done, 0 delayed
+[auto_scale_0 @ 0000019e108b2680] picking yuva420p out of 16 ref:rgba alpha:1
+[auto_scale_0 @ 0000019e108b2680] w:80 h:80 fmt:rgba sar:11811/11811 -> w:80 h:80 fmt:yuva420p sar:1/1 flags:0x0
+[libvpx-vp9 @ 0000019e107b8dc0] v1.11.0-74-g51415c407
+[libvpx-vp9 @ 0000019e107b8dc0] --prefix=/local64 --target=x86_64-win64-gcc --disable-shared --disable-unit-tests --disable-docs --disable-install-bins --enable-vp9-postproc --enable-vp9-highbitdepth
+[libvpx-vp9 @ 0000019e107b8dc0] vpx_codec_enc_cfg
+[libvpx-vp9 @ 0000019e107b8dc0] generic settings
+  g_usage:                      0
+  g_threads:                    8
+  g_profile:                    0
+  g_w:                          320
+  g_h:                          240
+  g_bit_depth:                  8
+  g_input_bit_depth:            8
+  g_timebase:                   {1/30}
+  g_error_resilient:            0
+  g_pass:                       0
+  g_lag_in_frames:              25
+[libvpx-vp9 @ 0000019e107b8dc0] rate control settings
+  rc_dropframe_thresh:          0
+  rc_resize_allowed:            0
+  rc_resize_up_thresh:          60
+  rc_resize_down_thresh:        30
+  rc_end_usage:                 0
+  rc_twopass_stats_in:          0000000000000000(0)
+  rc_target_bitrate:            256
+[libvpx-vp9 @ 0000019e107b8dc0] quantizer settings
+  rc_min_quantizer:             0
+  rc_max_quantizer:             63
+[libvpx-vp9 @ 0000019e107b8dc0] bitrate tolerance
+  rc_undershoot_pct:            25
+  rc_overshoot_pct:             25
+[libvpx-vp9 @ 0000019e107b8dc0] temporal layering settings
+  ts_number_layers:             1
+[libvpx-vp9 @ 0000019e107b8dc0] 
+  layer_target_bitrate:         0 0 0 0 0 
+[libvpx-vp9 @ 0000019e107b8dc0] 
+  ts_rate_decimator:            0 0 0 0 0 
+[libvpx-vp9 @ 0000019e107b8dc0] 
+  ts_periodicity:               0
+[libvpx-vp9 @ 0000019e107b8dc0] 
+  ts_layer_id:                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+[libvpx-vp9 @ 0000019e107b8dc0] decoder buffer model
+  rc_buf_sz:                    6000
+  rc_buf_initial_sz:            4000
+  rc_buf_optimal_sz:            5000
+[libvpx-vp9 @ 0000019e107b8dc0] 2 pass rate control settings
+  rc_2pass_vbr_bias_pct:        50
+  rc_2pass_vbr_minsection_pct:  0
+  rc_2pass_vbr_maxsection_pct:  2000
+[libvpx-vp9 @ 0000019e107b8dc0]   rc_2pass_vbr_corpus_complexity:0
+[libvpx-vp9 @ 0000019e107b8dc0] keyframing settings
+  kf_mode:                      1
+  kf_min_dist:                  0
+  kf_max_dist:                  128
+[libvpx-vp9 @ 0000019e107b8dc0] 
+[libvpx-vp9 @ 0000019e107b8dc0] vpx_codec_enc_cfg
+[libvpx-vp9 @ 0000019e107b8dc0] generic settings
+  g_usage:                      0
+  g_threads:                    12
+  g_profile:                    0
+  g_w:                          80
+  g_h:                          80
+  g_bit_depth:                  8
+  g_input_bit_depth:            8
+  g_timebase:                   {1/10}
+  g_error_resilient:            0
+  g_pass:                       0
+  g_lag_in_frames:              25
+[libvpx-vp9 @ 0000019e107b8dc0] rate control settings
+  rc_dropframe_thresh:          0
+  rc_resize_allowed:            0
+  rc_resize_up_thresh:          60
+  rc_resize_down_thresh:        30
+  rc_end_usage:                 0
+  rc_twopass_stats_in:          0000000000000000(0)
+  rc_target_bitrate:            2000
+[libvpx-vp9 @ 0000019e107b8dc0] quantizer settings
+  rc_min_quantizer:             0
+  rc_max_quantizer:             63
+[libvpx-vp9 @ 0000019e107b8dc0] bitrate tolerance
+  rc_undershoot_pct:            25
+  rc_overshoot_pct:             25
+[libvpx-vp9 @ 0000019e107b8dc0] temporal layering settings
+  ts_number_layers:             1
+[libvpx-vp9 @ 0000019e107b8dc0] 
+  layer_target_bitrate:         0 0 0 0 0 
+[libvpx-vp9 @ 0000019e107b8dc0] 
+  ts_rate_decimator:            0 0 0 0 0 
+[libvpx-vp9 @ 0000019e107b8dc0] 
+  ts_periodicity:               0
+[libvpx-vp9 @ 0000019e107b8dc0] 
+  ts_layer_id:                  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+[libvpx-vp9 @ 0000019e107b8dc0] decoder buffer model
+  rc_buf_sz:                    6000
+  rc_buf_initial_sz:            4000
+  rc_buf_optimal_sz:            5000
+[libvpx-vp9 @ 0000019e107b8dc0] 2 pass rate control settings
+  rc_2pass_vbr_bias_pct:        50
+  rc_2pass_vbr_minsection_pct:  0
+  rc_2pass_vbr_maxsection_pct:  2000
+[libvpx-vp9 @ 0000019e107b8dc0]   rc_2pass_vbr_corpus_complexity:0
+[libvpx-vp9 @ 0000019e107b8dc0] keyframing settings
+  kf_mode:                      1
+  kf_min_dist:                  0
+  kf_max_dist:                  128
+[libvpx-vp9 @ 0000019e107b8dc0] 
+[libvpx-vp9 @ 0000019e107b8dc0] vpx_codec_control
+[libvpx-vp9 @ 0000019e107b8dc0]   VP8E_SET_CPUUSED:             1
+[libvpx-vp9 @ 0000019e107b8dc0]   VP8E_SET_ARNR_MAXFRAMES:      0
+[libvpx-vp9 @ 0000019e107b8dc0]   VP8E_SET_ARNR_STRENGTH:       3
+[libvpx-vp9 @ 0000019e107b8dc0]   VP8E_SET_ARNR_TYPE:           3
+[libvpx-vp9 @ 0000019e107b8dc0]   VP8E_SET_STATIC_THRESHOLD:    0
+[libvpx-vp9 @ 0000019e107b8dc0]   VP9E_SET_COLOR_SPACE:         0
+[libvpx-vp9 @ 0000019e107b8dc0]   VP9E_SET_COLOR_RANGE:         0
+[libvpx-vp9 @ 0000019e107b8dc0]   VP9E_SET_TARGET_LEVEL:        255
+[libvpx-vp9 @ 0000019e107b8dc0] Using deadline: 1000000
+[webm @ 0000019e107aee80] get_metadata_duration returned: 0
+Output #0, webm, to 'D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric.webm':
+  Metadata:
+    encoder         : Lavf59.16.100
+  Stream #0:0, 0, 1/1000: Video: vp9, 1 reference frame, yuva420p(tv, progressive), 80x80 (0x0) [SAR 1:1 DAR 1:1], 0/1, q=2-31, 2000 kb/s, 10 fps, 1k tbn
+    Metadata:
+      encoder         : Lavc59.18.100 libvpx-vp9
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+Clipping frame in rate conversion by 0.000008
+frame=    1 fps=0.0 q=0.0 size=       1kB time=00:00:00.00 bitrate=N/A speed=   0x    cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+    Last message repeated 14 times
+[out_0_0 @ 0000019e10882cc0] EOF on sink link out_0_0:default.
+No more output streams to write to, finishing.
+Automatically inserted bitstream filter 'vp9_superframe'; args=''
+[webm @ 0000019e107aee80] Starting new cluster with timestamp 0 at offset 515 bytes
+[webm @ 0000019e107aee80] Writing block of size 776 with pts 0, dts 0, duration 100 at relative offset 3 in cluster at offset 515. TrackNumber 1, keyframe 1
+[webm @ 0000019e107aee80] Writing block of size 65 with pts 100, dts 100, duration 100 at relative offset 1550 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 41 with pts 200, dts 200, duration 100 at relative offset 1720 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 91 with pts 300, dts 300, duration 100 at relative offset 1844 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 119 with pts 400, dts 400, duration 100 at relative offset 2045 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 234 with pts 500, dts 500, duration 100 at relative offset 2251 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 429 with pts 600, dts 600, duration 100 at relative offset 2567 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 858 with pts 700, dts 700, duration 100 at relative offset 3126 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 795 with pts 800, dts 800, duration 100 at relative offset 4322 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 440 with pts 900, dts 900, duration 100 at relative offset 5423 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 916 with pts 1000, dts 1000, duration 100 at relative offset 6080 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 26 with pts 1100, dts 1100, duration 100 at relative offset 7384 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 21 with pts 1200, dts 1200, duration 100 at relative offset 7475 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] Writing block of size 17 with pts 1300, dts 1300, duration 100 at relative offset 7555 in cluster at offset 515. TrackNumber 1, keyframe 0
+[webm @ 0000019e107aee80] end duration = 1400
+[webm @ 0000019e107aee80] stream 0 end duration = 1400
+frame=   14 fps=0.0 q=0.0 Lsize=       8kB time=00:00:01.30 bitrate=  50.3kbits/s speed=19.9x    
+[AVIOContext @ 0000019e107abdc0] Statistics: 361 bytes written, 0 seeks, 2 writeouts
+video:5kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 69.304062%
+Input file #0 (D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric%04d.png):
+  Input stream #0:0 (video): 14 packets read (35291 bytes); 14 frames decoded; 
+  Total: 14 packets (35291 bytes) demuxed
+Output file #0 (D:/GithubProjects/DuxMovil/resources/obstacles/light_pole_electric/light_pole_electric.webm):
+  Output stream #0:0 (video): 14 frames encoded; 14 packets muxed (4828 bytes); 
+  Total: 14 packets (4828 bytes) muxed
+[AVIOContext @ 0000019e10815040] Statistics: 8174 bytes written, 0 seeks, 1 writeouts
+14 frames successfully decoded, 0 decoding errors
