@@ -9,25 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "TextureButton",
+"base": "Reference",
 "class": "CustomButtonBase",
 "language": "GDScript",
-"path": "res://scenes/scripts/game_button.gd"
+"path": "res://user_interfaces/buttons/game_button.gd"
 }, {
 "base": "TextureButton",
 "class": "GroupSign",
 "language": "GDScript",
-"path": "res://scenes/scripts/signs.gd"
+"path": "res://levels/level_creation/groups/signs.gd"
 }, {
-"base": "TextureButton",
+"base": "Reference",
 "class": "MenuButtonBase",
 "language": "GDScript",
-"path": "res://scenes/scripts/menu_button.gd"
+"path": "res://user_interfaces/buttons/menu_button.gd"
 }, {
 "base": "Area2D",
 "class": "Person",
 "language": "GDScript",
-"path": "res://scenes/scripts/person_to_rescue.gd"
+"path": "res://levels/level_creation/groups/person_to_rescue.gd"
 } ]
 _global_script_class_icons={
 "CustomButtonBase": "",
@@ -39,14 +39,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Juego Educativo"
-run/main_scene="res://scenes/menus/main_menu.tscn"
+run/main_scene="res://user_interfaces/menus/main_menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-ConfigVariables="*res://scenes/scripts/config_variables.gd"
-LevelVariables="*res://scenes/scripts/level_variables.gd"
-TTSManager="*res://scenes/scripts/tts_manager.gd"
+ConfigVariables="*res://autoload/config_variables.gd"
+LevelVariables="*res://autoload/level_variables.gd"
+TTSManager="*res://autoload/tts_manager.gd"
 
 [display]
 

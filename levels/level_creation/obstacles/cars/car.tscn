@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/level_creation/obstacles/cars/car_base_2_wl1.png" type="Texture" id=1]
+[ext_resource path="res://levels/level_creation/obstacles/cars/tint_sprite_material.tres" type="Material" id=2]
+[ext_resource path="res://levels/level_creation/obstacles/cars/car.gd" type="Script" id=3]
+[ext_resource path="res://levels/level_creation/obstacles/cars/car_mask_2.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13, 30 )
+
+[node name="Car" type="Sprite"]
+material = ExtResource( 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+car_color = Color( 0.235294, 0.470588, 0.917647, 1 )
+mask_texture = ExtResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+shape = SubResource( 1 )

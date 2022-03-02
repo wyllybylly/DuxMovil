@@ -1,0 +1,205 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://fonts/tres/menu_title.tres" type="DynamicFont" id=1]
+[ext_resource path="res://user_interfaces/buttons/config_row.tscn" type="PackedScene" id=2]
+[ext_resource path="res://user_interfaces/buttons/config_button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://user_interfaces/menus/config_menu.gd" type="Script" id=4]
+[ext_resource path="res://resources/img/back_green.jpg" type="Texture" id=5]
+[ext_resource path="res://user_interfaces/buttons/TTS_button.tscn" type="PackedScene" id=6]
+
+[node name="ConfigMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBox"]
+margin_right = 960.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 180 )
+custom_fonts/font = ExtResource( 1 )
+text = "Configuración"
+align = 1
+valign = 1
+
+[node name="Center" type="CenterContainer" parent="VBox"]
+margin_top = 190.0
+margin_right = 960.0
+margin_bottom = 363.0
+
+[node name="Options" type="VBoxContainer" parent="VBox/Center"]
+margin_left = 187.0
+margin_right = 773.0
+margin_bottom = 173.0
+rect_min_size = Vector2( 500, 0 )
+custom_constants/separation = 15
+
+[node name="OverlaySizeRow" parent="VBox/Center/Options" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_right = 586.0
+focus_neighbour_top = NodePath("../../../../TTSButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../OverlayAlphaRow")
+focus_mode = 1
+mouse_filter = 0
+alignment = 0
+config_type = "OverlaySize"
+text = "Tamaño de controles"
+
+[node name="OverlayAlphaRow" parent="VBox/Center/Options" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_top = 47.0
+margin_right = 586.0
+margin_bottom = 79.0
+focus_neighbour_top = NodePath("../OverlaySizeRow")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../TextSizeRow")
+focus_mode = 1
+mouse_filter = 0
+alignment = 0
+config_type = "OverlayAlpha"
+text = "Transparencia de controles"
+min_value = 0.2
+max_value = 1.0
+step = 0.05
+value = 0.5
+rounded = false
+
+[node name="TextSizeRow" parent="VBox/Center/Options" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_top = 94.0
+margin_right = 586.0
+margin_bottom = 126.0
+focus_neighbour_top = NodePath("../OverlayAlphaRow")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Option4Row")
+focus_mode = 1
+mouse_filter = 0
+alignment = 0
+config_type = "TextSize"
+text = "Tamaño de texto"
+min_value = 0.0
+value = 0.0
+
+[node name="Option4Row" parent="VBox/Center/Options" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_top = 141.0
+margin_right = 586.0
+margin_bottom = 173.0
+focus_neighbour_top = NodePath("../TextSizeRow")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../../ButtonsSave/Save")
+focus_mode = 1
+mouse_filter = 0
+alignment = 0
+config_type = "None"
+text = "Opción 4"
+
+[node name="ButtonsSave" type="HBoxContainer" parent="VBox"]
+margin_top = 373.0
+margin_right = 960.0
+margin_bottom = 403.0
+alignment = 1
+
+[node name="Save" parent="VBox/ButtonsSave" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 333.0
+margin_top = 0.0
+margin_right = 443.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 110, 30 )
+focus_neighbour_top = NodePath("../../Center/Options/Option4Row")
+focus_neighbour_right = NodePath("../Save&Close")
+focus_neighbour_bottom = NodePath("../../ButtonsCancel/Cancel")
+text = "Guardar"
+
+[node name="Save&Close" parent="VBox/ButtonsSave" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 447.0
+margin_top = 0.0
+margin_right = 627.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 180, 30 )
+focus_neighbour_left = NodePath("../Save")
+focus_neighbour_top = NodePath("../../Center/Options/Option4Row")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../ButtonsCancel/Reset")
+text = "Guardar y Salir"
+
+[node name="ButtonsCancel" type="HBoxContainer" parent="VBox"]
+margin_top = 413.0
+margin_right = 960.0
+margin_bottom = 443.0
+alignment = 1
+
+[node name="Cancel" parent="VBox/ButtonsCancel" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 338.0
+margin_top = 0.0
+margin_right = 458.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 120, 30 )
+focus_neighbour_top = NodePath("../../ButtonsSave/Save")
+focus_neighbour_right = NodePath("../Reset")
+text = "Cancelar"
+
+[node name="Reset" parent="VBox/ButtonsCancel" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 462.0
+margin_top = 0.0
+margin_right = 622.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 160, 30 )
+focus_neighbour_left = NodePath("../Cancel")
+focus_neighbour_top = NodePath("../../ButtonsSave/Save&Close")
+focus_neighbour_right = NodePath(".")
+text = "Restablecer"
+
+[node name="TTSButton" parent="." instance=ExtResource( 6 )]
+margin_left = -115.077
+margin_top = -185.852
+margin_right = -51.0765
+margin_bottom = -121.852
+focus_neighbour_left = NodePath("")
+focus_neighbour_bottom = NodePath("../VBox/Center/Options/OverlaySizeRow")
+
+[connection signal="b_pressed" from="VBox/ButtonsSave/Save" to="." method="_on_Save_b_pressed"]
+[connection signal="b_pressed" from="VBox/ButtonsSave/Save&Close" to="." method="_on_SaveAndClose_b_pressed"]
+[connection signal="b_pressed" from="VBox/ButtonsCancel/Cancel" to="." method="_on_Cancel_b_pressed"]
+[connection signal="b_pressed" from="VBox/ButtonsCancel/Reset" to="." method="_on_Reset_b_pressed"]
