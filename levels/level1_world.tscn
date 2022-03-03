@@ -1044,6 +1044,7 @@ scale = Vector2( -1, 1 )
 [node name="LightPole" parent="Poles" instance=ExtResource( 15 )]
 position = Vector2( 203.663, -1912.58 )
 scale = Vector2( -1, 1 )
+type = "Electric"
 
 [node name="LightPole2" parent="Poles" instance=ExtResource( 15 )]
 position = Vector2( 647.716, -2070.37 )

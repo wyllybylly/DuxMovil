@@ -44,9 +44,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-ConfigVariables="*res://autoload/config_variables.gd"
-LevelVariables="*res://autoload/level_variables.gd"
-TTSManager="*res://autoload/tts_manager.gd"
+ConfigVariables="*res://globals/config_variables.gd"
+LevelVariables="*res://globals/level_variables.gd"
+TTSManager="*res://globals/tts_manager.gd"
 
 [display]
 

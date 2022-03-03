@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://levels/level_creation/tilemaps/tile_map_house.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/level_creation/water/water.tscn" type="PackedScene" id=2]
@@ -14,9 +14,8 @@
 [ext_resource path="res://levels/level_creation/groups/person_to_rescue.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/tutorial/help_background.tres" type="Material" id=13]
 [ext_resource path="res://levels/level_creation/obstacles/fallen_tree.tscn" type="PackedScene" id=14]
-[ext_resource path="res://resources/tile_maps/tile_map_roof.png" type="Texture" id=15]
+[ext_resource path="res://levels/level_creation/obstacles/cars/car_mask_2.png" type="Texture" id=15]
 [ext_resource path="res://levels/level_creation/tilemaps/tile_map_house.tres" type="Material" id=16]
-[ext_resource path="res://resources/tile_maps/tile_map_roof_2.png" type="Texture" id=17]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -33,7 +32,7 @@ void fragment(){
 
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=10]
 shader = SubResource( 1 )
 shader_param/house_color = Color( 0.831373, 0.92549, 0.737255, 1 )
 shader_param/mix_amount = 2.0
@@ -53,17 +52,42 @@ void fragment(){
 
 }"
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=11]
 shader = SubResource( 3 )
 shader_param/house_color = Color( 0.764706, 0.847059, 0.937255, 1 )
 shader_param/mix_amount = 2.0
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform vec4 tint_color : hint_color;
+uniform sampler2D mask_img;
+
+void fragment(){
+    vec4 tex=texture(TEXTURE,UV); //sprite texture
+	vec3 color = tint_color.rgb;
+    vec3 sprite_color= tex.rgb; //sprite color, without alpha;
+	float mask_value = texture(mask_img, UV).a;
+	
+	if (mask_value == 1.0) {
+    	COLOR = vec4( color * sprite_color.r, tex.a );
+	}
+	else {
+		COLOR = tex;
+	}
+
+}"
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 12 )
+shader_param/tint_color = Color( 0.235294, 0.470588, 0.917647, 1 )
+shader_param/mask_img = ExtResource( 15 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 220.668, 76.1206 )
 
 [sub_resource type="TileSet" id=8]
 0/name = "tile_map_roof.png 0"
-0/texture = ExtResource( 15 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 32, 32 )
@@ -77,7 +101,6 @@ extents = Vector2( 220.668, 76.1206 )
 0/shapes = [  ]
 0/z_index = 0
 1/name = "tile_map_roof.png 1"
-1/texture = ExtResource( 15 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 32, 0, 32, 32 )
@@ -91,7 +114,6 @@ extents = Vector2( 220.668, 76.1206 )
 1/shapes = [  ]
 1/z_index = 0
 2/name = "tile_map_roof.png 2"
-2/texture = ExtResource( 15 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 64, 0, 32, 32 )
@@ -105,7 +127,6 @@ extents = Vector2( 220.668, 76.1206 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "tile_map_roof.png 3"
-3/texture = ExtResource( 15 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 96, 0, 32, 32 )
@@ -119,7 +140,6 @@ extents = Vector2( 220.668, 76.1206 )
 3/shapes = [  ]
 3/z_index = 0
 4/name = "tile_map_roof.png 4"
-4/texture = ExtResource( 15 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 128, 0, 32, 32 )
@@ -133,7 +153,6 @@ extents = Vector2( 220.668, 76.1206 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "tile_map_roof.png 5"
-5/texture = ExtResource( 15 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 160, 0, 32, 32 )
@@ -147,7 +166,6 @@ extents = Vector2( 220.668, 76.1206 )
 5/shapes = [  ]
 5/z_index = 0
 6/name = "tile_map_roof.png 6"
-6/texture = ExtResource( 15 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 192, 0, 32, 32 )
@@ -161,7 +179,6 @@ extents = Vector2( 220.668, 76.1206 )
 6/shapes = [  ]
 6/z_index = 0
 7/name = "tile_map_roof.png 7"
-7/texture = ExtResource( 15 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 224, 0, 32, 32 )
@@ -175,7 +192,6 @@ extents = Vector2( 220.668, 76.1206 )
 7/shapes = [  ]
 7/z_index = 0
 8/name = "tile_map_roof.png 8"
-8/texture = ExtResource( 15 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 0, 32, 32, 32 )
@@ -189,7 +205,6 @@ extents = Vector2( 220.668, 76.1206 )
 8/shapes = [  ]
 8/z_index = 0
 9/name = "tile_map_roof.png 9"
-9/texture = ExtResource( 15 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 32, 32, 32, 32 )
@@ -203,7 +218,6 @@ extents = Vector2( 220.668, 76.1206 )
 9/shapes = [  ]
 9/z_index = 0
 10/name = "tile_map_roof.png 10"
-10/texture = ExtResource( 15 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
 10/region = Rect2( 64, 32, 32, 32 )
@@ -217,7 +231,6 @@ extents = Vector2( 220.668, 76.1206 )
 10/shapes = [  ]
 10/z_index = 0
 11/name = "tile_map_roof.png 11"
-11/texture = ExtResource( 15 )
 11/tex_offset = Vector2( 0, 0 )
 11/modulate = Color( 1, 1, 1, 1 )
 11/region = Rect2( 96, 32, 32, 32 )
@@ -231,7 +244,6 @@ extents = Vector2( 220.668, 76.1206 )
 11/shapes = [  ]
 11/z_index = 0
 12/name = "tile_map_roof.png 12"
-12/texture = ExtResource( 15 )
 12/tex_offset = Vector2( 0, 0 )
 12/modulate = Color( 1, 1, 1, 1 )
 12/region = Rect2( 128, 32, 32, 32 )
@@ -245,7 +257,6 @@ extents = Vector2( 220.668, 76.1206 )
 12/shapes = [  ]
 12/z_index = 0
 13/name = "tile_map_roof.png 13"
-13/texture = ExtResource( 15 )
 13/tex_offset = Vector2( 0, 0 )
 13/modulate = Color( 1, 1, 1, 1 )
 13/region = Rect2( 160, 32, 32, 32 )
@@ -259,7 +270,6 @@ extents = Vector2( 220.668, 76.1206 )
 13/shapes = [  ]
 13/z_index = 0
 14/name = "tile_map_roof.png 14"
-14/texture = ExtResource( 15 )
 14/tex_offset = Vector2( 0, 0 )
 14/modulate = Color( 1, 1, 1, 1 )
 14/region = Rect2( 192, 32, 32, 32 )
@@ -273,7 +283,6 @@ extents = Vector2( 220.668, 76.1206 )
 14/shapes = [  ]
 14/z_index = 0
 15/name = "tile_map_roof.png 15"
-15/texture = ExtResource( 15 )
 15/tex_offset = Vector2( 0, 0 )
 15/modulate = Color( 1, 1, 1, 1 )
 15/region = Rect2( 224, 32, 32, 32 )
@@ -287,7 +296,6 @@ extents = Vector2( 220.668, 76.1206 )
 15/shapes = [  ]
 15/z_index = 0
 16/name = "tile_map_roof.png 16"
-16/texture = ExtResource( 15 )
 16/tex_offset = Vector2( 0, 0 )
 16/modulate = Color( 1, 1, 1, 1 )
 16/region = Rect2( 0, 64, 32, 32 )
@@ -301,7 +309,6 @@ extents = Vector2( 220.668, 76.1206 )
 16/shapes = [  ]
 16/z_index = 0
 17/name = "tile_map_roof.png 17"
-17/texture = ExtResource( 15 )
 17/tex_offset = Vector2( 0, 0 )
 17/modulate = Color( 1, 1, 1, 1 )
 17/region = Rect2( 32, 64, 32, 32 )
@@ -315,7 +322,6 @@ extents = Vector2( 220.668, 76.1206 )
 17/shapes = [  ]
 17/z_index = 0
 18/name = "tile_map_roof.png 18"
-18/texture = ExtResource( 15 )
 18/tex_offset = Vector2( 0, 0 )
 18/modulate = Color( 1, 1, 1, 1 )
 18/region = Rect2( 64, 64, 32, 32 )
@@ -329,7 +335,6 @@ extents = Vector2( 220.668, 76.1206 )
 18/shapes = [  ]
 18/z_index = 0
 19/name = "tile_map_roof.png 19"
-19/texture = ExtResource( 15 )
 19/tex_offset = Vector2( 0, 0 )
 19/modulate = Color( 1, 1, 1, 1 )
 19/region = Rect2( 96, 64, 32, 32 )
@@ -343,7 +348,6 @@ extents = Vector2( 220.668, 76.1206 )
 19/shapes = [  ]
 19/z_index = 0
 20/name = "tile_map_roof.png 20"
-20/texture = ExtResource( 15 )
 20/tex_offset = Vector2( 0, 0 )
 20/modulate = Color( 1, 1, 1, 1 )
 20/region = Rect2( 128, 64, 32, 32 )
@@ -359,7 +363,6 @@ extents = Vector2( 220.668, 76.1206 )
 
 [sub_resource type="TileSet" id=9]
 0/name = "tile_map_roof_2.png 0"
-0/texture = ExtResource( 17 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 32, 8 )
@@ -373,7 +376,6 @@ extents = Vector2( 220.668, 76.1206 )
 0/shapes = [  ]
 0/z_index = 0
 1/name = "tile_map_roof_2.png 1"
-1/texture = ExtResource( 17 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 8, 32, 8 )
@@ -387,7 +389,6 @@ extents = Vector2( 220.668, 76.1206 )
 1/shapes = [  ]
 1/z_index = 0
 2/name = "tile_map_roof_2.png 2"
-2/texture = ExtResource( 17 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 16, 32, 8 )
@@ -401,7 +402,6 @@ extents = Vector2( 220.668, 76.1206 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "tile_map_roof_2.png 3"
-3/texture = ExtResource( 17 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 24, 32, 8 )
@@ -415,7 +415,6 @@ extents = Vector2( 220.668, 76.1206 )
 3/shapes = [  ]
 3/z_index = 0
 4/name = "tile_map_roof_2.png 4"
-4/texture = ExtResource( 17 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 32, 0, 32, 8 )
@@ -429,7 +428,6 @@ extents = Vector2( 220.668, 76.1206 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "tile_map_roof_2.png 5"
-5/texture = ExtResource( 17 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 32, 8, 32, 8 )
@@ -443,7 +441,6 @@ extents = Vector2( 220.668, 76.1206 )
 5/shapes = [  ]
 5/z_index = 0
 6/name = "tile_map_roof_2.png 6"
-6/texture = ExtResource( 17 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 32, 16, 32, 8 )
@@ -457,7 +454,6 @@ extents = Vector2( 220.668, 76.1206 )
 6/shapes = [  ]
 6/z_index = 0
 7/name = "tile_map_roof_2.png 7"
-7/texture = ExtResource( 17 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
 7/region = Rect2( 32, 24, 32, 8 )
@@ -471,7 +467,6 @@ extents = Vector2( 220.668, 76.1206 )
 7/shapes = [  ]
 7/z_index = 0
 8/name = "tile_map_roof_2.png 8"
-8/texture = ExtResource( 17 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 64, 0, 32, 8 )
@@ -485,7 +480,6 @@ extents = Vector2( 220.668, 76.1206 )
 8/shapes = [  ]
 8/z_index = 0
 9/name = "tile_map_roof_2.png 9"
-9/texture = ExtResource( 17 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
 9/region = Rect2( 64, 8, 32, 8 )
@@ -503,12 +497,12 @@ extents = Vector2( 220.668, 76.1206 )
 script = ExtResource( 6 )
 
 [node name="TileMapHouse2" parent="." instance=ExtResource( 1 )]
-material = SubResource( 6 )
+material = SubResource( 10 )
 tile_data = PoolIntArray( 131095, 0, 0, 131096, 8, 0, 131097, 8, 0, 131098, 8, 0, 131099, 8, 0, 131100, 8, 0, 196631, 1, 0, 196632, 8, 0, 196633, 8, 0, 196634, 8, 0, 196635, 8, 0, 196636, 8, 0, 262166, 0, 0, 262167, 2, 0, 262168, 8, 0, 262169, 8, 0, 262170, 8, 0, 262171, 8, 0, 262172, 8, 0, 327702, 16, 0, 327703, 2, 0, 327704, 1610612741, 0, 327705, 1610612741, 0, 327706, 1610612741, 0, 327707, 1610612741, 0, 327708, 1610612741, 0, 327709, 6, 0, 393238, 17, 0, 393239, 3, 0, 393240, 5, 0, 393241, 5, 0, 393242, 5, 0, 393243, 5, 0, 393244, 7, 0, 458774, 17, 0, 458775, 4, 0, 458776, 5, 0, 458777, 5, 0, 458778, 5, 0, 458779, 5, 0, 458780, 6, 0, 524310, 17, 0, 589846, 17, 0 )
 house_color = Color( 0.831373, 0.92549, 0.737255, 1 )
 
 [node name="TileMapHouse" parent="." instance=ExtResource( 1 )]
-material = SubResource( 7 )
+material = SubResource( 11 )
 tile_data = PoolIntArray( 327695, 0, 0, 327696, 8, 0, 393231, 9, 0, 393232, 8, 0, 458767, 10, 0, 458768, 7, 0, 524310, 0, 0, 524311, 8, 0, 524312, 8, 0, 524313, 8, 0, 524314, 8, 0, 524315, 8, 0, 589846, 1, 0, 589847, 8, 0, 589848, 8, 0, 589849, 8, 0, 589850, 8, 0, 589851, 8, 0, 655382, 2, 0, 655383, 8, 0, 655384, 8, 0, 655385, 8, 0, 655386, 8, 0, 655387, 8, 0, 720918, 2, 0, 720919, 8, 0, 720920, 8, 0, 720921, 8, 0, 720922, 8, 0, 720923, 8, 0, 786440, 0, 0, 786441, 8, 0, 786442, 8, 0, 786443, 8, 0, 786454, 2, 0, 786455, 8, 0, 786456, 8, 0, 786457, 8, 0, 786458, 8, 0, 786459, 8, 0, 851976, 9, 0, 851977, 8, 0, 851978, 8, 0, 851979, 8, 0, 851990, 2, 0, 851991, 8, 0, 851992, 8, 0, 851993, 8, 0, 851994, 8, 0, 851995, 8, 0, 917512, 9, 0, 917513, 8, 0, 917514, 8, 0, 917515, 8, 0, 917526, 3, 0, 917527, 5, 0, 917528, 5, 0, 917529, 5, 0, 917530, 5, 0, 917531, 7, 0, 983048, 9, 0, 983049, 5, 0, 983050, 5, 0, 983051, 5, 0, 983052, 6, 0, 983062, 4, 0, 983063, 5, 0, 983064, 5, 0, 983065, 5, 0, 983066, 5, 0, 983067, 6, 0, 1048584, 10, 0, 1048585, 5, 0, 1048586, 5, 0, 1048587, 7, 0 )
 house_color = Color( 0.764706, 0.847059, 0.937255, 1 )
 
@@ -519,6 +513,7 @@ tile_data = PoolIntArray( 393238, 1, 0, 393240, 5, 0, 393242, 5, 0, 458774, 3, 0
 position = Vector2( 480.851, 312.69 )
 
 [node name="Car" parent="." instance=ExtResource( 3 )]
+material = SubResource( 13 )
 position = Vector2( 601.77, 227.459 )
 scale = Vector2( 1.57357, 1.57357 )
 texture = ExtResource( 8 )
@@ -531,7 +526,6 @@ z_index = 0
 collision_mask = 0
 
 [node name="Group 1" type="Node2D" parent="."]
-visible = false
 position = Vector2( 775.142, 319.006 )
 z_index = 5
 script = ExtResource( 9 )

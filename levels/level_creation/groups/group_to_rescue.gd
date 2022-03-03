@@ -11,7 +11,7 @@ var c = 0
 func _ready():
 	$Signs.set_num_of_people(get_child_count() - 1)
 	calculate_centroid()
-	$Signs.rect_position = centroid + Vector2(-$Signs.box_size.x / 2, -$Signs.box_size.y - 60.0)
+	$Signs.rect_position = centroid - Vector2($Signs.box_size.x / 2.0, $Signs.box_size.y)
 
 
 func person_rescued(person):
@@ -30,10 +30,14 @@ func person_rescued(person):
 
 func calculate_centroid():
 	var centroid_aux = Vector2.ZERO
+	var highest_point = 99999
 	for i in range(get_child_count()):
 		if get_child(i) is Area2D:
 			centroid_aux += get_child(i).position
+			if get_child(i).position.y < highest_point:
+				highest_point = get_child(i).position.y
 	centroid_aux = centroid_aux / get_child_count()
+	centroid_aux.y = highest_point - 50.0
 	centroid = centroid_aux
 
 

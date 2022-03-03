@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://fonts/tres/help_text.tres" type="DynamicFont" id=1]
 [ext_resource path="res://levels/level1_world.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/tutorial/phone_tilting.gd" type="Script" id=3]
+[ext_resource path="res://levels/tutorial/text_signs.gd" type="Script" id=4]
 [ext_resource path="res://levels/tutorial/help_background.gd" type="Script" id=5]
 [ext_resource path="res://levels/level1_world.gd" type="Script" id=7]
 [ext_resource path="res://levels/level_creation/groups/signs/sign_elder.png" type="Texture" id=8]
@@ -105,6 +106,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 scroll_horizontal_enabled = false
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -115,10 +117,10 @@ margin_bottom = 3716.0
 
 [node name="Sign1" type="HBoxContainer" parent="Help/TextSigns/SignList"]
 margin_right = 12.0
-margin_bottom = 245.0
+margin_bottom = 140.0
 
 [node name="Icon" type="TextureRect" parent="Help/TextSigns/SignList/Sign1"]
-margin_bottom = 245.0
+margin_bottom = 140.0
 texture = ExtResource( 13 )
 expand = true
 stretch_mode = 5
@@ -126,19 +128,19 @@ stretch_mode = 5
 [node name="Description" type="RichTextLabel" parent="Help/TextSigns/SignList/Sign1"]
 margin_left = 4.0
 margin_right = 4.0
-margin_bottom = 245.0
+margin_bottom = 140.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 1 )
 text = "Bebé"
 fit_content_height = true
 
 [node name="Sign2" type="HBoxContainer" parent="Help/TextSigns/SignList"]
-margin_top = 249.0
+margin_top = 144.0
 margin_right = 12.0
-margin_bottom = 1474.0
+margin_bottom = 844.0
 
 [node name="Icon" type="TextureRect" parent="Help/TextSigns/SignList/Sign2"]
-margin_bottom = 1225.0
+margin_bottom = 700.0
 texture = ExtResource( 16 )
 expand = true
 stretch_mode = 5
@@ -146,19 +148,19 @@ stretch_mode = 5
 [node name="Description" type="RichTextLabel" parent="Help/TextSigns/SignList/Sign2"]
 margin_left = 4.0
 margin_right = 4.0
-margin_bottom = 1225.0
+margin_bottom = 700.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 1 )
 text = "Persona con discapacidad"
 fit_content_height = true
 
 [node name="Sign3" type="HBoxContainer" parent="Help/TextSigns/SignList"]
-margin_top = 1478.0
+margin_top = 848.0
 margin_right = 12.0
-margin_bottom = 2164.0
+margin_bottom = 1240.0
 
 [node name="Icon" type="TextureRect" parent="Help/TextSigns/SignList/Sign3"]
-margin_bottom = 686.0
+margin_bottom = 392.0
 texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
@@ -166,19 +168,19 @@ stretch_mode = 5
 [node name="Description" type="RichTextLabel" parent="Help/TextSigns/SignList/Sign3"]
 margin_left = 4.0
 margin_right = 4.0
-margin_bottom = 686.0
+margin_bottom = 392.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 1 )
 text = "Persona mayor"
 fit_content_height = true
 
 [node name="Sign4" type="HBoxContainer" parent="Help/TextSigns/SignList"]
-margin_top = 2168.0
+margin_top = 1244.0
 margin_right = 12.0
-margin_bottom = 3148.0
+margin_bottom = 1804.0
 
 [node name="Icon" type="TextureRect" parent="Help/TextSigns/SignList/Sign4"]
-margin_bottom = 980.0
+margin_bottom = 560.0
 texture = ExtResource( 9 )
 expand = true
 stretch_mode = 5
@@ -186,19 +188,19 @@ stretch_mode = 5
 [node name="Description" type="RichTextLabel" parent="Help/TextSigns/SignList/Sign4"]
 margin_left = 4.0
 margin_right = 4.0
-margin_bottom = 980.0
+margin_bottom = 560.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 1 )
 text = "Agua demasiado alta"
 fit_content_height = true
 
 [node name="Sign5" type="HBoxContainer" parent="Help/TextSigns/SignList"]
-margin_top = 3152.0
+margin_top = 1808.0
 margin_right = 12.0
-margin_bottom = 5357.0
+margin_bottom = 3068.0
 
 [node name="Icon" type="TextureRect" parent="Help/TextSigns/SignList/Sign5"]
-margin_bottom = 2205.0
+margin_bottom = 1260.0
 texture = ExtResource( 10 )
 expand = true
 stretch_mode = 5
@@ -206,7 +208,7 @@ stretch_mode = 5
 [node name="Icon2" type="TextureRect" parent="Help/TextSigns/SignList/Sign5"]
 margin_left = 4.0
 margin_right = 4.0
-margin_bottom = 2205.0
+margin_bottom = 1260.0
 texture = ExtResource( 12 )
 expand = true
 stretch_mode = 5
@@ -214,7 +216,7 @@ stretch_mode = 5
 [node name="Description" type="RichTextLabel" parent="Help/TextSigns/SignList/Sign5"]
 margin_left = 8.0
 margin_right = 8.0
-margin_bottom = 2205.0
+margin_bottom = 1260.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 1 )
 text = "Tienen o no lugar alto (techo o planta alta)"
@@ -222,12 +224,12 @@ fit_content_height = true
 scroll_active = false
 
 [node name="Sign6" type="HBoxContainer" parent="Help/TextSigns/SignList"]
-margin_top = 5361.0
+margin_top = 3072.0
 margin_right = 12.0
-margin_bottom = 6488.0
+margin_bottom = 3716.0
 
 [node name="Icon" type="TextureRect" parent="Help/TextSigns/SignList/Sign6"]
-margin_bottom = 1127.0
+margin_bottom = 644.0
 texture = ExtResource( 11 )
 expand = true
 stretch_mode = 5
@@ -235,7 +237,7 @@ stretch_mode = 5
 [node name="Icon2" type="TextureRect" parent="Help/TextSigns/SignList/Sign6"]
 margin_left = 4.0
 margin_right = 4.0
-margin_bottom = 1127.0
+margin_bottom = 644.0
 texture = ExtResource( 14 )
 expand = true
 stretch_mode = 5
@@ -243,7 +245,7 @@ stretch_mode = 5
 [node name="Icon3" type="TextureRect" parent="Help/TextSigns/SignList/Sign6"]
 margin_left = 8.0
 margin_right = 8.0
-margin_bottom = 1127.0
+margin_bottom = 644.0
 texture = ExtResource( 15 )
 expand = true
 stretch_mode = 5
@@ -251,7 +253,7 @@ stretch_mode = 5
 [node name="Description" type="RichTextLabel" parent="Help/TextSigns/SignList/Sign6"]
 margin_left = 12.0
 margin_right = 12.0
-margin_bottom = 1127.0
+margin_bottom = 644.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 1 )
 text = "Quedan 1/2/+3 personas"

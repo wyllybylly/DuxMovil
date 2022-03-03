@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light_pole_electric0008.png-09db06b0c83b10ccab98b7bbe06d532f.stex"
+path="res://.import/light_pole_electric0008.png-75bded0043f17128b4c766742b9c8361.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/obstacles/light_pole_electric/light_pole_electric0008.png"
-dest_files=[ "res://.import/light_pole_electric0008.png-09db06b0c83b10ccab98b7bbe06d532f.stex" ]
+source_file="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0008.png"
+dest_files=[ "res://.import/light_pole_electric0008.png-75bded0043f17128b4c766742b9c8361.stex" ]
 
 [params]
 

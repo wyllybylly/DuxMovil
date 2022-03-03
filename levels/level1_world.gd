@@ -110,6 +110,7 @@ func show_help_view(text):
 	text.show()
 	$Help/Button.show()
 	$Help/Button.update_size()
+	TTSManager.say(text.text)
 
 
 func set_text_config(text, right = 1.0, left = 0.0, bottom = 0.9, top = 0.0):
