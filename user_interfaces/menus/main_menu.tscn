@@ -10,6 +10,7 @@
 default_font = ExtResource( 4 )
 
 [node name="MainMenu" type="Node"]
+pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="Background" type="TextureRect" parent="."]

@@ -1,14 +1,19 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://levels/level_creation/boat.gd" type="Script" id=1]
 [ext_resource path="res://user_interfaces/resources/power_frame.png" type="Texture" id=2]
-[ext_resource path="res://user_interfaces/resources/rescue_button.png" type="Texture" id=3]
+[ext_resource path="res://user_interfaces/resources/rescue_button_off.png" type="Texture" id=3]
 [ext_resource path="res://levels/level_creation/boat.png" type="Texture" id=4]
 [ext_resource path="res://user_interfaces/resources/power_lever.png" type="Texture" id=5]
 [ext_resource path="res://user_interfaces/resources/dock_button.png" type="Texture" id=6]
 [ext_resource path="res://user_interfaces/resources/options_button.png" type="Texture" id=7]
+[ext_resource path="res://fonts/tres/help_text.tres" type="DynamicFont" id=8]
 [ext_resource path="res://user_interfaces/menus/config_menu.tscn" type="PackedScene" id=9]
 [ext_resource path="res://user_interfaces/buttons/game_button.gd" type="Script" id=10]
+[ext_resource path="res://user_interfaces/help_panel.gd" type="Script" id=11]
+[ext_resource path="res://user_interfaces/buttons/config_button.tscn" type="PackedScene" id=12]
+[ext_resource path="res://user_interfaces/resources/left_button.png" type="Texture" id=13]
+[ext_resource path="res://user_interfaces/resources/right_button.png" type="Texture" id=14]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
@@ -20,6 +25,21 @@ height = 35.0
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 30, 18 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.156863, 0.156863, 0.156863, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
 
 [node name="Boat" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,7 +59,7 @@ polygon = PoolVector2Array( 10, -37.5, 20, -27.5, 20, 32, 16.5, 37.5, 13, 32, 13
 
 [node name="DockArea" type="Area2D" parent="Boat"]
 scale = Vector2( 2, 2 )
-collision_layer = 16
+collision_layer = 0
 collision_mask = 4
 
 [node name="DockCollision" type="CollisionShape2D" parent="Boat/DockArea"]
@@ -47,7 +67,7 @@ shape = SubResource( 1 )
 
 [node name="RescueArea" type="Area2D" parent="Boat"]
 scale = Vector2( 2, 2 )
-collision_layer = 16
+collision_layer = 0
 collision_mask = 32
 
 [node name="RescueCollision" type="CollisionShape2D" parent="Boat/RescueArea"]
@@ -55,7 +75,7 @@ shape = SubResource( 2 )
 
 [node name="SafeZoneArea" type="Area2D" parent="Boat"]
 scale = Vector2( 2, 2 )
-collision_layer = 16
+collision_layer = 0
 collision_mask = 64
 
 [node name="SafeZoneCollision" type="CollisionShape2D" parent="Boat/SafeZoneArea"]
@@ -98,6 +118,8 @@ margin_left = 173.982
 margin_top = -56.1231
 margin_right = 237.982
 margin_bottom = 7.87689
+focus_neighbour_top = NodePath("../RescueButton")
+focus_neighbour_right = NodePath("../LeftTurnButton")
 texture_normal = ExtResource( 6 )
 script = ExtResource( 10 )
 __meta__ = {
@@ -110,7 +132,11 @@ margin_left = 251.432
 margin_top = -55.0006
 margin_right = 315.432
 margin_bottom = 8.99937
-texture_normal = ExtResource( 3 )
+focus_neighbour_top = NodePath("../OptionsButton")
+focus_neighbour_right = NodePath("../LeftTurnButton")
+focus_neighbour_bottom = NodePath("../DockButton")
+disabled = true
+texture_disabled = ExtResource( 3 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -122,7 +148,37 @@ margin_left = 334.494
 margin_top = -57.2456
 margin_right = 398.494
 margin_bottom = 6.75443
+focus_neighbour_bottom = NodePath("../RightTurnButton")
 texture_normal = ExtResource( 7 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "Botón de configuraciones"
+
+[node name="LeftTurnButton" type="TextureButton" parent="GUI"]
+margin_left = 418.494
+margin_top = -57.2456
+margin_right = 482.494
+margin_bottom = 6.75443
+focus_neighbour_left = NodePath("../DockButton")
+focus_neighbour_top = NodePath("../OptionsButton")
+focus_neighbour_right = NodePath("../RightTurnButton")
+texture_normal = ExtResource( 13 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "Botón de configuraciones"
+
+[node name="RightTurnButton" type="TextureButton" parent="GUI"]
+margin_left = 499.494
+margin_top = -57.2456
+margin_right = 563.494
+margin_bottom = 6.75443
+focus_neighbour_left = NodePath("../LeftTurnButton")
+focus_neighbour_top = NodePath("../OptionsButton")
+texture_normal = ExtResource( 14 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -131,6 +187,41 @@ text = "Botón de configuraciones"
 
 [node name="ConfigMenu" parent="GUI" instance=ExtResource( 9 )]
 visible = false
+
+[node name="NoPause" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="HelpPanel" type="Panel" parent="NoPause"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -286.5
+margin_top = -178.0
+margin_right = 286.5
+margin_bottom = 178.0
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="NoPause/HelpPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[center] Algunos postes de luz pueden liberar electricidad y ser peligrosos. Lo mejor es evitar anclarnos en ellos. [/center]"
+text = " Algunos postes de luz pueden liberar electricidad y ser peligrosos. Lo mejor es evitar anclarnos en ellos. "
+
+[node name="ConfigButton" parent="NoPause/HelpPanel" instance=ExtResource( 12 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -30.0
+margin_right = 100.0
+margin_bottom = 0.0
 
 [connection signal="input_event" from="GUI/Lever" to="." method="_on_Lever_input_event"]
 [connection signal="b_pressed" from="GUI/DockButton" to="." method="_on_DockButton_b_pressed"]
@@ -148,4 +239,15 @@ visible = false
 [connection signal="focus_exited" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_focus_exited"]
 [connection signal="mouse_entered" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_mouse_entered"]
 [connection signal="pressed" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_pressed"]
+[connection signal="b_pressed" from="GUI/LeftTurnButton" to="." method="_on_LeftTurnButton_b_pressed"]
+[connection signal="focus_entered" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_focus_entered"]
+[connection signal="focus_exited" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_focus_exited"]
+[connection signal="mouse_entered" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_mouse_entered"]
+[connection signal="pressed" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_pressed"]
+[connection signal="b_pressed" from="GUI/RightTurnButton" to="." method="_on_RightTurnButton_b_pressed"]
+[connection signal="focus_entered" from="GUI/RightTurnButton" to="GUI/RightTurnButton" method="_on_GameButton_focus_entered"]
+[connection signal="focus_exited" from="GUI/RightTurnButton" to="GUI/RightTurnButton" method="_on_GameButton_focus_exited"]
+[connection signal="mouse_entered" from="GUI/RightTurnButton" to="GUI/RightTurnButton" method="_on_GameButton_mouse_entered"]
+[connection signal="pressed" from="GUI/RightTurnButton" to="GUI/RightTurnButton" method="_on_GameButton_pressed"]
 [connection signal="menu_closed" from="GUI/ConfigMenu" to="." method="_on_ConfigMenu_menu_closed"]
+[connection signal="b_pressed" from="NoPause/HelpPanel/ConfigButton" to="NoPause/HelpPanel" method="_on_ConfigButton_b_pressed"]

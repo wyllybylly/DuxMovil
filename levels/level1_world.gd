@@ -139,6 +139,7 @@ func finish_menu():
 
 func _on_FinishLevel_back_button_pressed():
 # warning-ignore:return_value_discarded
+	get_tree().paused = false
 	get_tree().change_scene("res://user_interfaces/menus/main_menu.tscn")
 
 

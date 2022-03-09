@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://levels/level_creation/groups/signs.gd" type="Script" id=1]
 [ext_resource path="res://levels/level_creation/water/water.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://levels/level_creation/groups/person_to_rescue.gd" type="Script" id=5]
 [ext_resource path="res://levels/level_creation/tilemaps/tile_map_house.gd" type="Script" id=6]
 [ext_resource path="res://levels/level_creation/tilemaps/tile_map_house_1.png" type="Texture" id=7]
+[ext_resource path="res://levels/level_creation/obstacles/tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://levels/level_creation/tilemaps/tile_map_window_1png.png" type="Texture" id=9]
 [ext_resource path="res://levels/level_creation/tilemaps/tile_map_door.png" type="Texture" id=10]
 [ext_resource path="res://levels/level_creation/obstacles/cars/car_mask_2.png" type="Texture" id=12]
@@ -795,7 +796,7 @@ shader_param/tint_color = Color( 0.407843, 0.788235, 0.298039, 1 )
 shader_param/mask_img = ExtResource( 32 )
 
 [sub_resource type="RectangleShape2D" id=35]
-extents = Vector2( 220.668, 76.1206 )
+extents = Vector2( 220, 32 )
 
 [node name="World" type="Node2D"]
 
@@ -1039,6 +1040,42 @@ position = Vector2( 93.234, -1580.01 )
 rotation = -0.261799
 scale = Vector2( -1, 1 )
 
+[node name="Tree" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 315.401, -140.089 )
+z_index = 3
+
+[node name="Tree2" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 87.9288, -1059.73 )
+z_index = 3
+
+[node name="Tree3" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 107.436, -454.059 )
+z_index = 3
+
+[node name="Tree4" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 334.023, -413.644 )
+z_index = 3
+
+[node name="Tree5" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 323.44, -965.995 )
+z_index = 3
+
+[node name="Tree6" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 94.1989, -1331.58 )
+z_index = 3
+
+[node name="Tree7" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 327.935, -1139.8 )
+z_index = 3
+
+[node name="Tree8" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 91.2022, -1524.86 )
+z_index = 3
+
+[node name="Tree9" parent="Obstacles" instance=ExtResource( 8 )]
+position = Vector2( 318.945, -1493.4 )
+z_index = 3
+
 [node name="Poles" type="Node2D" parent="."]
 
 [node name="LightPole" parent="Poles" instance=ExtResource( 15 )]
@@ -1066,6 +1103,7 @@ scale = Vector2( -1, 1 )
 
 [node name="LightPole7" parent="Poles" instance=ExtResource( 15 )]
 position = Vector2( 217.943, -2922.15 )
+scale = Vector2( -1, 1 )
 
 [node name="Group1" type="Node2D" parent="."]
 position = Vector2( 598.37, -2534.21 )
@@ -1117,8 +1155,7 @@ hair_color = Color( 0.454902, 0.454902, 0.454902, 1 )
 clothes_color = Color( 0.244754, 0.736457, 0.181611, 1 )
 
 [node name="SafeZone" type="Area2D" parent="."]
-visible = false
-position = Vector2( 591, -3728 )
+position = Vector2( 591, -3681.98 )
 z_index = 1
 collision_layer = 64
 collision_mask = 0

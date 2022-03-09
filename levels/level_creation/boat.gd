@@ -1,28 +1,30 @@
 extends Node2D
 
 
-export (float) var max_speed = 40
+export (float) var max_speed = 20
 
 signal person_safe
 
 
 const SEATS = [
-	[Vector2(0, -50), 90],
-	[Vector2(15, -45), 135],
-	[Vector2(-15, -45), 45],
+	[Vector2(0, -50), -90],
+	[Vector2(15, -45), -45],
+	[Vector2(-15, -45), -135],
 	[Vector2(20, -30), 0],
-	[Vector2(-20, -30), 0],
-	[Vector2(0, -35), 90],
-	[Vector2(0, -20), 90],
+	[Vector2(-20, -30), 180],
+	[Vector2(0, -35), -90],
+	[Vector2(0, -20), -90],
 	[Vector2(20, -12.5), 0],
-	[Vector2(-20, -12.5), 0],
+	[Vector2(-20, -12.5), 180],
 	[Vector2(20, 5), 0],
-	[Vector2(-20, 5), 0],
+	[Vector2(-20, 5), 180],
 	[Vector2(20, 22.5), 0],
-	[Vector2(-20, 22.5), 0],
+	[Vector2(-20, 22.5), 180],
 	[Vector2(20, 40), 0],
-	[Vector2(-20, 40), 0],
+	[Vector2(-20, 40), 180],
 ]
+const button_tex_1 = preload("res://user_interfaces/resources/to_boat_button.png")
+const button_tex_2 = preload("res://user_interfaces/resources/to_safe_zone_button.png")
 
 var speed = 0.0
 var water_speed = 10.0
@@ -78,7 +80,7 @@ func _process(delta):
 			rotate(-delta)
 		var movement = Vector2()
 		if speed != 0.0:
-			movement += Vector2(1, 0).rotated($Boat.rotation - PI / 2) * speed
+			movement += Vector2(1, 0).rotated($Boat.rotation - PI / 2) * speed * (1 - 0.02 * used_seats)
 		movement.y += water_speed
 		$Boat.move_and_collide(movement * delta * 10)
 	else:
@@ -178,6 +180,22 @@ func set_overlay():
 	$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
 
 
+func update_rescue_button():
+	if not $Boat/RescueArea.get_overlapping_areas().empty():
+		$GUI/RescueButton.disabled = false
+		$GUI/RescueButton.texture_normal = button_tex_1
+		print("Subir persona")
+		print(str(button_tex_1))
+	elif not $Boat/SafeZoneArea.get_overlapping_areas().empty():
+		$GUI/RescueButton.disabled = false
+		$GUI/RescueButton.texture_normal = button_tex_2
+		print("Dejar persona")
+		print(str(button_tex_2))
+	else:
+		$GUI/RescueButton.disabled = true
+		print("Nada")
+
+
 func _on_DockButton_b_pressed():
 	# If boat is docked, undock it
 	if docked:
@@ -185,17 +203,23 @@ func _on_DockButton_b_pressed():
 		from_point = to_point
 		update()
 		TTSManager.say("Lancha suelta")
+		$GUI/RescueButton.disabled = true
 	# Else, check if there is dockable areas
 	else:
 		# If there is, dock
 		if not $Boat/DockArea.get_overlapping_bodies().empty():
-			docked = true
-			from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
-			to_point = $Boat/DockArea.get_overlapping_bodies().pop_front().global_position - global_position
-			rope_lenght = from_point.distance_to(to_point)
-			update()
-			stabilizing = true
-			TTSManager.say("Lancha anclada")
+			var dock_body = $Boat/DockArea.get_overlapping_bodies().pop_front()
+			if dock_body.type == "Electric":
+				$NoPause/HelpPanel.open()
+			else:
+				docked = true
+				from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
+				to_point = dock_body.global_position - global_position
+				rope_lenght = from_point.distance_to(to_point)
+				update()
+				stabilizing = true
+				update_rescue_button()
+				TTSManager.say("Lancha anclada")
 		# Else notify
 		else:
 			TTSManager.say("No se encontró lugar para anclar")
@@ -212,6 +236,8 @@ func _on_RescueButton_b_pressed():
 				TTSManager.say("Se subió una persona a la lancha")
 			else:
 				TTSManager.say("No hay más lugar en la lancha")
+			yield(get_tree(), "physics_frame")
+			update_rescue_button()
 		# If there is a safe zone, leave a person on  it
 		elif not $Boat/SafeZoneArea.get_overlapping_areas().empty():
 			var safe_zone = $Boat/SafeZoneArea.get_overlapping_areas().pop_front()
@@ -220,6 +246,8 @@ func _on_RescueButton_b_pressed():
 				person.get_to_safe_zone(safe_zone)
 				emit_signal("person_safe")
 				TTSManager.say("Se dejó una persona en zona segura")
+			yield(get_tree(), "physics_frame")
+			update_rescue_button()
 		# Else do nothing
 
 
@@ -239,3 +267,11 @@ func _on_ConfigMenu_menu_closed():
 func _on_Lever_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("ui_click"):
 		power_selected = true
+
+
+func _on_LeftTurnButton_b_pressed():
+	pass # Replace with function body.
+
+
+func _on_RightTurnButton_b_pressed():
+	pass # Replace with function body.

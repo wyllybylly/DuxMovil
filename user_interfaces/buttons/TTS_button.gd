@@ -55,14 +55,12 @@ func show_border():
 func _on_TTSButton_pressed():
 	if pressed:
 		if clicked:
-			print("Apagar")
 			TTSManager.toggle(false)
 		else:
 			TTSManager.say("Apagar narrador")
 			clicked = true
 			pressed = false
 	else:
-		print("Encender")
 		TTSManager.toggle(true)
 		TTSManager.say("Narrador encendido")
 

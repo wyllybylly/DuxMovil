@@ -132,10 +132,6 @@ func set_label_size():
 	$ConfigLabel.rect_min_size.x = 320 + 60.0 * ConfigVariables.get_text_size()
 	$ConfigLabel.rect_size.x = 320 + 60.0 * ConfigVariables.get_text_size()
 	$ConfigOption.get_stylebox("custom_style/slider").set_expand_margin_individual(0.0, 0.0, 0.0, $ConfigLabel.rect_size.y - 32.0)
-#	$ConfigOption.get_stylebox("custom_style/slider").region_rect.size.y = 50.0
-	print(str($ConfigLabel.rect_size.y - 32.0))
-	print(str($ConfigOption.get_stylebox("slider").get_expand_margin_size(3)))
-	print(str($ConfigOption.get_stylebox("custom_style/slider").region_rect))
 
 
 func _on_ConfigRow_focus_entered():

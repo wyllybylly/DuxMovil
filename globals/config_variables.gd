@@ -7,6 +7,7 @@ var overlay_alpha = 0.8
 var text_size = 3
 var text_size_l_values = [ 20, 28, 34, 42, 50, 56 ]
 var text_size_m_values = [ 18, 20, 22, 24, 28, 32 ]
+var touch_controls = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -67,3 +68,11 @@ func update_font_sizes():
 	font.set_size(get_text_size_m_value())
 	font = load("res://fonts/tres/menu_title.tres")
 	font.set_size(get_text_size_l_value())
+
+
+func set_touch_controls(new_value):
+	touch_controls = new_value
+
+
+func get_touch_controls():
+	return touch_controls

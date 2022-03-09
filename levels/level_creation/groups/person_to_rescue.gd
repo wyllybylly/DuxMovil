@@ -19,23 +19,23 @@ export (Color) var hair_color = Color.saddlebrown setget set_hair_color
 export (Color) var clothes_color = Color.red setget set_clothes_color
 export (Color) var baby_color = Color.green setget set_baby_color
 
-var personSprite
-var personCollision
+var person_sprite
+var person_collision
 
 
 func _init():
-	personCollision = CollisionShape2D.new()
+	person_collision = CollisionShape2D.new()
 	var shape = CircleShape2D.new()
 	shape.set_radius(16.0)
-	personCollision.set_shape(shape)
-	add_child(personCollision)
+	person_collision.set_shape(shape)
+	add_child(person_collision)
 	set_collision_layer_bit(0, false)
 	set_collision_layer_bit(5, true)
 	set_collision_mask_bit(0, false)
-	personSprite = Sprite.new()
+	person_sprite = Sprite.new()
 	var mat = spriteMaterial.duplicate()
-	personSprite.set_material(mat)
-	add_child(personSprite)
+	person_sprite.set_material(mat)
+	add_child(person_sprite)
 	set_texture()
 
 
@@ -52,17 +52,19 @@ func rescued(boat, seat):
 	position = seat[0]
 	rotation_degrees = seat[1]
 	z_index = 0
-	scale = Vector2(0.4, 0.4)
+	scale = Vector2(0.3, 0.3)
 	# Remove collision
-	personCollision.queue_free()
+	remove_child(person_collision)
+	person_collision.queue_free()
+	set_collision_layer_bit(5, false)
 
 
 func get_to_safe_zone(safe_zone):
 	get_parent().remove_child(self)
 	safe_zone.add_child(self)
-	position = Vector2(rand_range(-50.0, 50.0), rand_range(-50.0, 50.0))
-	rotation_degrees = 0.0
-	z_index = 1
+	position = Vector2(rand_range(-50.0, 50.0), rand_range(-15.0, 15.0))
+	rotation_degrees = -90.0
+	z_index = 3
 	scale = Vector2(0.6, 0.6)
 
 
@@ -84,29 +86,29 @@ func set_sprite():
 
 func set_hair_color(new_color):
 	hair_color = new_color
-	var mat = personSprite.get_material()
+	var mat = person_sprite.get_material()
 	mat.set_shader_param("hair_color",hair_color)
 
 
 func set_clothes_color(new_color):
 	clothes_color = new_color
-	var mat = personSprite.get_material()
+	var mat = person_sprite.get_material()
 	mat.set_shader_param("clothes_color",clothes_color)
 
 
 func set_baby_color(new_color):
 	baby_color = new_color
-	var mat = personSprite.get_material()
+	var mat = person_sprite.get_material()
 	mat.set_shader_param("baby_color",baby_color)
 
 
 func set_texture():
-	var mat = personSprite.get_material()
+	var mat = person_sprite.get_material()
 	if baby:
-		personSprite.texture = tex2
+		person_sprite.texture = tex2
 		mat.set_shader_param("mask_img",mask2)
 	else:
-		personSprite.texture = tex1
+		person_sprite.texture = tex1
 		mat.set_shader_param("mask_img",mask1)
 
 
