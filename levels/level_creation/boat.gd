@@ -6,6 +6,15 @@ export (float) var max_speed = 20
 signal person_safe
 
 
+enum actions_enum {
+	IDLE,
+	TURN_RIGHT,
+	TURN_LEFT,
+	POWER_UP,
+	POWER_DOWN,
+}
+
+
 const SEATS = [
 	[Vector2(0, -50), -90],
 	[Vector2(15, -45), -45],
@@ -38,6 +47,7 @@ var to_point
 var rope_color
 var rope_lenght
 var stabilizing
+var current_action = actions_enum.IDLE
 
 
 func _draw():
@@ -66,18 +76,20 @@ func _ready():
 func _process(delta):
 	if not docked:
 		# Movement
-		if Input.is_action_pressed("ui_up"):
-			power_up(delta)
-		if Input.is_action_pressed("ui_down"):
-			power_down(delta)
-		if Input.is_action_pressed("ui_right") and speed != 0.0:
-			rotate(delta)
-		if Input.is_action_pressed("ui_left") and speed != 0.0:
-			rotate(-delta)
-		if Input.get_accelerometer().x > 3.0:
-			rotate(delta)
-		if Input.get_accelerometer().x < -3.0:
-			rotate(-delta)
+		if ConfigVariables.get_default_controls(): 
+			if Input.get_accelerometer().x > 3.0:
+				rotate(delta)
+			if Input.get_accelerometer().x < -3.0:
+				rotate(-delta)
+		else:
+			if current_action == actions_enum.TURN_RIGHT and speed != 0.0:
+				rotate(delta)
+			elif current_action == actions_enum.TURN_LEFT and speed != 0.0:
+				rotate(-delta)
+			elif current_action == actions_enum.POWER_UP:
+				power_up(delta)
+			elif current_action == actions_enum.POWER_DOWN:
+				power_down(delta)
 		var movement = Vector2()
 		if speed != 0.0:
 			movement += Vector2(1, 0).rotated($Boat.rotation - PI / 2) * speed * (1 - 0.02 * used_seats)
@@ -115,6 +127,7 @@ func _input(event):
 func power_up(delta):
 	speed = min(speed + 20.0 * delta, max_speed)
 	update_lever_y()
+	TTSManager.say("Motor al " + str(round(speed / max_speed * 100)) + "%")
 
 
 func power_down(delta):
@@ -136,7 +149,8 @@ func stabilize_rotation(delta):
 
 
 func update_lever_y():
-	$GUI/Lever.position.y = lever_height.x - (speed / max_speed) * lever_height.y
+	if ConfigVariables.get_default_controls():
+		$GUI/Lever.position.y = lever_height.x - (speed / max_speed) * lever_height.y
 
 
 func update_water_speed():
@@ -158,26 +172,82 @@ func get_person():
 
 
 func set_overlay():
+	# Initialize variables
 	var mid_height = get_viewport().size.y / 2.0
-	$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
-	$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
-	$GUI/DockButton.rect_position = Vector2(20.0, get_viewport().size.y - 15.0 * ConfigVariables.get_overlay_size() - 110.0)
-	$GUI/RescueButton.rect_position = Vector2(20.0, get_viewport().size.y - 35.0 * ConfigVariables.get_overlay_size() - 200.0)
-	$GUI/OptionsButton.rect_position = Vector2(get_viewport().size.x - (40.0 * ConfigVariables.get_overlay_size() + 200.0 if ConfigVariables.get_overlay_size() >= 3 else 20.0 * ConfigVariables.get_overlay_size() + 100.0), 10.0)
-	$GUI/Lever/LeverSprite.position = Vector2.ZERO
-	$GUI/Lever/LeverCollision.position = Vector2.ZERO
-	lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
-	$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-	$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
 	var scale_value = 1.4 + ConfigVariables.get_overlay_size() * 0.2
+	$GUI/OptionsButton.grab_focus()
+	
+	# Setup dock button
+	$GUI/DockButton.rect_position = Vector2(20.0, get_viewport().size.y - 15.0 * ConfigVariables.get_overlay_size() - 110.0)
 	$GUI/DockButton.rect_scale = Vector2(scale_value, scale_value)
-	$GUI/RescueButton.rect_scale = Vector2(scale_value, scale_value)
-	$GUI/OptionsButton.rect_scale = Vector2(scale_value, scale_value)
-	$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
 	$GUI/DockButton.modulate.a = ConfigVariables.overlay_alpha
+	
+	# Setup rescue button
+	$GUI/RescueButton.rect_position = Vector2(20.0, get_viewport().size.y - 35.0 * ConfigVariables.get_overlay_size() - 200.0)
+	$GUI/RescueButton.rect_scale = Vector2(scale_value, scale_value)
 	$GUI/RescueButton.modulate.a = ConfigVariables.overlay_alpha
-	$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
+	
+	if ConfigVariables.get_default_controls():
+		# Show & hide buttons
+		$GUI/Lever.show()
+		$GUI/Frame.show()
+		$GUI/LeftTurnButton.hide()
+		$GUI/RightTurnButton.hide()
+		$GUI/PowerUpButton.hide()
+		$GUI/PowerDownButton.hide()
+		
+		# Setup Lever & Frame
+		$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
+		$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
+		$GUI/Lever/LeverSprite.position = Vector2.ZERO
+		$GUI/Lever/LeverCollision.position = Vector2.ZERO
+		lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
+		$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+		$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+		$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
+		$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
+		
+		# Setup options button
+		$GUI/OptionsButton.rect_position = Vector2(get_viewport().size.x - (40.0 * ConfigVariables.get_overlay_size() + 200.0 if ConfigVariables.get_overlay_size() >= 3 else 20.0 * ConfigVariables.get_overlay_size() + 100.0), 10.0)
+		$GUI/OptionsButton.rect_scale = Vector2(scale_value, scale_value)
+		$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
+	else:
+		# Show & hide buttons
+		$GUI/Lever.hide()
+		$GUI/Frame.hide()
+		$GUI/LeftTurnButton.show()
+		$GUI/RightTurnButton.show()
+		$GUI/PowerUpButton.show()
+		$GUI/PowerDownButton.show()
+		
+		# Setup right turn button
+		$GUI/RightTurnButton.rect_position.x = get_viewport().size.x - (20.0 * ConfigVariables.get_overlay_size() + 100.0)
+		$GUI/RightTurnButton.rect_position.y = $GUI/DockButton.rect_position.y
+		$GUI/RightTurnButton.rect_scale = Vector2(scale_value, scale_value)
+		$GUI/RightTurnButton.modulate.a = ConfigVariables.overlay_alpha
+		
+		# Setup power down button
+		$GUI/PowerDownButton.rect_position = $GUI/RightTurnButton.rect_position
+		$GUI/PowerDownButton.rect_position.x -= ConfigVariables.get_overlay_size() * 15.0 + 100.0
+		$GUI/PowerDownButton.rect_scale = Vector2(scale_value, scale_value)
+		$GUI/PowerDownButton.modulate.a = ConfigVariables.overlay_alpha
+		
+		# Setup power up button
+		$GUI/PowerUpButton.rect_position = $GUI/PowerDownButton.rect_position
+		$GUI/PowerUpButton.rect_position.y -= ConfigVariables.get_overlay_size() * 15.0 + 100.0
+		$GUI/PowerUpButton.rect_scale = Vector2(scale_value, scale_value)
+		$GUI/PowerUpButton.modulate.a = ConfigVariables.overlay_alpha
+		
+		# Setup left turn button
+		$GUI/LeftTurnButton.rect_position = $GUI/PowerDownButton.rect_position
+		$GUI/LeftTurnButton.rect_position.x -= ConfigVariables.get_overlay_size() * 15.0 + 100.0
+		$GUI/LeftTurnButton.rect_scale = Vector2(scale_value, scale_value)
+		$GUI/LeftTurnButton.modulate.a = ConfigVariables.overlay_alpha
+		
+		# Setup options button
+		$GUI/OptionsButton.rect_position = Vector2($GUI/RightTurnButton.rect_position.x, 10.0)
+		$GUI/OptionsButton.rect_scale = Vector2(scale_value, scale_value)
+		$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
 
 
 func update_rescue_button():
@@ -270,8 +340,20 @@ func _on_Lever_input_event(_viewport, _event, _shape_idx):
 
 
 func _on_LeftTurnButton_b_pressed():
-	pass # Replace with function body.
+	current_action = actions_enum.TURN_LEFT
 
 
 func _on_RightTurnButton_b_pressed():
-	pass # Replace with function body.
+	current_action = actions_enum.TURN_RIGHT
+
+
+func _on_TurnButton_button_up():
+	current_action = actions_enum.IDLE
+
+
+func _on_PowerUpButton_b_pressed():
+	current_action = actions_enum.POWER_UP
+
+
+func _on_PowerDownButton_b_pressed():
+	current_action = actions_enum.POWER_DOWN

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://levels/level_creation/boat.gd" type="Script" id=1]
 [ext_resource path="res://user_interfaces/resources/power_frame.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://user_interfaces/buttons/config_button.tscn" type="PackedScene" id=12]
 [ext_resource path="res://user_interfaces/resources/left_button.png" type="Texture" id=13]
 [ext_resource path="res://user_interfaces/resources/right_button.png" type="Texture" id=14]
+[ext_resource path="res://user_interfaces/resources/down_button.png" type="Texture" id=15]
+[ext_resource path="res://user_interfaces/resources/up_button.png" type="Texture" id=16]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
@@ -114,10 +116,10 @@ position = Vector2( 71.0978, -27.5816 )
 shape = SubResource( 3 )
 
 [node name="DockButton" type="TextureButton" parent="GUI"]
-margin_left = 173.982
-margin_top = -56.1231
-margin_right = 237.982
-margin_bottom = 7.87689
+margin_left = 248.818
+margin_top = -64.1412
+margin_right = 312.818
+margin_bottom = -0.141167
 focus_neighbour_top = NodePath("../RescueButton")
 focus_neighbour_right = NodePath("../LeftTurnButton")
 texture_normal = ExtResource( 6 )
@@ -129,9 +131,9 @@ text = "Botón de anclaje"
 
 [node name="RescueButton" type="TextureButton" parent="GUI"]
 margin_left = 251.432
-margin_top = -55.0006
+margin_top = -158.345
 margin_right = 315.432
-margin_bottom = 8.99937
+margin_bottom = -94.3449
 focus_neighbour_top = NodePath("../OptionsButton")
 focus_neighbour_right = NodePath("../LeftTurnButton")
 focus_neighbour_bottom = NodePath("../DockButton")
@@ -144,11 +146,12 @@ __meta__ = {
 text = "Botón de rescate"
 
 [node name="OptionsButton" type="TextureButton" parent="GUI"]
-margin_left = 334.494
-margin_top = -57.2456
-margin_right = 398.494
-margin_bottom = 6.75443
-focus_neighbour_bottom = NodePath("../RightTurnButton")
+margin_left = 598.2
+margin_top = -249.68
+margin_right = 662.2
+margin_bottom = -185.68
+focus_neighbour_left = NodePath("../RescueButton")
+focus_neighbour_bottom = NodePath("../PowerUpButton")
 texture_normal = ExtResource( 7 )
 script = ExtResource( 10 )
 __meta__ = {
@@ -157,33 +160,70 @@ __meta__ = {
 text = "Botón de configuraciones"
 
 [node name="LeftTurnButton" type="TextureButton" parent="GUI"]
-margin_left = 418.494
-margin_top = -57.2456
-margin_right = 482.494
-margin_bottom = 6.75443
+margin_left = 427.858
+margin_top = -49.0449
+margin_right = 491.858
+margin_bottom = 14.9551
 focus_neighbour_left = NodePath("../DockButton")
-focus_neighbour_top = NodePath("../OptionsButton")
+focus_neighbour_top = NodePath("../PowerUpButton")
 focus_neighbour_right = NodePath("../RightTurnButton")
+focus_neighbour_bottom = NodePath("../PowerDownButton")
+action_mode = 0
 texture_normal = ExtResource( 13 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-text = "Botón de configuraciones"
+text = "Botón de girar a la izquierda"
 
 [node name="RightTurnButton" type="TextureButton" parent="GUI"]
-margin_left = 499.494
-margin_top = -57.2456
-margin_right = 563.494
-margin_bottom = 6.75443
+margin_left = 581.893
+margin_top = -51.2632
+margin_right = 645.893
+margin_bottom = 12.7369
 focus_neighbour_left = NodePath("../LeftTurnButton")
-focus_neighbour_top = NodePath("../OptionsButton")
+focus_neighbour_top = NodePath("../PowerUpButton")
+focus_neighbour_bottom = NodePath("../PowerDownButton")
+action_mode = 0
 texture_normal = ExtResource( 14 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-text = "Botón de configuraciones"
+text = "Botón de girar a la derecha"
+
+[node name="PowerUpButton" type="TextureButton" parent="GUI"]
+margin_left = 496.911
+margin_top = -124.408
+margin_right = 560.911
+margin_bottom = -60.4078
+focus_neighbour_left = NodePath("../LeftTurnButton")
+focus_neighbour_top = NodePath("../OptionsButton")
+focus_neighbour_right = NodePath("../RightTurnButton")
+focus_neighbour_bottom = NodePath("../PowerDownButton")
+action_mode = 0
+texture_normal = ExtResource( 16 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "Botón de acelerar motor"
+
+[node name="PowerDownButton" type="TextureButton" parent="GUI"]
+margin_left = 503.948
+margin_top = -48.3366
+margin_right = 567.948
+margin_bottom = 15.6635
+focus_neighbour_left = NodePath("../LeftTurnButton")
+focus_neighbour_top = NodePath("../PowerUpButton")
+focus_neighbour_right = NodePath("../RightTurnButton")
+action_mode = 0
+texture_normal = ExtResource( 15 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "Botón de desacelerar motor"
 
 [node name="ConfigMenu" parent="GUI" instance=ExtResource( 9 )]
 visible = false
@@ -240,14 +280,28 @@ margin_bottom = 0.0
 [connection signal="mouse_entered" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_mouse_entered"]
 [connection signal="pressed" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_pressed"]
 [connection signal="b_pressed" from="GUI/LeftTurnButton" to="." method="_on_LeftTurnButton_b_pressed"]
+[connection signal="button_up" from="GUI/LeftTurnButton" to="." method="_on_TurnButton_button_up"]
 [connection signal="focus_entered" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_focus_entered"]
 [connection signal="focus_exited" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_focus_exited"]
 [connection signal="mouse_entered" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_mouse_entered"]
 [connection signal="pressed" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_pressed"]
 [connection signal="b_pressed" from="GUI/RightTurnButton" to="." method="_on_RightTurnButton_b_pressed"]
+[connection signal="button_up" from="GUI/RightTurnButton" to="." method="_on_TurnButton_button_up"]
 [connection signal="focus_entered" from="GUI/RightTurnButton" to="GUI/RightTurnButton" method="_on_GameButton_focus_entered"]
 [connection signal="focus_exited" from="GUI/RightTurnButton" to="GUI/RightTurnButton" method="_on_GameButton_focus_exited"]
 [connection signal="mouse_entered" from="GUI/RightTurnButton" to="GUI/RightTurnButton" method="_on_GameButton_mouse_entered"]
 [connection signal="pressed" from="GUI/RightTurnButton" to="GUI/RightTurnButton" method="_on_GameButton_pressed"]
+[connection signal="b_pressed" from="GUI/PowerUpButton" to="." method="_on_PowerUpButton_b_pressed"]
+[connection signal="button_up" from="GUI/PowerUpButton" to="." method="_on_TurnButton_button_up"]
+[connection signal="focus_entered" from="GUI/PowerUpButton" to="GUI/PowerUpButton" method="_on_GameButton_focus_entered"]
+[connection signal="focus_exited" from="GUI/PowerUpButton" to="GUI/PowerUpButton" method="_on_GameButton_focus_exited"]
+[connection signal="mouse_entered" from="GUI/PowerUpButton" to="GUI/PowerUpButton" method="_on_GameButton_mouse_entered"]
+[connection signal="pressed" from="GUI/PowerUpButton" to="GUI/PowerUpButton" method="_on_GameButton_pressed"]
+[connection signal="b_pressed" from="GUI/PowerDownButton" to="." method="_on_PowerDownButton_b_pressed"]
+[connection signal="button_up" from="GUI/PowerDownButton" to="." method="_on_TurnButton_button_up"]
+[connection signal="focus_entered" from="GUI/PowerDownButton" to="GUI/PowerDownButton" method="_on_GameButton_focus_entered"]
+[connection signal="focus_exited" from="GUI/PowerDownButton" to="GUI/PowerDownButton" method="_on_GameButton_focus_exited"]
+[connection signal="mouse_entered" from="GUI/PowerDownButton" to="GUI/PowerDownButton" method="_on_GameButton_mouse_entered"]
+[connection signal="pressed" from="GUI/PowerDownButton" to="GUI/PowerDownButton" method="_on_GameButton_pressed"]
 [connection signal="menu_closed" from="GUI/ConfigMenu" to="." method="_on_ConfigMenu_menu_closed"]
 [connection signal="b_pressed" from="NoPause/HelpPanel/ConfigButton" to="NoPause/HelpPanel" method="_on_ConfigButton_b_pressed"]
