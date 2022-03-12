@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/tres/menu_title.tres" type="DynamicFont" id=1]
 [ext_resource path="res://user_interfaces/buttons/config_row.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://user_interfaces/menus/config_menu.gd" type="Script" id=4]
 [ext_resource path="res://resources/img/back_green.jpg" type="Texture" id=5]
 [ext_resource path="res://user_interfaces/buttons/TTS_button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://user_interfaces/buttons/config_row_bool.tscn" type="PackedScene" id=7]
 
 [node name="ConfigMenu" type="Control"]
 pause_mode = 2
@@ -45,12 +46,12 @@ valign = 1
 [node name="Center" type="CenterContainer" parent="VBox"]
 margin_top = 190.0
 margin_right = 960.0
-margin_bottom = 363.0
+margin_bottom = 352.0
 
 [node name="Options" type="VBoxContainer" parent="VBox/Center"]
 margin_left = 187.0
 margin_right = 773.0
-margin_bottom = 173.0
+margin_bottom = 162.0
 rect_min_size = Vector2( 500, 0 )
 custom_constants/separation = 15
 
@@ -95,7 +96,7 @@ margin_right = 586.0
 margin_bottom = 126.0
 focus_neighbour_top = NodePath("../OverlayAlphaRow")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../Option4Row")
+focus_neighbour_bottom = NodePath("../DefaultControls")
 focus_mode = 1
 mouse_filter = 0
 alignment = 0
@@ -104,25 +105,15 @@ text = "Tamaño de texto"
 min_value = 0.0
 value = 0.0
 
-[node name="Option4Row" parent="VBox/Center/Options" instance=ExtResource( 2 )]
-anchor_left = 0.0
-anchor_right = 0.0
-margin_top = 141.0
-margin_right = 586.0
-margin_bottom = 173.0
-focus_neighbour_top = NodePath("../TextSizeRow")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../../../ButtonsSave/Save")
-focus_mode = 1
-mouse_filter = 0
-alignment = 0
-config_type = "None"
-text = "Opción 4"
+[node name="DefaultControls" parent="VBox/Center/Options" instance=ExtResource( 7 )]
+margin_bottom = 162.0
+config_type = "DefaultControls"
+text = "Controles por defecto"
 
 [node name="ButtonsSave" type="HBoxContainer" parent="VBox"]
-margin_top = 373.0
+margin_top = 362.0
 margin_right = 960.0
-margin_bottom = 403.0
+margin_bottom = 392.0
 alignment = 1
 
 [node name="Save" parent="VBox/ButtonsSave" instance=ExtResource( 3 )]
@@ -135,7 +126,7 @@ margin_top = 0.0
 margin_right = 443.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 110, 30 )
-focus_neighbour_top = NodePath("../../Center/Options/Option4Row")
+focus_neighbour_top = NodePath("../../Center/Options/DefaultControls")
 focus_neighbour_right = NodePath("../Save&Close")
 focus_neighbour_bottom = NodePath("../../ButtonsCancel/Cancel")
 text = "Guardar"
@@ -151,15 +142,15 @@ margin_right = 627.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 180, 30 )
 focus_neighbour_left = NodePath("../Save")
-focus_neighbour_top = NodePath("../../Center/Options/Option4Row")
+focus_neighbour_top = NodePath("../../Center/Options/DefaultControls")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../../ButtonsCancel/Reset")
 text = "Guardar y Salir"
 
 [node name="ButtonsCancel" type="HBoxContainer" parent="VBox"]
-margin_top = 413.0
+margin_top = 402.0
 margin_right = 960.0
-margin_bottom = 443.0
+margin_bottom = 432.0
 alignment = 1
 
 [node name="Cancel" parent="VBox/ButtonsCancel" instance=ExtResource( 3 )]

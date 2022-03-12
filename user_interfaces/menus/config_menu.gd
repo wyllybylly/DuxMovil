@@ -6,6 +6,11 @@ signal menu_closed
 var from_level = false
 
 
+func _ready():
+	yield(get_tree(), "idle_frame")
+	save()
+
+
 func save():
 	# Save values
 	for option in $VBox/Center/Options.get_children():

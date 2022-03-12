@@ -13,6 +13,7 @@ var default_controls = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	default_overlay_size = get_viewport().size.y / 540
+	yield(get_tree(), "idle_frame")
 	update_font_sizes()
 
 

@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://user_interfaces/buttons/config_row_bool.gd" type="Script" id=1]
+[ext_resource path="res://user_interfaces/resources/toggle_button_on.png" type="Texture" id=2]
+[ext_resource path="res://user_interfaces/resources/toggle_button_off.png" type="Texture" id=3]
+[ext_resource path="res://fonts/tres/config_label.tres" type="DynamicFont" id=7]
+
+[node name="Option4Row" type="HBoxContainer"]
+margin_top = 141.0
+margin_right = 586.0
+margin_bottom = 173.0
+focus_neighbour_top = NodePath("../TextSizeRow")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../../ButtonsSave/Save")
+focus_mode = 1
+mouse_filter = 0
+custom_constants/separation = 10
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ConfigLabel" type="Label" parent="."]
+margin_top = 5.0
+margin_right = 320.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 320, 0 )
+custom_fonts/font = ExtResource( 7 )
+text = "Config text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfigOption" type="TextureButton" parent="."]
+margin_left = 330.0
+margin_right = 330.0
+margin_bottom = 32.0
+focus_mode = 0
+mouse_filter = 1
+toggle_mode = true
+pressed = true
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+expand = true
+
+[connection signal="focus_entered" from="." to="." method="_on_ConfigRow_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_ConfigRow_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_ConfigRow_mouse_entered"]
+[connection signal="pressed" from="ConfigOption" to="." method="_on_ConfigOption_pressed"]

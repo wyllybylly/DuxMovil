@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "HBoxContainer",
+"class": "ConfigRowBase",
+"language": "GDScript",
+"path": "res://user_interfaces/buttons/config_row_base.gd"
+}, {
 "base": "TextureButton",
 "class": "CustomButtonBase",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://levels/level_creation/groups/person_to_rescue.gd"
 } ]
 _global_script_class_icons={
+"ConfigRowBase": "",
 "CustomButtonBase": "",
 "GroupSign": "",
 "MenuButtonBase": "",

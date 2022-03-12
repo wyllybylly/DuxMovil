@@ -4,6 +4,8 @@ extends Node
 func _ready():
 	TTSManager.toggle(true)
 	$VBoxContainer/VBoxContainer/Start.grab_focus()
+	yield(get_tree(), "idle_frame")
+	ConfigVariables.update_font_sizes()
 
 
 func _on_Start_pressed():
