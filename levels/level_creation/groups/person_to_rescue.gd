@@ -34,8 +34,9 @@ var action = actions.IDLE
 var boat
 var seat
 var calling_boat
-var boat_position
+var end_position
 var starting_distance
+var safe_zone
 
 
 func _init():
@@ -61,12 +62,20 @@ func _ready():
 
 func _process(delta):
 	if action == actions.GETTING_ON_THE_BOAT:
-		move_and_slide(boat_position - position)
-		var current_distance = position.distance_squared_to(boat_position)
+		move_and_slide(end_position - position)
+		var current_distance = position.distance_squared_to(end_position)
 		if current_distance < 200.0:
 			rescued()
 		else:
 			var diff = sqrt(-pow(current_distance / starting_distance - 1, 2) + 1)
+			scale = boat_scale + scale_difference * diff
+	elif action == actions.GETTING_OFF_THE_BOAT:
+		move_and_slide(end_position - position)
+		var current_distance = position.distance_squared_to(end_position)
+		if current_distance < 200.0:
+			is_safe()
+		else:
+			var diff = sqrt(-pow(current_distance / starting_distance, 2) + 1)
 			scale = boat_scale + scale_difference * diff
 
 
@@ -75,10 +84,9 @@ func start_rescue(new_boat, new_seat, new_calling_boat):
 	seat = new_seat
 	calling_boat = new_calling_boat
 	action = actions.GETTING_ON_THE_BOAT
-	boat_position = boat.global_position - get_parent().global_position + seat[0]
-	starting_distance = position.distance_squared_to(boat_position)
-	print(starting_distance)
-#	rotation = position.angle_to(boat_position)
+	end_position = boat.global_position - get_parent().global_position + seat[0]
+	starting_distance = position.distance_squared_to(end_position)
+	rotation = position.angle_to_point(end_position)
 
 
 func rescued():
@@ -99,13 +107,25 @@ func rescued():
 	calling_boat.rescue_finished()
 
 
-func get_to_safe_zone(safe_zone):
+func get_to_safe_zone(new_safe_zone):
+	safe_zone = new_safe_zone
+	seat[0] = Vector2(rand_range(-50.0, 50.0), rand_range(-15.0, 15.0))
+	seat[1] = -90
+	end_position = safe_zone.global_position - get_parent().global_position + seat[0]
+	starting_distance = position.distance_squared_to(end_position)
+	action = actions.GETTING_OFF_THE_BOAT
+	rotation = position.angle_to_point(end_position)
+
+
+func is_safe():
 	get_parent().remove_child(self)
 	safe_zone.add_child(self)
-	position = Vector2(rand_range(-50.0, 50.0), rand_range(-15.0, 15.0))
-	rotation_degrees = -90.0
-	z_index = 3
+	position = seat[0]
+	rotation_degrees = seat[1]
 	scale = idle_scale
+	action = actions.IDLE
+	# Notify boat
+	calling_boat.rescue_finished()
 
 
 func set_sprite():
