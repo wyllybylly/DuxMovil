@@ -503,11 +503,11 @@ house_color = Color( 0.831373, 0.92549, 0.737255, 1 )
 
 [node name="TileMapHouse" parent="." instance=ExtResource( 1 )]
 material = SubResource( 14 )
-tile_data = PoolIntArray( 327695, 0, 0, 327696, 8, 0, 393231, 9, 0, 393232, 8, 0, 458767, 10, 0, 458768, 7, 0, 524310, 0, 0, 524311, 8, 0, 524312, 8, 0, 524313, 8, 0, 524314, 8, 0, 524315, 8, 0, 589846, 1, 0, 589847, 8, 0, 589848, 8, 0, 589849, 8, 0, 589850, 8, 0, 589851, 8, 0, 655382, 2, 0, 655383, 8, 0, 655384, 8, 0, 655385, 8, 0, 655386, 8, 0, 655387, 8, 0, 720918, 2, 0, 720919, 8, 0, 720920, 8, 0, 720921, 8, 0, 720922, 8, 0, 720923, 8, 0, 786440, 0, 0, 786441, 8, 0, 786442, 8, 0, 786443, 8, 0, 786454, 2, 0, 786455, 8, 0, 786456, 8, 0, 786457, 8, 0, 786458, 8, 0, 786459, 8, 0, 851976, 9, 0, 851977, 8, 0, 851978, 8, 0, 851979, 8, 0, 851990, 2, 0, 851991, 8, 0, 851992, 8, 0, 851993, 8, 0, 851994, 8, 0, 851995, 8, 0, 917512, 9, 0, 917513, 8, 0, 917514, 8, 0, 917515, 8, 0, 917526, 3, 0, 917527, 5, 0, 917528, 5, 0, 917529, 5, 0, 917530, 5, 0, 917531, 7, 0, 983048, 9, 0, 983049, 5, 0, 983050, 5, 0, 983051, 5, 0, 983052, 6, 0, 983062, 4, 0, 983063, 5, 0, 983064, 5, 0, 983065, 5, 0, 983066, 5, 0, 983067, 6, 0, 1048584, 10, 0, 1048585, 5, 0, 1048586, 5, 0, 1048587, 7, 0 )
+tile_data = PoolIntArray( 327695, 0, 0, 327696, 8, 0, 393231, 9, 0, 393232, 8, 0, 458767, 10, 0, 458768, 7, 0, 524310, 0, 0, 524311, 8, 0, 524312, 8, 0, 524313, 8, 0, 524314, 8, 0, 524315, 8, 0, 589846, 1, 0, 589847, 8, 0, 589848, 8, 0, 589849, 8, 0, 589850, 8, 0, 589851, 8, 0, 655382, 2, 0, 655383, 8, 0, 655384, 8, 0, 655385, 8, 0, 655386, 8, 0, 655387, 8, 0, 720918, 2, 0, 720919, 8, 0, 720920, 8, 0, 720921, 8, 0, 720922, 8, 0, 720923, 8, 0, 786454, 2, 0, 786455, 8, 0, 786456, 8, 0, 786457, 8, 0, 786458, 8, 0, 786459, 8, 0, 851990, 2, 0, 851991, 8, 0, 851992, 8, 0, 851993, 8, 0, 851994, 8, 0, 851995, 8, 0, 917526, 3, 0, 917527, 5, 0, 917528, 5, 0, 917529, 5, 0, 917530, 5, 0, 917531, 7, 0, 983062, 4, 0, 983063, 5, 0, 983064, 5, 0, 983065, 5, 0, 983066, 5, 0, 983067, 6, 0 )
 house_color = Color( 0.764706, 0.847059, 0.937255, 1 )
 
 [node name="TileMapDecorations" parent="." instance=ExtResource( 4 )]
-tile_data = PoolIntArray( 393238, 1, 0, 393240, 5, 0, 393242, 5, 0, 458774, 3, 0, 458776, 6, 0, 458778, 6, 0, 589846, 3, 0, 655382, 3, 0, 786454, 0, 0, 851990, 3, 0, 917512, 2, 0, 917527, 5, 0, 917529, 5, 0, 983048, 4, 0, 983063, 6, 0, 983065, 6, 0, 1048585, 5, 0 )
+tile_data = PoolIntArray( 393238, 1, 0, 393240, 5, 0, 393242, 5, 0, 458774, 3, 0, 458776, 6, 0, 458778, 6, 0, 589846, 3, 0, 655382, 3, 0, 786454, 0, 0, 851990, 3, 0, 917527, 5, 0, 917529, 5, 0, 983063, 6, 0, 983065, 6, 0 )
 
 [node name="Water" parent="." instance=ExtResource( 2 )]
 position = Vector2( 480.851, 312.69 )
@@ -547,63 +547,48 @@ sign_flooded = true
 
 [node name="Person" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( -29.814, 66.1617 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person2" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 47.7195, 81.4039 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person3" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( -22.9894, -11.0588 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person4" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( -9.18048, 54.8678 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person5" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 51.8611, 10.7712 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person6" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 15.7647, 32.1498 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person7" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( -21.1939, 24.7813 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person8" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( -11.8531, -39.1221 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person9" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 0.0895996, 10.3798 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person10" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 38.9281, -37.7857 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person11" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 31.9736, 41.9365 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person12" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 35.9023, 5.45648 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person13" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 12.3306, -47.0186 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person14" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 4.19269, -22.0438 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Person15" parent="Group 1" instance=ExtResource( 12 )]
 position = Vector2( 21.0296, 0.686005 )
-scale = Vector2( 0.6, 0.6 )
 
 [node name="Help" type="CanvasLayer" parent="."]
 pause_mode = 2

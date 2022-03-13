@@ -2,7 +2,9 @@ tool
 extends Panel
 
 
-export (String) var text = "Algunos postes de luz pueden liberar electricidad y ser peligrosos. Lo mejor es evitar anclarnos en ellos." setget set_text
+const TEXT_ELECTRIC = "Algunos postes de luz pueden liberar electricidad y ser peligrosos. Lo mejor es evitar anclarnos en ellos."
+const TEXT_NO_UNDOCKING = "No puedes desanclar la lancha mientras una persona está subiendo o bajando"
+export (String) var text = TEXT_ELECTRIC setget set_text
 
 
 func _ready():
@@ -18,8 +20,14 @@ func setup_text():
 	$Text.bbcode_text = "[center] %s [/center]" % text
 
 
-func open():
+func open(mode):
 	get_tree().paused = true
+	if mode == "Electric":
+		set_text(TEXT_ELECTRIC)
+	elif mode == "Undocking":
+		set_text(TEXT_NO_UNDOCKING)
+	else:
+		set_text(TEXT_ELECTRIC)
 	show()
 	TTSManager.say(text)
 

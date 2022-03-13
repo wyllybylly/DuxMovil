@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://user_interfaces/buttons/menu_button.gd"
 }, {
-"base": "Area2D",
+"base": "KinematicBody2D",
 "class": "Person",
 "language": "GDScript",
 "path": "res://levels/level_creation/groups/person_to_rescue.gd"

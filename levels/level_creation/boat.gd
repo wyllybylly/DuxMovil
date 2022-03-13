@@ -48,6 +48,8 @@ var rope_color
 var rope_lenght
 var stabilizing
 var current_action = actions_enum.IDLE
+var can_rescue = false
+var can_undock = true
 
 
 func _draw():
@@ -108,6 +110,8 @@ func _process(delta):
 			update()
 			if distance < 1.0 and $Boat.rotation == 0.0:
 				stabilizing = false
+				can_rescue = true
+				update_rescue_button()
 
 
 func _physics_process(delta):
@@ -251,36 +255,48 @@ func set_overlay():
 
 
 func update_rescue_button():
-	if not $Boat/RescueArea.get_overlapping_areas().empty():
-		$GUI/RescueButton.disabled = false
-		$GUI/RescueButton.texture_normal = button_tex_1
-		print("Subir persona")
-		print(str(button_tex_1))
-	elif not $Boat/SafeZoneArea.get_overlapping_areas().empty():
-		$GUI/RescueButton.disabled = false
-		$GUI/RescueButton.texture_normal = button_tex_2
-		print("Dejar persona")
-		print(str(button_tex_2))
+	if can_rescue:
+		if not $Boat/RescueArea.get_overlapping_bodies().empty():
+			$GUI/RescueButton.disabled = false
+			$GUI/RescueButton.texture_normal = button_tex_1
+			print("Subir persona")
+		elif not $Boat/SafeZoneArea.get_overlapping_areas().empty():
+			$GUI/RescueButton.disabled = false
+			$GUI/RescueButton.texture_normal = button_tex_2
+			print("Dejar persona")
+		else:
+			$GUI/RescueButton.disabled = true
+			print("No hay áreas disponibles")
 	else:
 		$GUI/RescueButton.disabled = true
-		print("Nada")
+		print("No puede rescatar")
+
+
+func rescue_finished():
+	can_rescue = true
+	can_undock = true
+	update_rescue_button()
 
 
 func _on_DockButton_b_pressed():
 	# If boat is docked, undock it
 	if docked:
-		docked = false
-		from_point = to_point
-		update()
-		TTSManager.say("Lancha suelta")
-		$GUI/RescueButton.disabled = true
+		if can_undock:
+			docked = false
+			from_point = to_point
+			update()
+			TTSManager.say("Lancha suelta")
+			$GUI/RescueButton.disabled = true
+		else:
+			$NoPause/HelpPanel.open("Undocking")
+			# Mostrar cartel
 	# Else, check if there is dockable areas
 	else:
 		# If there is, dock
 		if not $Boat/DockArea.get_overlapping_bodies().empty():
 			var dock_body = $Boat/DockArea.get_overlapping_bodies().pop_front()
 			if dock_body.type == "Electric":
-				$NoPause/HelpPanel.open()
+				$NoPause/HelpPanel.open("Electric")
 			else:
 				docked = true
 				from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
@@ -298,11 +314,13 @@ func _on_DockButton_b_pressed():
 func _on_RescueButton_b_pressed():
 	if docked:
 		# If there is a person to rescue, rescue them
-		if not $Boat/RescueArea.get_overlapping_areas().empty():
-			var person = $Boat/RescueArea.get_overlapping_areas().pop_front()
+		if not $Boat/RescueArea.get_overlapping_bodies().empty():
+			var person = $Boat/RescueArea.get_overlapping_bodies().pop_front()
 			var seat = get_seat()
 			if seat != null:
-				person.rescued($Boat, seat)
+				person.start_rescue($Boat, seat, self)
+				can_rescue = false
+				can_undock = false
 				TTSManager.say("Se subió una persona a la lancha")
 			else:
 				TTSManager.say("No hay más lugar en la lancha")

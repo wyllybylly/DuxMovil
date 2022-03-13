@@ -1,7 +1,12 @@
 tool
 class_name Person
-extends Area2D
+extends KinematicBody2D
 
+enum actions {
+	IDLE,
+	GETTING_ON_THE_BOAT,
+	GETTING_OFF_THE_BOAT,
+}
 
 const tex1 = preload("res://levels/level_creation/groups/person/person.png")
 const tex2 = preload("res://levels/level_creation/groups/person/person_with_child.png")
@@ -12,6 +17,10 @@ const spriteMaterial = preload("res://levels/level_creation/groups/person/person
 const hair_colors = ["734c29", "5b4027", "7e5835", "8c752a", "d7b548", "322513", "1d1305", "672616"]
 const hair_colors_elder = ["cbcbcb", "a5a5a5", "747474", "4c4c4c", "2c2c2c"]
 
+const idle_scale = Vector2(0.6, 0.6)
+const boat_scale = Vector2(0.3, 0.3)
+const scale_difference = idle_scale - boat_scale
+
 export (bool) var random_colors = false setget set_random_colors
 export (bool) var elder = false setget set_elder
 export (bool) var baby = false setget set_baby
@@ -21,6 +30,12 @@ export (Color) var baby_color = Color.green setget set_baby_color
 
 var person_sprite
 var person_collision
+var action = actions.IDLE
+var boat
+var seat
+var calling_boat
+var boat_position
+var starting_distance
 
 
 func _init():
@@ -41,10 +56,32 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	scale = Vector2(0.6, 0.6)
+	scale = idle_scale
 
 
-func rescued(boat, seat):
+func _process(delta):
+	if action == actions.GETTING_ON_THE_BOAT:
+		move_and_slide(boat_position - position)
+		var current_distance = position.distance_squared_to(boat_position)
+		if current_distance < 200.0:
+			rescued()
+		else:
+			var diff = sqrt(-pow(current_distance / starting_distance - 1, 2) + 1)
+			scale = boat_scale + scale_difference * diff
+
+
+func start_rescue(new_boat, new_seat, new_calling_boat):
+	boat = new_boat
+	seat = new_seat
+	calling_boat = new_calling_boat
+	action = actions.GETTING_ON_THE_BOAT
+	boat_position = boat.global_position - get_parent().global_position + seat[0]
+	starting_distance = position.distance_squared_to(boat_position)
+	print(starting_distance)
+#	rotation = position.angle_to(boat_position)
+
+
+func rescued():
 	# Notify parent the person has been rescued
 	get_parent().person_rescued(self)
 	# Change Parent and get in Boat
@@ -52,11 +89,14 @@ func rescued(boat, seat):
 	position = seat[0]
 	rotation_degrees = seat[1]
 	z_index = 0
-	scale = Vector2(0.3, 0.3)
+	scale = boat_scale
 	# Remove collision
 	remove_child(person_collision)
 	person_collision.queue_free()
 	set_collision_layer_bit(5, false)
+	action = actions.IDLE
+	# Notify boat
+	calling_boat.rescue_finished()
 
 
 func get_to_safe_zone(safe_zone):
@@ -65,7 +105,7 @@ func get_to_safe_zone(safe_zone):
 	position = Vector2(rand_range(-50.0, 50.0), rand_range(-15.0, 15.0))
 	rotation_degrees = -90.0
 	z_index = 3
-	scale = Vector2(0.6, 0.6)
+	scale = idle_scale
 
 
 func set_sprite():

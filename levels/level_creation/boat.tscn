@@ -253,7 +253,7 @@ anchor_bottom = 1.0
 custom_fonts/normal_font = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "[center] Algunos postes de luz pueden liberar electricidad y ser peligrosos. Lo mejor es evitar anclarnos en ellos. [/center]"
-text = " Algunos postes de luz pueden liberar electricidad y ser peligrosos. Lo mejor es evitar anclarnos en ellos. "
+text = "[center] Algunos postes de luz pueden liberar electricidad y ser peligrosos. Lo mejor es evitar anclarnos en ellos. [/center]"
 
 [node name="ConfigButton" parent="NoPause/HelpPanel" instance=ExtResource( 12 )]
 anchor_top = 1.0
@@ -262,6 +262,7 @@ margin_left = -100.0
 margin_top = -30.0
 margin_right = 100.0
 margin_bottom = 0.0
+text = "Cerrar"
 
 [connection signal="input_event" from="GUI/Lever" to="." method="_on_Lever_input_event"]
 [connection signal="b_pressed" from="GUI/DockButton" to="." method="_on_DockButton_b_pressed"]
