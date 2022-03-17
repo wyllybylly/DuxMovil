@@ -125,7 +125,7 @@ func is_safe():
 	scale = idle_scale
 	action = actions.IDLE
 	# Notify boat
-	calling_boat.rescue_finished()
+	calling_boat.person_safe()
 
 
 func set_sprite():

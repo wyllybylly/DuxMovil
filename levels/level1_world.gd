@@ -1,10 +1,13 @@
 extends Node2D
 
 
+const TOTAL_PEOPLE = 3
+
 var onHelpView
 var helpScreenLevel
 var helpArray
-var people = 3
+var people_rescued = 0
+var people_safe = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +34,7 @@ func _ready():
 	set_text_config($Help/TextDocking, 1.0, 0.2)
 	set_text_config($Help/TextSave, 1.0, 0.2)
 	set_text_config($Help/TextSigns)
+	set_text_config($Help/TextRescued)
 	$Help/TextSteering/PhoneIcon.position.x = $Help/TextSteering.rect_size.x / 2
 	$Boat/GUI/DockButton.hide()
 	$Boat/GUI/RescueButton.hide()
@@ -41,7 +45,8 @@ func _ready():
 		[$Help/TextSteering, "None"],
 		[$Help/TextDocking, "Circle", $Boat/GUI/DockButton],
 		[$Help/TextSave, "Circle", $Boat/GUI/RescueButton],
-		[$Help/TextSigns, "None"]
+		[$Help/TextSigns, "None"],
+		[$Help/TextRescued, "None"]
 	]
 	
 	var icon_size = Vector2(ConfigVariables.get_text_size_l_value(), ConfigVariables.get_text_size_l_value()) * 1.25
@@ -52,7 +57,7 @@ func _ready():
 		for i in (child_count - 1):
 			sign_line.get_child(i).rect_min_size = icon_size
 	
-	next_screen()
+	next_screen(false)
 	
 	# Set finish panel
 	$FinishLevel/Panel.hide()
@@ -64,12 +69,12 @@ func _ready():
 func _process(_delta):
 	if onHelpView:
 		if Input.is_action_just_released("ui_accept"):
-			next_screen()
+			next_screen(false)
 
 
 func _on_NextHelp_body_entered(body):
 	if body.name == "Boat":
-		next_screen()
+		next_screen(true)
 #		queue_free()
 
 
@@ -81,7 +86,7 @@ func _on_TurnOnWater_body_entered(body):
 		$Triggers/TurnOnWater.queue_free()
 
 
-func next_screen():
+func next_screen(from_trigger):
 	if onHelpView:
 		hide_help_view(helpArray[helpScreenLevel][0])
 	else:
@@ -92,7 +97,7 @@ func next_screen():
 			button.show()
 		$Help/Background.update_shape()
 		show_help_view(helpArray[helpScreenLevel][0])
-		if helpScreenLevel > 0:
+		if from_trigger:
 			$Triggers.get_child(0).queue_free()
 	onHelpView = !onHelpView
 	get_tree().paused = !get_tree().paused
@@ -126,9 +131,15 @@ func set_text_config(text, right = 1.0, left = 0.0, bottom = 0.9, top = 0.0):
 	text.margin_top = 25 + view_y * top
 
 
+func _on_Boat_person_rescue():
+	people_rescued += 1
+	if people_rescued == TOTAL_PEOPLE:
+		next_screen(false)
+
+
 func _on_Boat_person_safe():
-	people -= 1
-	if people == 0:
+	people_safe += 1
+	if people_safe == TOTAL_PEOPLE:
 		finish_menu()
 
 
@@ -150,4 +161,4 @@ func _on_FinishLevel_next_button_pressed():
 
 
 func _on_Button_b_pressed():
-	next_screen()
+	next_screen(false)

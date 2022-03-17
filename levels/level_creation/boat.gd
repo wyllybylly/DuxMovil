@@ -3,6 +3,7 @@ extends Node2D
 
 export (float) var max_speed = 20
 
+signal person_rescue
 signal person_safe
 
 
@@ -275,6 +276,14 @@ func update_rescue_button():
 func rescue_finished():
 	can_rescue = true
 	can_undock = true
+	emit_signal("person_rescue")
+	update_rescue_button()
+
+
+func person_safe():
+	can_rescue = true
+	can_undock = true
+	emit_signal("person_safe")
 	update_rescue_button()
 
 
@@ -332,7 +341,6 @@ func _on_RescueButton_b_pressed():
 			var person = get_person()
 			if person != null:
 				person.get_to_safe_zone(safe_zone)
-				emit_signal("person_safe")
 				can_rescue = false
 				can_undock = false
 				TTSManager.say("Se dejó una persona en zona segura")
