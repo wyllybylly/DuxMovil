@@ -1,0 +1,60 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://levels/level_creation/obstacles/light_pole.png" type="Texture" id=1]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_wl1.png" type="Texture" id=2]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0005.png" type="Texture" id=3]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0000.png" type="Texture" id=4]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0003.png" type="Texture" id=5]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0001.png" type="Texture" id=6]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0006.png" type="Texture" id=7]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0009.png" type="Texture" id=8]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0007.png" type="Texture" id=9]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0004.png" type="Texture" id=10]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0008.png" type="Texture" id=11]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0010.png" type="Texture" id=12]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0002.png" type="Texture" id=13]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole_electric/light_pole_electric0011.png" type="Texture" id=15]
+[ext_resource path="res://levels/level_creation/obstacles/light_pole.gd" type="Script" id=17]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "Normal",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "Electric",
+"speed": 15.0
+} ]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.59772
+
+[node name="LightPole" type="StaticBody2D"]
+position = Vector2( 233.085, 154.97 )
+z_index = 1
+collision_layer = 5
+collision_mask = 16
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_group_": true
+}
+type = "Normal"
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( -2.72953, -8.09 )
+frames = SubResource( 2 )
+animation = "Normal"
+offset = Vector2( 20, -24 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

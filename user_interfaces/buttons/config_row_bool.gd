@@ -15,14 +15,20 @@ func _process(_delta):
 			if !selected:
 				selection_border()
 				say_option()
+				SoundManager.play("SE", "select")
 			else:
 				show_border()
+				SoundManager.play("SE", "drop")
 			selected = !selected
 		if selected:
 			if Input.is_action_just_pressed("ui_left"):
-				$ConfigOption.pressed = false
+				if $ConfigOption.pressed:
+					$ConfigOption.pressed = false
+					SoundManager.play("SE", "toggle")
 			if Input.is_action_just_pressed("ui_right"):
-				$ConfigOption.pressed = true
+				if !$ConfigOption.pressed:
+					$ConfigOption.pressed = true
+					SoundManager.play("SE", "toggle")
 
 
 func set_value(new_value):

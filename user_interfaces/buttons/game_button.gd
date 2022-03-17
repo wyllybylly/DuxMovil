@@ -42,6 +42,7 @@ func show_border():
 
 func _on_GameButton_mouse_entered():
 	grab_focus()
+	SoundManager.play("SE", "pluck")
 
 
 func _on_GameButton_focus_entered():
@@ -58,7 +59,10 @@ func _on_GameButton_pressed():
 	if TTSManager.is_on():
 		if clicked:
 			emit_signal("b_pressed")
+			SoundManager.play("SE", "select")
 		else:
 			clicked = true
+			SoundManager.play("SE", "click")
 	else:
 		emit_signal("b_pressed")
+		SoundManager.play("SE", "select")

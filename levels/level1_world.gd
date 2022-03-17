@@ -135,6 +135,7 @@ func _on_Boat_person_safe():
 func finish_menu():
 	get_tree().paused = true
 	$FinishLevel/Panel.show()
+	SoundManager.stop("water_stream")
 
 
 func _on_FinishLevel_back_button_pressed():

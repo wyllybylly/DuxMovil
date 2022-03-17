@@ -54,6 +54,7 @@ func show_border():
 func _on_MenuButton_focus_entered():
 	show_border()
 	TTSManager.say(text)
+	SoundManager.play("SE", "pluck")
 
 
 func _on_MenuButton_focus_exited():
@@ -69,7 +70,10 @@ func _on_MenuButton_pressed():
 	if TTSManager.is_on():
 		if clicked:
 			emit_signal("b_pressed")
+			SoundManager.play("SE", "select")
 		else:
 			clicked = true
+			SoundManager.play("SE", "click")
 	else:
 		emit_signal("b_pressed")
+		SoundManager.play("SE", "select")

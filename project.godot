@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://levels/level_creation/groups/signs.gd"
 }, {
-"base": "Reference",
+"base": "TextureButton",
 "class": "MenuButtonBase",
 "language": "GDScript",
 "path": "res://user_interfaces/buttons/menu_button.gd"
@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "Person",
 "language": "GDScript",
 "path": "res://levels/level_creation/groups/person_to_rescue.gd"
+}, {
+"base": "Node",
+"class": "SoundManagerModule",
+"language": "GDScript",
+"path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
 } ]
 _global_script_class_icons={
 "ConfigRowBase": "",
 "CustomButtonBase": "",
 "GroupSign": "",
 "MenuButtonBase": "",
-"Person": ""
+"Person": "",
+"SoundManagerModule": ""
 }
 
 [application]
@@ -53,6 +59,7 @@ config/icon="res://icon.png"
 ConfigVariables="*res://globals/config_variables.gd"
 LevelVariables="*res://globals/level_variables.gd"
 TTSManager="*res://globals/tts_manager.gd"
+SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
 [display]
 
@@ -60,6 +67,10 @@ window/size/width=960
 window/size/height=540
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/sound_manager/plugin.cfg" )
 
 [input]
 

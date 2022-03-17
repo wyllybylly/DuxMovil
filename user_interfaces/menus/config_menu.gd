@@ -27,6 +27,7 @@ func save():
 
 
 func close():
+	SoundManager.play("SE", "back")
 	if !from_level:
 		get_tree().change_scene("res://user_interfaces/menus/main_menu.tscn")
 	else:

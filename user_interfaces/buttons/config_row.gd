@@ -19,8 +19,10 @@ func _process(_delta):
 			if !selected:
 				selection_border()
 				say_option()
+				SoundManager.play("SE", "select")
 			else:
 				show_border()
+				SoundManager.play("SE", "drop")
 			selected = !selected
 		if selected:
 			if Input.is_action_just_pressed("ui_down"):
@@ -71,3 +73,4 @@ func say_option():
 func _on_ConfigOption_value_changed(_value):
 	if focused:
 		TTSManager.say("Nuevo valor de " + text + ": " + str($ConfigOption.value))
+		SoundManager.play("SE", "tick")

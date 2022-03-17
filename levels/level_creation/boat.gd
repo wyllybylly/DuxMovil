@@ -32,8 +32,8 @@ const SEATS = [
 	[Vector2(20, 40), 0],
 	[Vector2(-20, 40), 180],
 ]
-const button_tex_1 = preload("res://user_interfaces/resources/to_boat_button.png")
-const button_tex_2 = preload("res://user_interfaces/resources/to_safe_zone_button.png")
+const button_tex_1 = preload("res://user_interfaces/textures/to_boat_button.png")
+const button_tex_2 = preload("res://user_interfaces/textures/to_safe_zone_button.png")
 
 var speed = 0.0
 var water_speed = 10.0
@@ -333,6 +333,8 @@ func _on_RescueButton_b_pressed():
 			if person != null:
 				person.get_to_safe_zone(safe_zone)
 				emit_signal("person_safe")
+				can_rescue = false
+				can_undock = false
 				TTSManager.say("Se dejó una persona en zona segura")
 			yield(get_tree(), "physics_frame")
 			update_rescue_button()

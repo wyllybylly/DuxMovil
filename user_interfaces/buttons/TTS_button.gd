@@ -18,6 +18,7 @@ func _ready():
 
 func _on_TTSButton_focus_entered():
 	show_border()
+	SoundManager.play("SE", "pluck")
 	if pressed:
 		TTSManager.say("Apagar Narrador")
 
@@ -56,11 +57,14 @@ func _on_TTSButton_pressed():
 	if pressed:
 		if clicked:
 			TTSManager.toggle(false)
+			SoundManager.play("SE", "toggle")
 		else:
 			TTSManager.say("Apagar narrador")
 			clicked = true
 			pressed = false
+			SoundManager.play("SE", "click")
 	else:
 		TTSManager.toggle(true)
 		TTSManager.say("Narrador encendido")
+		SoundManager.play("SE", "toggle")
 
