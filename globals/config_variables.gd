@@ -7,7 +7,7 @@ var overlay_alpha = 0.8
 var text_size = 3
 var text_size_l_values = [ 20, 28, 34, 42, 50, 56 ]
 var text_size_m_values = [ 18, 20, 22, 24, 28, 32 ]
-var default_controls = false
+var default_controls = true
 
 
 # Called when the node enters the scene tree for the first time.

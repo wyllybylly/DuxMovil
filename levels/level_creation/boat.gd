@@ -156,6 +156,8 @@ func stabilize_rotation(delta):
 func update_lever_y():
 	if ConfigVariables.get_default_controls():
 		$GUI/Lever.position.y = lever_height.x - (speed / max_speed) * lever_height.y
+	else:
+		$GUI/EngineView.value = round(speed / max_speed * 100)
 
 
 func update_water_speed():
@@ -178,7 +180,6 @@ func get_person():
 
 func set_overlay():
 	# Initialize variables
-	var mid_height = get_viewport().size.y / 2.0
 	var scale_value = 1.4 + ConfigVariables.get_overlay_size() * 0.2
 	$GUI/OptionsButton.grab_focus()
 	
@@ -200,20 +201,29 @@ func set_overlay():
 		$GUI/RightTurnButton.hide()
 		$GUI/PowerUpButton.hide()
 		$GUI/PowerDownButton.hide()
+		$GUI/EngineView.hide()
+		
+		# Initialize variables
+		var mid_height = get_viewport().size.y / 2.0
+		var engine_scale = ConfigVariables.get_overlay_size() * 0.6 + 1.0
 		
 		# Setup Lever & Frame
-		$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height)
-		$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * ConfigVariables.get_overlay_size(), mid_height + 48 * ConfigVariables.get_overlay_size())
+		$GUI/Frame.position = Vector2(get_viewport().size.x - 30.0 * engine_scale, mid_height)
+		$GUI/Lever.position = Vector2(get_viewport().size.x - 30.0 * engine_scale, mid_height + 48 * engine_scale)
 		$GUI/Lever/LeverSprite.position = Vector2.ZERO
 		$GUI/Lever/LeverCollision.position = Vector2.ZERO
-		lever_height = Vector2($GUI/Lever.position.y, 96 * ConfigVariables.get_overlay_size())
-		$GUI/Lever.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
-		$GUI/Frame.scale = Vector2(ConfigVariables.get_overlay_size(),ConfigVariables.get_overlay_size())
+		lever_height = Vector2($GUI/Lever.position.y, 96 * engine_scale)
+		$GUI/Lever.scale = Vector2(engine_scale,engine_scale)
+		$GUI/Frame.scale = Vector2(engine_scale,engine_scale)
 		$GUI/Lever/LeverSprite.modulate.a = ConfigVariables.overlay_alpha
 		$GUI/Frame.modulate.a = ConfigVariables.overlay_alpha
 		
 		# Setup options button
-		$GUI/OptionsButton.rect_position = Vector2(get_viewport().size.x - (40.0 * ConfigVariables.get_overlay_size() + 200.0 if ConfigVariables.get_overlay_size() >= 3 else 20.0 * ConfigVariables.get_overlay_size() + 100.0), 10.0)
+		if ($GUI/Frame.scale.y * $GUI/Frame.get_rect().size.y + scale_value * 2.0 * $GUI/OptionsButton.rect_size.y + 50.0) > get_viewport().size.y:
+#			$GUI/OptionsButton.rect_position = Vector2(get_viewport().size.x - (40.0 * ConfigVariables.get_overlay_size() + 200.0 if ConfigVariables.get_overlay_size() >= 3 else 20.0 * ConfigVariables.get_overlay_size() + 100.0), 10.0)
+			$GUI/OptionsButton.rect_position = Vector2($GUI/Frame.position.x - ConfigVariables.get_overlay_size() * 15.0 - 200.0, 10.0)
+		else:
+			$GUI/OptionsButton.rect_position = Vector2(get_viewport().size.x - $GUI/OptionsButton.rect_size.x * scale_value - 10.0, 10.0)
 		$GUI/OptionsButton.rect_scale = Vector2(scale_value, scale_value)
 		$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
 	else:
@@ -224,6 +234,7 @@ func set_overlay():
 		$GUI/RightTurnButton.show()
 		$GUI/PowerUpButton.show()
 		$GUI/PowerDownButton.show()
+		$GUI/EngineView.show()
 		
 		# Setup right turn button
 		$GUI/RightTurnButton.rect_position.x = get_viewport().size.x - (20.0 * ConfigVariables.get_overlay_size() + 100.0)
@@ -253,6 +264,13 @@ func set_overlay():
 		$GUI/OptionsButton.rect_position = Vector2($GUI/RightTurnButton.rect_position.x, 10.0)
 		$GUI/OptionsButton.rect_scale = Vector2(scale_value, scale_value)
 		$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
+		
+		# Setup options button
+		$GUI/EngineView.rect_position.x = $GUI/RightTurnButton.rect_position.x
+		$GUI/EngineView.rect_position.y = $GUI/PowerUpButton.rect_position.y
+		$GUI/EngineView.rect_scale = Vector2(scale_value, scale_value)
+		$GUI/EngineView.modulate.a = ConfigVariables.overlay_alpha
+	update_lever_y()
 
 
 func update_rescue_button():
