@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://levels/level_creation/boat.gd" type="Script" id=1]
 [ext_resource path="res://user_interfaces/textures/power_frame.png" type="Texture" id=2]
@@ -20,6 +20,9 @@
 [ext_resource path="res://user_interfaces/textures/engine_slider/slider.png" type="Texture" id=18]
 [ext_resource path="res://user_interfaces/textures/engine_slider/grabber_area.png" type="Texture" id=19]
 [ext_resource path="res://user_interfaces/textures/engine_slider/frame.png" type="Texture" id=20]
+[ext_resource path="res://user_interfaces/textures/home_button.png" type="Texture" id=21]
+[ext_resource path="res://user_interfaces/confirmation_panel.gd" type="Script" id=22]
+[ext_resource path="res://user_interfaces/panel.tres" type="StyleBox" id=23]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
@@ -41,21 +44,6 @@ texture = ExtResource( 19 )
 region_rect = Rect2( 0, 0, 64, 16 )
 margin_bottom = 15.6056
 axis_stretch_vertical = 2
-
-[sub_resource type="StyleBoxFlat" id=4]
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color( 0.156863, 0.156863, 0.156863, 1 )
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-expand_margin_left = 10.0
-expand_margin_right = 10.0
-expand_margin_top = 10.0
-expand_margin_bottom = 10.0
 
 [node name="Boat" type="Node2D"]
 script = ExtResource( 1 )
@@ -148,7 +136,7 @@ margin_left = 251.432
 margin_top = -158.345
 margin_right = 315.432
 margin_bottom = -94.3449
-focus_neighbour_top = NodePath("../OptionsButton")
+focus_neighbour_top = NodePath("../HomeButton")
 focus_neighbour_right = NodePath("../LeftTurnButton")
 focus_neighbour_bottom = NodePath("../DockButton")
 disabled = true
@@ -164,9 +152,24 @@ margin_left = 598.2
 margin_top = -249.68
 margin_right = 662.2
 margin_bottom = -185.68
-focus_neighbour_left = NodePath("../RescueButton")
+focus_neighbour_left = NodePath("../HomeButton")
 focus_neighbour_bottom = NodePath("../PowerUpButton")
 texture_normal = ExtResource( 7 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "Botón de configuraciones"
+
+[node name="HomeButton" type="TextureButton" parent="GUI"]
+margin_left = 505.701
+margin_top = -247.998
+margin_right = 569.701
+margin_bottom = -183.998
+focus_neighbour_left = NodePath("../RescueButton")
+focus_neighbour_right = NodePath("../OptionsButton")
+focus_neighbour_bottom = NodePath("../PowerUpButton")
+texture_normal = ExtResource( 21 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -281,7 +284,7 @@ margin_left = -286.5
 margin_top = -178.0
 margin_right = 286.5
 margin_bottom = 178.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = ExtResource( 23 )
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -304,6 +307,55 @@ margin_right = 100.0
 margin_bottom = 0.0
 text = "Cerrar"
 
+[node name="HomePanel" type="Panel" parent="NoPause"]
+visible = false
+margin_left = 230.0
+margin_top = 170.0
+margin_right = 730.0
+margin_bottom = 370.0
+custom_styles/panel = ExtResource( 23 )
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="NoPause/HomePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_neighbour_left = NodePath("../Accept")
+focus_neighbour_right = NodePath("../Cancel")
+focus_neighbour_bottom = NodePath("../Accept")
+focus_mode = 1
+custom_fonts/normal_font = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[center] ¿Desea volver al menú principal? [/center]"
+text = " ¿Desea volver al menú principal? "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accept" parent="NoPause/HomePanel" instance=ExtResource( 12 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -212.0
+margin_top = -37.0
+margin_right = -2.0
+margin_bottom = -7.0
+rect_min_size = Vector2( 210, 30 )
+focus_neighbour_right = NodePath("../Cancel")
+text = "Aceptar"
+
+[node name="Cancel" parent="NoPause/HomePanel" instance=ExtResource( 12 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 31.2778
+margin_top = -37.2202
+margin_right = 231.278
+margin_bottom = -7.22025
+focus_neighbour_left = NodePath("../Accept")
+focus_mode = 2
+text = "Cancelar"
+
 [connection signal="input_event" from="GUI/Lever" to="." method="_on_Lever_input_event"]
 [connection signal="b_pressed" from="GUI/DockButton" to="." method="_on_DockButton_b_pressed"]
 [connection signal="focus_entered" from="GUI/DockButton" to="GUI/DockButton" method="_on_GameButton_focus_entered"]
@@ -320,6 +372,11 @@ text = "Cerrar"
 [connection signal="focus_exited" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_focus_exited"]
 [connection signal="mouse_entered" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_mouse_entered"]
 [connection signal="pressed" from="GUI/OptionsButton" to="GUI/OptionsButton" method="_on_GameButton_pressed"]
+[connection signal="b_pressed" from="GUI/HomeButton" to="." method="_on_HomeButton_b_pressed"]
+[connection signal="focus_entered" from="GUI/HomeButton" to="GUI/HomeButton" method="_on_GameButton_focus_entered"]
+[connection signal="focus_exited" from="GUI/HomeButton" to="GUI/HomeButton" method="_on_GameButton_focus_exited"]
+[connection signal="mouse_entered" from="GUI/HomeButton" to="GUI/HomeButton" method="_on_GameButton_mouse_entered"]
+[connection signal="pressed" from="GUI/HomeButton" to="GUI/HomeButton" method="_on_GameButton_pressed"]
 [connection signal="b_pressed" from="GUI/LeftTurnButton" to="." method="_on_LeftTurnButton_b_pressed"]
 [connection signal="button_up" from="GUI/LeftTurnButton" to="." method="_on_TurnButton_button_up"]
 [connection signal="focus_entered" from="GUI/LeftTurnButton" to="GUI/LeftTurnButton" method="_on_GameButton_focus_entered"]
@@ -346,3 +403,5 @@ text = "Cerrar"
 [connection signal="pressed" from="GUI/PowerDownButton" to="GUI/PowerDownButton" method="_on_GameButton_pressed"]
 [connection signal="menu_closed" from="GUI/ConfigMenu" to="." method="_on_ConfigMenu_menu_closed"]
 [connection signal="b_pressed" from="NoPause/HelpPanel/ConfigButton" to="NoPause/HelpPanel" method="_on_ConfigButton_b_pressed"]
+[connection signal="b_pressed" from="NoPause/HomePanel/Accept" to="NoPause/HomePanel" method="_on_Accept_b_pressed"]
+[connection signal="b_pressed" from="NoPause/HomePanel/Cancel" to="NoPause/HomePanel" method="_on_Cancel_b_pressed"]

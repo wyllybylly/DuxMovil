@@ -61,6 +61,7 @@ func _draw():
 func _ready():
 	# Initialize overlay positions
 	set_overlay()
+	default_focus()
 	
 	# Initialize water speed
 	water_speed = LevelVariables.water_speed
@@ -265,12 +266,23 @@ func set_overlay():
 		$GUI/OptionsButton.rect_scale = Vector2(scale_value, scale_value)
 		$GUI/OptionsButton.modulate.a = ConfigVariables.overlay_alpha
 		
-		# Setup options button
+		# Setup engine view
 		$GUI/EngineView.rect_position.x = $GUI/RightTurnButton.rect_position.x
 		$GUI/EngineView.rect_position.y = $GUI/PowerUpButton.rect_position.y
 		$GUI/EngineView.rect_scale = Vector2(scale_value, scale_value)
 		$GUI/EngineView.modulate.a = ConfigVariables.overlay_alpha
 	update_lever_y()
+	
+	# Setup home button
+	$GUI/HomeButton.rect_position = $GUI/OptionsButton.rect_position
+	$GUI/HomeButton.rect_position.x -= ConfigVariables.get_overlay_size() * 15.0 + 100.0
+	$GUI/HomeButton.rect_scale = Vector2(scale_value, scale_value)
+	$GUI/HomeButton.modulate.a = ConfigVariables.overlay_alpha
+
+
+func default_focus():
+	if !ConfigVariables.get_default_controls():
+		$GUI/HomeButton.grab_focus()
 
 
 func update_rescue_button():
@@ -403,3 +415,7 @@ func _on_PowerUpButton_b_pressed():
 
 func _on_PowerDownButton_b_pressed():
 	current_action = actions_enum.POWER_DOWN
+
+
+func _on_HomeButton_b_pressed():
+	$NoPause/HomePanel.open()
