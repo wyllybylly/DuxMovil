@@ -7,31 +7,35 @@ signal next_button_pressed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Panel.rect_min_size = get_viewport().size / 2
-	$Panel.margin_left = get_viewport().size.x / 4
-	$Panel.margin_top = get_viewport().size.y / 4
-	set_texts_positions()
-	$Panel/BackButton.rect_position.y = $Panel.rect_size.y * 0.9 - $Panel/BackButton.rect_size.y / 2
-	$Panel/BackButton.rect_position.x = $Panel.rect_size.x * 0.2 - $Panel/BackButton.rect_size.x / 2
-	$Panel/NextButton.rect_position.y = $Panel.rect_size.y * 0.9 - $Panel/NextButton.rect_size.y / 2
-	$Panel/NextButton.rect_position.x = $Panel.rect_size.x * 0.8 - $Panel/NextButton.rect_size.x / 2
-
-
-func _on_NextButton_button_up():
-	emit_signal("next_button_pressed")
-
-
-func _on_BackButton_button_up():
-	emit_signal("back_button_pressed")
-
-
-func set_texts_positions():
-	$Panel/Title.rect_position.y = $Panel.rect_size.y / 10
-	$Panel/Title.rect_position.x = ($Panel.rect_size.x - $Panel/Title.rect_size.x) / 2
-	$Panel/Description.rect_position = ($Panel.rect_size - $Panel/Description.rect_size) / 2
+	update_sizes()
 
 
 func set_texts(title, description):
 	$Panel/Title.text = title
-	$Panel/Description.text = description
-	set_texts_positions()
+	$Panel/Description.bbcode_text = "[center] %s [/center]" % description
+
+
+func update_sizes():
+	var half_panel_x = $Panel.rect_size.x / 2.0
+	$Panel/BackToMenu.rect_min_size.x = ConfigVariables.get_text_size_m_value() * $Panel/BackToMenu.text.length()
+	$Panel/BackToMenu.rect_min_size.y = ConfigVariables.get_text_size_m_value() + 10.0
+	$Panel/BackToMenu.rect_size = $Panel/BackToMenu.rect_min_size
+	$Panel/NextLevel.rect_min_size.x = ConfigVariables.get_text_size_m_value() * $Panel/NextLevel.text.length()
+	$Panel/NextLevel.rect_min_size.y = ConfigVariables.get_text_size_m_value() + 10.0
+	$Panel/NextLevel.rect_size = $Panel/NextLevel.rect_min_size
+	$Panel/BackToMenu.rect_position.x = (half_panel_x- $Panel/BackToMenu.rect_size.x) / 2.0
+	$Panel/NextLevel.rect_position.x = (half_panel_x - $Panel/NextLevel.rect_size.x) / 2.0 + half_panel_x
+	$Panel/BackToMenu.rect_position.y = $Panel.rect_size.y - 50.0
+	$Panel/NextLevel.rect_position.y = $Panel.rect_size.y - 50.0
+
+
+func say_msg():
+	TTSManager.say($Panel/Title.text + ". " + $Panel/Description.text)
+
+
+func _on_NextLevel_b_pressed():
+	emit_signal("next_button_pressed")
+
+
+func _on_BackToMenu_b_pressed():
+	emit_signal("back_button_pressed")

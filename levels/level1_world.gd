@@ -61,9 +61,10 @@ func _ready():
 	
 	# Set finish panel
 	$FinishLevel/Panel.hide()
-	var title = "Has completado el tutorial"
-	var description = "Ya tienes los conocimientos básicos para comenzar a jugar"
+	var title = "Felicitaciones"
+	var description = "Has completado el tutorial. \n Ya tienes los conocimientos básicos para comenzar a jugar"
 	$FinishLevel.set_texts(title, description)
+	$FinishLevel/Panel/NextLevel.disabled = true
 
 
 func _process(_delta):
@@ -151,6 +152,9 @@ func _on_Boat_boat_emptied():
 func finish_menu():
 	get_tree().paused = true
 	$FinishLevel/Panel.show()
+	$FinishLevel.update_sizes()
+	$FinishLevel/Panel/Description.grab_focus()
+	$FinishLevel.say_msg()
 	SoundManager.stop("water_stream")
 
 
