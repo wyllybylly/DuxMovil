@@ -4,6 +4,7 @@ extends Panel
 
 const TEXT_ELECTRIC = "Algunos postes de luz pueden liberar electricidad y ser peligrosos. Lo mejor es evitar anclarnos en ellos."
 const TEXT_NO_UNDOCKING = "No puedes desanclar la lancha mientras una persona está subiendo o bajando"
+const TEXT_MORE_PEOPLE = "Aún quedan personas en el mapa que deben ser salvadas"
 export (String) var text = TEXT_ELECTRIC setget set_text
 
 
@@ -26,6 +27,8 @@ func open(mode):
 		set_text(TEXT_ELECTRIC)
 	elif mode == "Undocking":
 		set_text(TEXT_NO_UNDOCKING)
+	elif mode == "More people":
+		set_text(TEXT_MORE_PEOPLE)
 	else:
 		set_text(TEXT_ELECTRIC)
 	show()

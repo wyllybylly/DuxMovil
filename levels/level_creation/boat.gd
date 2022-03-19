@@ -3,8 +3,10 @@ extends Node2D
 
 export (float) var max_speed = 20
 
+
 signal person_rescue
 signal person_safe
+signal boat_emptied
 
 
 enum actions_enum {
@@ -110,7 +112,7 @@ func _process(delta):
 				$Boat.move_and_collide(movement * delta * 10 * water_speed)
 			from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
 			update()
-			if distance < 1.0 and $Boat.rotation == 0.0:
+			if distance < 1.0 and $Boat.rotation == 0.0 and speed == 0.0:
 				stabilizing = false
 				can_rescue = true
 				update_rescue_button()
@@ -291,7 +293,7 @@ func update_rescue_button():
 			$GUI/RescueButton.disabled = false
 			$GUI/RescueButton.texture_normal = button_tex_1
 			print("Subir persona")
-		elif not $Boat/SafeZoneArea.get_overlapping_areas().empty():
+		elif not $Boat/SafeZoneArea.get_overlapping_areas().empty() and used_seats > 0:
 			$GUI/RescueButton.disabled = false
 			$GUI/RescueButton.texture_normal = button_tex_2
 			print("Dejar persona")
@@ -315,6 +317,8 @@ func person_safe():
 	can_undock = true
 	emit_signal("person_safe")
 	update_rescue_button()
+	if used_seats == 0:
+		emit_signal("boat_emptied")
 
 
 func _on_DockButton_b_pressed():
@@ -343,6 +347,7 @@ func _on_DockButton_b_pressed():
 				rope_lenght = from_point.distance_to(to_point)
 				update()
 				stabilizing = true
+				can_rescue = false
 				update_rescue_button()
 				TTSManager.say("Lancha anclada")
 		# Else notify

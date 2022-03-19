@@ -133,14 +133,19 @@ func set_text_config(text, right = 1.0, left = 0.0, bottom = 0.9, top = 0.0):
 
 func _on_Boat_person_rescue():
 	people_rescued += 1
-	if people_rescued == TOTAL_PEOPLE:
+	if people_rescued == 1:
 		next_screen(false)
 
 
 func _on_Boat_person_safe():
 	people_safe += 1
+
+
+func _on_Boat_boat_emptied():
 	if people_safe == TOTAL_PEOPLE:
 		finish_menu()
+	else:
+		$Boat/NoPause/HelpPanel.open("More people")
 
 
 func finish_menu():
