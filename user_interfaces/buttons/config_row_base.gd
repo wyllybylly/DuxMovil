@@ -90,7 +90,7 @@ func _on_ConfigRow_focus_entered():
 	focused = true
 	selected = false
 	TTSManager.say(text)
-	SoundManager.play("SE", "pluck")
+	SoundManager.play_se("pluck")
 
 
 func _on_ConfigRow_focus_exited():
