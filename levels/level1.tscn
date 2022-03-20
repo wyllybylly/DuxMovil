@@ -51,10 +51,13 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = false
+focus_neighbour_bottom = NodePath("../Button")
+focus_mode = 1
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
 text = "La potencia de la lancha es controlada por la palanca a la derecha.
 Arrastrando la palanca hacia arriba se aumenta la potencia y hacia abajo se reduce.
-También puede controlarse con teclado u otro controlador (arriba y abajo)."
+(Controles alternativos: Flecha hacia arriba y flecha hacia abajo)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,9 +67,12 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = false
+focus_neighbour_bottom = NodePath("../Button")
+focus_mode = 1
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
 text = "La lancha puede moverse rotando el dispositivo hacia la izquierda y hacia la derecha.
-También puede controlarse con teclado u otro controlador (izquierda y derecha)."
+(Controles alternativos: Flacha hacia la izquierda y flecha hacia la derecha.)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -83,8 +89,13 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = false
+focus_neighbour_bottom = NodePath("../Button")
+focus_mode = 1
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
-text = "Explicación de anclaje"
+text = "Con el botón señalado podremos anclar la lancha con una soga.
+Debemos anclarla a lugares firmes, como un poste de luz.
+Hay que tener cuidado de que sean sitios seguros."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -94,9 +105,12 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = false
+focus_neighbour_bottom = NodePath("../Button")
+focus_mode = 1
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
-text = "Una vez anclada la lancha, podemos empezar a subir personas.
-En el mapa nos encontraremos distintos grupos de personas indicados con un cartel en la parte superior indicando su situación."
+text = "Una vez anclada y quieta la lancha, podemos empezar a subir personas.
+En el mapa nos encontraremos distintos grupos de personas indicados con un cartel en la parte inferior indicando su situación."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -105,6 +119,9 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+focus_neighbour_bottom = NodePath("../Button")
+focus_mode = 1
+mouse_filter = 2
 scroll_horizontal_enabled = false
 script = ExtResource( 4 )
 __meta__ = {
@@ -264,8 +281,13 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = false
+focus_neighbour_bottom = NodePath("../Button")
+focus_mode = 1
+mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
-text = "Luego de salvar a las personas debes llevarlas a una zona segura. Sigue la flecha hacia arriba."
+text = "Luego de subir a las personas a la lancha debes llevarlas a una zona segura.
+En este nivel, la zona se encuentra en la zona superior.
+"
 __meta__ = {
 "_edit_use_anchors_": false
 }

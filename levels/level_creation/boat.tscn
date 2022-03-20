@@ -174,7 +174,7 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-text = "Botón de configuraciones"
+text = "Botón de menú principal"
 
 [node name="LeftTurnButton" type="TextureButton" parent="GUI"]
 margin_left = 427.858

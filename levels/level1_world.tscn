@@ -1234,7 +1234,7 @@ car_color = Color( 0.862745, 0.898039, 0.85098, 1 )
 mask_texture = ExtResource( 32 )
 
 [node name="FallenTree" parent="Obstacles" instance=ExtResource( 18 )]
-position = Vector2( 284.38, -556.117 )
+position = Vector2( 298.153, -559.295 )
 
 [node name="FallenTree2" parent="Obstacles" instance=ExtResource( 18 )]
 position = Vector2( 160.712, -861.05 )

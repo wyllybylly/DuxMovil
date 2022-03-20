@@ -98,6 +98,7 @@ func next_screen(from_trigger):
 			button.show()
 		$Help/Background.update_shape()
 		show_help_view(helpArray[helpScreenLevel][0])
+		helpArray[helpScreenLevel][0].grab_focus()
 		if from_trigger:
 			$Triggers.get_child(0).queue_free()
 	onHelpView = !onHelpView
@@ -116,6 +117,7 @@ func show_help_view(text):
 	text.show()
 	$Help/Button.show()
 	$Help/Button.update_size()
+	$Help/Button.rect_position = Vector2((get_viewport_rect().size.x - $Help/Button.rect_size.x) / 2.0, get_viewport_rect().size.y - 50 - $Help/Button.rect_size.y)
 	TTSManager.say(text.text)
 
 
