@@ -109,7 +109,7 @@ func rescued():
 
 func get_to_safe_zone(new_safe_zone):
 	safe_zone = new_safe_zone
-	seat[0] = Vector2(rand_range(-50.0, 50.0), rand_range(-15.0, 15.0))
+	seat[0] = Vector2(rand_range(-50.0, 50.0), rand_range(-50.0, 50.0))
 	seat[1] = -90
 	end_position = safe_zone.global_position - get_parent().global_position + seat[0]
 	starting_distance = position.distance_squared_to(end_position)
