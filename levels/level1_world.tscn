@@ -1349,7 +1349,7 @@ position = Vector2( 651.833, -1700.3 )
 position = Vector2( 663.943, -2706.15 )
 
 [node name="LightPole6" parent="Poles" instance=ExtResource( 15 )]
-position = Vector2( 676.645, -3810.41 )
+position = Vector2( 677.905, -3848.21 )
 rotation = 0.274793
 scale = Vector2( -1, 1 )
 
@@ -1410,10 +1410,10 @@ z_index = 3
 script = ExtResource( 17 )
 
 [node name="Signs" type="TextureButton" parent="Group1"]
-margin_left = 128.242
-margin_top = -234.309
-margin_right = 400.242
-margin_bottom = -154.309
+margin_left = 134.977
+margin_top = 21.6121
+margin_right = 406.977
+margin_bottom = 101.612
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1425,40 +1425,52 @@ num_of_people = 3
 
 [node name="Person" type="KinematicBody2D" parent="Group1"]
 position = Vector2( 190.768, -33.6125 )
+rotation = 0.261799
 scale = Vector2( 0.6, 0.6 )
 collision_layer = 32
 collision_mask = 0
 script = ExtResource( 5 )
+elder = true
+hair_color = Color( 0.796078, 0.796078, 0.796078, 1 )
+clothes_color = Color( 0.703849, 0.926427, 0.334865, 1 )
+baby_color = Color( 0.147286, 0.516065, 0.256601, 1 )
 
 [node name="Person2" type="KinematicBody2D" parent="Group1"]
-position = Vector2( 243.952, -70.0032 )
+position = Vector2( 222.032, -74.2458 )
 scale = Vector2( 0.6, 0.6 )
 collision_layer = 32
 collision_mask = 0
 script = ExtResource( 5 )
+baby = true
+hair_color = Color( 0.113725, 0.0745098, 0.0196078, 1 )
+clothes_color = Color( 0.32549, 0.721569, 0.843137, 1 )
+baby_color = Color( 0.968627, 0.0392157, 0.431373, 1 )
 
 [node name="Person3" type="KinematicBody2D" parent="Group1"]
 position = Vector2( 200.299, -113.274 )
+rotation = -0.261799
 scale = Vector2( 0.6, 0.6 )
 collision_layer = 32
 collision_mask = 0
 script = ExtResource( 5 )
+elder = true
+hair_color = Color( 0.796078, 0.796078, 0.796078, 1 )
+clothes_color = Color( 0.615686, 0.27451, 0.752941, 1 )
 
 [node name="SafeZone" type="Area2D" parent="."]
-position = Vector2( 957.634, -3761.17 )
+position = Vector2( 860, -3761.17 )
 z_index = 1
 collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeZone"]
-position = Vector2( -105.014, 0.10083 )
 shape = SubResource( 35 )
 
 [node name="Text" type="RichTextLabel" parent="SafeZone"]
-margin_left = -218.0
-margin_top = -53.0
-margin_right = 53.0
-margin_bottom = 106.0
+margin_left = -125.613
+margin_top = -28.1143
+margin_right = 140.387
+margin_bottom = 130.886
 custom_fonts/normal_font = ExtResource( 11 )
 bbcode_enabled = true
 bbcode_text = "[center]Zona

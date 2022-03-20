@@ -531,9 +531,9 @@ z_index = 5
 script = ExtResource( 9 )
 
 [node name="Signs" type="TextureButton" parent="Group 1"]
-margin_left = -180.072
+margin_left = -119.683
 margin_top = -169.725
-margin_right = 91.928
+margin_right = 152.317
 margin_bottom = -89.725
 action_mode = 0
 script = ExtResource( 11 )

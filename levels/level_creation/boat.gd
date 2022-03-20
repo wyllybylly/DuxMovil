@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export (float) var max_speed = 20
+export (float) var max_speed = 50
 
 
 signal person_rescue
@@ -321,6 +321,29 @@ func person_safe():
 		emit_signal("boat_emptied")
 
 
+func get_person_to_rescue():
+	var person_count = $Boat/RescueArea.get_overlapping_bodies().size()
+	if person_count == 1:
+		return $Boat/RescueArea.get_overlapping_bodies().pop_back()
+	else:
+		var first_priority = $Boat/RescueArea.get_overlapping_bodies().pop_back()
+		if first_priority.elder and first_priority.baby:
+			return first_priority
+		for current_person in $Boat/RescueArea.get_overlapping_bodies():
+			if first_priority.elder:
+				if current_person.elder and current_person.baby:
+					first_priority = current_person
+					break
+			else:
+				if current_person.elder:
+					first_priority = current_person
+					if current_person.baby:
+						break
+				elif !first_priority.baby and current_person.baby:
+					first_priority = current_person
+		return first_priority
+
+
 func _on_DockButton_b_pressed():
 	# If boat is docked, undock it
 	if docked:
@@ -359,7 +382,8 @@ func _on_RescueButton_b_pressed():
 	if docked:
 		# If there is a person to rescue, rescue them
 		if not $Boat/RescueArea.get_overlapping_bodies().empty():
-			var person = $Boat/RescueArea.get_overlapping_bodies().pop_front()
+#			var person = $Boat/RescueArea.get_overlapping_bodies().pop_front()
+			var person = get_person_to_rescue()
 			var seat = get_seat()
 			if seat != null:
 				person.start_rescue($Boat, seat, self)
