@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export (float) var max_speed = 50
+export (float) var max_speed = 20
 
 
 signal person_rescue

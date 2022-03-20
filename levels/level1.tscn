@@ -285,9 +285,8 @@ focus_neighbour_bottom = NodePath("../Button")
 focus_mode = 1
 mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 1 )
-text = "Luego de subir a las personas a la lancha debes llevarlas a una zona segura.
-En este nivel, la zona se encuentra en la zona superior.
-"
+text = "Luego de subir a las personas a la lancha debes llevarlas a una zona segura, anclando y utilizando el botón de rescate.
+En este nivel, la zona se encuentra en la zona superior."
 __meta__ = {
 "_edit_use_anchors_": false
 }
