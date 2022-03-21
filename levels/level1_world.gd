@@ -65,6 +65,7 @@ func _ready():
 	var description = "Has completado el tutorial. \n Ya tienes los conocimientos básicos para comenzar a jugar"
 	$FinishLevel.set_texts(title, description)
 	$FinishLevel/Panel/NextLevel.disabled = true
+	$FinishLevel/Panel/NextLevel.hide()
 
 
 func _process(_delta):

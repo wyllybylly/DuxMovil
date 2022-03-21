@@ -100,3 +100,8 @@ func _on_ConfigRow_focus_exited():
 
 func _on_ConfigRow_mouse_entered():
 	grab_focus()
+
+
+func _on_ConfigRow_mouse_exited():
+	if (!TTSManager.is_on()) and ConfigVariables.get_default_controls():
+		release_focus()

@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export (float) var max_speed = 20
+export (float) var max_speed = 25
 
 
 signal person_rescue
@@ -103,7 +103,8 @@ func _process(delta):
 		$Boat.move_and_collide(movement * delta * 10)
 	else:
 		if stabilizing:
-			power_down(delta)
+			if speed > 10.0:
+				power_down(delta)
 			var movement = $Boat.position.direction_to(Vector2(to_point.x, to_point.y + 75.0 + rope_lenght))
 			if $Boat.rotation != 0.0:
 				stabilize_rotation(delta * movement.y)
@@ -112,7 +113,7 @@ func _process(delta):
 				$Boat.move_and_collide(movement * delta * 10 * water_speed)
 			from_point = Vector2($Boat.position.x + sin($Boat.rotation) * 75.0, $Boat.position.y + cos($Boat.rotation) * -75.0)
 			update()
-			if distance < 1.0 and $Boat.rotation == 0.0 and speed == 0.0:
+			if distance < 1.0 and $Boat.rotation == 0.0 and speed <= 10.0:
 				stabilizing = false
 				can_rescue = true
 				update_rescue_button()
@@ -145,7 +146,7 @@ func power_down(delta):
 
 
 func rotate(delta):
-	$Boat.rotate(PI / 4 * delta)
+	$Boat.rotate(PI / 6 * delta)
 
 
 func stabilize_rotation(delta):

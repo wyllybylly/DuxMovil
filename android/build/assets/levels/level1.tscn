@@ -277,6 +277,7 @@ text = "Quedan 1/2/+3 personas"
 fit_content_height = true
 
 [node name="TextRescued" type="RichTextLabel" parent="Help"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = false

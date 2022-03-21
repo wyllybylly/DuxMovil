@@ -66,3 +66,8 @@ func _on_GameButton_pressed():
 	else:
 		emit_signal("b_pressed")
 		SoundManager.play_se("select")
+
+
+func _on_GameButton_mouse_exited():
+	if (!TTSManager.is_on()) and ConfigVariables.get_default_controls():
+		release_focus()
